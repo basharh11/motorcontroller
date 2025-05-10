@@ -1,0 +1,24 @@
+# ninja log v5
+2	297	1746848728475203787	CMakeFiles/motor.dir/Core/Src/stm32f1xx_hal_msp.c.obj	5d51f72ca58b106a
+3	327	1746848728514203572	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c.obj	d06da65a451ab98c
+2	332	1746848728516203561	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c.obj	b34a62ee97f421b3
+7	371	1746848728560203319	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c.obj	242fb0b9274fe03
+2	380	1746848728559203325	CMakeFiles/motor.dir/Core/Src/stm32f1xx_it.c.obj	929957ceda71433d
+3	392	1746848728576203231	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c.obj	5a92334c63602cc4
+2	412	1746848728599203105	CMakeFiles/motor.dir/Core/Src/main.c.obj	344b91424a0c3016
+5	452	1746848728637202896	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c.obj	2da1fd8593ee1980
+392	509	1746848728692202593	CMakeFiles/motor.dir/Core/Src/sysmem.c.obj	c452e79e4dad0f31
+454	509	1746848728696202571	CMakeFiles/motor.dir/startup_stm32f103xb.s.obj	998af44b8b47edf2
+12	539	1746848728723202423	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c.obj	989ed9b100515b3a
+10	540	1746848728724202417	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c.obj	189e87053d79bfaf
+413	599	1746848728788202065	CMakeFiles/motor.dir/Core/Src/syscalls.c.obj	53017b56b9db4c
+332	665	1746848728853201708	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c.obj	371847df7b2b00c6
+372	677	1746848728863201653	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c.obj	75c189f662e7a72
+297	692	1746848728880201559	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c.obj	5dd04ff6876b56cd
+328	698	1746848728886201526	CMakeFiles/motor.dir/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c.obj	69334b278c9f78e5
+380	704	1746848728892201493	CMakeFiles/motor.dir/Core/Src/system_stm32f1xx.c.obj	d3d5280511baebb
+704	798	1746848728986200976	motor.elf	90b1f90f90b27742
+2	133	1746848829545668292	CMakeFiles/motor.dir/Core/Src/main.c.obj	344b91424a0c3016
+133	197	1746848829609667965	motor.elf	90b1f90f90b27742
+2	136	1746848980325933979	CMakeFiles/motor.dir/Core/Src/main.c.obj	344b91424a0c3016
+136	204	1746848980393933663	motor.elf	90b1f90f90b27742
