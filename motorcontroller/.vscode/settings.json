@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdbool.h": "c",
+        "ssd1309.h": "c",
+        "stm32f4xx_hal.h": "c"
+    }
+}
