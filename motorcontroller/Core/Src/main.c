@@ -22,7 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "../Inc/fonts.h"
-#include "../Inc/SSD1309.h"
+#include "../Inc/ssd1309.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -92,7 +92,9 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  ssd1309_init();
+  SSD1309_init();
+  SSD1309_drawBitmap(0, 0, 128, 64, ACA);
+  SSD1309_update();
   /* USER CODE END 2 */
 
   /* Infinite loop */

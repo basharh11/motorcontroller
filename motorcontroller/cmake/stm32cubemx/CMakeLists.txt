@@ -23,7 +23,7 @@ target_include_directories(stm32cubemx INTERFACE
 
 target_sources(stm32cubemx INTERFACE
     ../../Core/Src/main.c
-    ../../Core/Src/SSD1309.c
+    ../../Core/Src/ssd1309.c
     ../../Core/Src/fonts.c
     ../../Core/Src/stm32f4xx_it.c
     ../../Core/Src/stm32f4xx_hal_msp.c
