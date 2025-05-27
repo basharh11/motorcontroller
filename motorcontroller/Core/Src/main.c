@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "../Inc/fonts.h"
+#include "../Inc/bitmaps.h"
 #include "../Inc/ssd1309.h"
 /* USER CODE END Includes */
 
@@ -93,7 +94,23 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   SSD1309_init();
-  SSD1309_drawBitmap(0, 0, 128, 64, ACA);
+  SSD1309_drawBitmap(0, 0, 128, 64, Scroll1);
+  SSD1309_drawText(0, 0, 8, "1024.5");
+  SSD1309_update();
+  HAL_Delay(1000);
+  SSD1309_drawBitmap(0, 0, 128, 64, Scroll2);
+  SSD1309_update();
+  HAL_Delay(1000);
+  SSD1309_drawBitmap(0, 0, 128, 64, Scroll3);
+  SSD1309_update();
+  HAL_Delay(1000);
+  SSD1309_drawBitmap(0, 0, 128, 64, Scroll4);
+  SSD1309_update();
+  HAL_Delay(1000);
+  SSD1309_drawBitmap(0, 0, 128, 64, Scroll5);
+  SSD1309_update();
+  HAL_Delay(1000);
+  SSD1309_drawBitmap(0, 0, 128, 64, Scroll6);
   SSD1309_update();
   /* USER CODE END 2 */
 
@@ -282,6 +299,13 @@ static void MX_GPIO_Init(void)
   LL_GPIO_SetPinMode(B1_GPIO_Port, B1_Pin, LL_GPIO_MODE_INPUT);
 
   /**/
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_0|LL_GPIO_PIN_1|LL_GPIO_PIN_2|LL_GPIO_PIN_3
+                          |LL_GPIO_PIN_4|LL_GPIO_PIN_5|LL_GPIO_PIN_6|LL_GPIO_PIN_7;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
+  LL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /**/
   GPIO_InitStruct.Pin = LD2_Pin;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
@@ -290,21 +314,6 @@ static void MX_GPIO_Init(void)
   LL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
-  GPIO_InitStruct.Pin        = LL_GPIO_PIN_8;               // PA8
-  GPIO_InitStruct.Mode       = LL_GPIO_MODE_OUTPUT;         // simple GPIO output
-  GPIO_InitStruct.Speed      = LL_GPIO_SPEED_FREQ_LOW;      // not too fast
-  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;     // push-pull (0–3.3 V)
-  GPIO_InitStruct.Pull       = LL_GPIO_PULL_NO;             // no internal pull
-  LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-
-  GPIO_InitStruct.Pin        = LL_GPIO_PIN_8 | LL_GPIO_PIN_9;
-  GPIO_InitStruct.Mode       = LL_GPIO_MODE_ALTERNATE;
-  GPIO_InitStruct.Speed      = LL_GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_OPENDRAIN;
-  GPIO_InitStruct.Pull       = LL_GPIO_PULL_UP;
-  GPIO_InitStruct.Alternate  = LL_GPIO_AF_4;  // AF4 = I2C1
-  LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 /* USER CODE END MX_GPIO_Init_2 */
 }
 

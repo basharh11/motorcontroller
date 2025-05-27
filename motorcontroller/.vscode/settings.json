@@ -6,6 +6,7 @@
         "fonts.h": "c",
         "stm32f4xx_ll_i2c.h": "c",
         "stm32f4xx_hal_i2c.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "stdint.h": "c"
     }
 }
