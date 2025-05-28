@@ -8,7 +8,7 @@
 #ifndef SSD1309_H
 #define SSD1309_H
 
-#include "../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+#include "stm32f4xx_hal.h"
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>

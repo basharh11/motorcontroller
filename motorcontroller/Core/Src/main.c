@@ -24,6 +24,7 @@
 #include "../Inc/fonts.h"
 #include "../Inc/bitmaps.h"
 #include "../Inc/ssd1309.h"
+#include "../Inc/keypad.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,24 +95,7 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   SSD1309_init();
-  SSD1309_drawBitmap(0, 0, 128, 64, Scroll1);
-  SSD1309_drawText(0, 0, 8, "1024.5");
-  SSD1309_update();
-  HAL_Delay(1000);
-  SSD1309_drawBitmap(0, 0, 128, 64, Scroll2);
-  SSD1309_update();
-  HAL_Delay(1000);
-  SSD1309_drawBitmap(0, 0, 128, 64, Scroll3);
-  SSD1309_update();
-  HAL_Delay(1000);
-  SSD1309_drawBitmap(0, 0, 128, 64, Scroll4);
-  SSD1309_update();
-  HAL_Delay(1000);
-  SSD1309_drawBitmap(0, 0, 128, 64, Scroll5);
-  SSD1309_update();
-  HAL_Delay(1000);
-  SSD1309_drawBitmap(0, 0, 128, 64, Scroll6);
-  SSD1309_update();
+  uint8_t state = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -119,7 +103,15 @@ int main(void)
     while (1)
     {
     /* USER CODE END WHILE */
+      if(readKeypad() == 4)
+        state++;
+      
+      if(readKeypad() == 5)
+        state--;
 
+      SSD1309_drawBitmap(0, 0, 128, 64, Scroll[state]);
+
+      SSD1309_update();
     /* USER CODE BEGIN 3 */
     }
   /* USER CODE END 3 */
@@ -299,9 +291,14 @@ static void MX_GPIO_Init(void)
   LL_GPIO_SetPinMode(B1_GPIO_Port, B1_Pin, LL_GPIO_MODE_INPUT);
 
   /**/
-  GPIO_InitStruct.Pin = LL_GPIO_PIN_0|LL_GPIO_PIN_1|LL_GPIO_PIN_2|LL_GPIO_PIN_3
-                          |LL_GPIO_PIN_4|LL_GPIO_PIN_5|LL_GPIO_PIN_6|LL_GPIO_PIN_7;
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_0|LL_GPIO_PIN_1|LL_GPIO_PIN_2|LL_GPIO_PIN_3;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
+  LL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  
+  /**/
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_4|LL_GPIO_PIN_5|LL_GPIO_PIN_6|LL_GPIO_PIN_7;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
