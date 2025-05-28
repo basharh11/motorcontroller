@@ -1,5 +1,0 @@
-/home/bashar-hamade/repos/motorcontroller/motor/CMakeFiles/motor.dir
-/home/bashar-hamade/repos/motorcontroller/motor/CMakeFiles/edit_cache.dir
-/home/bashar-hamade/repos/motorcontroller/motor/CMakeFiles/rebuild_cache.dir
-/home/bashar-hamade/repos/motorcontroller/motor/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
-/home/bashar-hamade/repos/motorcontroller/motor/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir
