@@ -95,6 +95,7 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   SSD1309_init();
+  initKeypad();
   uint8_t state = 0;
   /* USER CODE END 2 */
 
@@ -103,13 +104,19 @@ int main(void)
     while (1)
     {
     /* USER CODE END WHILE */
-      if(readKeypad() == 4)
-        state++;
+      if(readKeypad() == 8)
+        if(state < 5)
+          state++;
       
-      if(readKeypad() == 5)
-        state--;
+      if(readKeypad() == 4)
+        if(state > 0)
+          state--;
 
-      SSD1309_drawBitmap(0, 0, 128, 64, Scroll[state]);
+      if(state > 0 && state < 5) {
+        SSD1309_drawBitmap(0, 0, 128, 64, Scroll[state]);
+      } else
+      
+
 
       SSD1309_update();
     /* USER CODE BEGIN 3 */
@@ -292,14 +299,14 @@ static void MX_GPIO_Init(void)
 
   /**/
   GPIO_InitStruct.Pin = LL_GPIO_PIN_0|LL_GPIO_PIN_1|LL_GPIO_PIN_2|LL_GPIO_PIN_3;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
-  LL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-  
-  /**/
-  GPIO_InitStruct.Pin = LL_GPIO_PIN_4|LL_GPIO_PIN_5|LL_GPIO_PIN_6|LL_GPIO_PIN_7;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
+  LL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /**/
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_4|LL_GPIO_PIN_5|LL_GPIO_PIN_6|LL_GPIO_PIN_7;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
   LL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /**/
