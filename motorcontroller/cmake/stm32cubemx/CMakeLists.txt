@@ -26,6 +26,7 @@ target_sources(stm32cubemx INTERFACE
     ../../Core/Src/bitmaps.c
     ../../Core/Src/fonts.c
     ../../Core/Src/queue.c
+    ../../Core/Src/override.c
     ../../Core/Src/ssd1309.c
     ../../Core/Src/stm32f4xx_it.c
     ../../Core/Src/stm32f4xx_hal_msp.c

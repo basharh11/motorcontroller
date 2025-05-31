@@ -2,11 +2,11 @@
 #include "stm32f4xx_hal.h"
 #include <stdint.h>
 
-#define KEYPAD_DEBOUNCE_MS 250
+#define KEYPAD_DEBOUNCE 200 // delay in ms to prevent rapid double clicking within the mouse
 
 static uint8_t currentRow = 0;
 static queue *keyQueue = NULL; // pointer to user's queue
-static uint32_t lastPressTick = 0; // timestamp for debounce
+static uint32_t previous = 0; // timestamp for debounce
 
 // lookup table for decoding keys
 static const char keymap[4][4] = {{ '1', '2', '3', 'A' }, { '4', '5', '6', 'B' }, { '7', '8', '9', 'C' }, { '*', '0', '#', 'D' }};
@@ -39,14 +39,19 @@ void keypadEXTIHandler(uint16_t GPIO_Pin) {
     if (!keyQueue) 
         return;  // must register queue first
 
-    uint32_t now = HAL_GetTick();
-    if (now - lastPressTick < KEYPAD_DEBOUNCE_MS) {
-        __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin);
+    uint32_t now = HAL_GetTick(); // returns a millisecond counter incremented by SysTick
+
+    // if the new interrupt is received within 200 ms of the previous one 
+    // clear the pending interrupt bit on the corresponding GPIO pin and return to ensure it won't be processed
+    if (now - previous < KEYPAD_DEBOUNCE) { 
+        __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin); 
         return;
     }
-    lastPressTick = now;
+
+    previous = now; // update the previous timestamp to reflect the one corresponding to the current and valid button press
 
     uint8_t col;
+
     switch(GPIO_Pin) {
         case GPIO_PIN_4:
             col = 0; 
@@ -70,7 +75,7 @@ void keypadEXTIHandler(uint16_t GPIO_Pin) {
 
     enqueue(keyQueue, key);
 
-    // clear pending EXTI to avoid retrigger
+    // clear pending interrupt to avoid retrigger
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin);
 }
 

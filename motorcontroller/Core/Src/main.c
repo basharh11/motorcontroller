@@ -26,6 +26,7 @@
 #include "ssd1309.h"
 #include "keypad.h"
 #include "queue.h"
+#include "override.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -104,12 +105,12 @@ int main(void)
 
   SSD1309_init();
   SSD1309_drawBitmap(0, 0, 128, 64, Scroll[0]);
-  SSD1309_update();          // make sure you actually push that first screen
+  SSD1309_update();          
 
   static queue keyQueue;
-  queueInit(&keyQueue);      // 1) reset your queue
-  keypadInit(&keyQueue);    // 2) register it with the keypad module
-  HAL_TIM_Base_Start_IT(&htim2);  // 3) kick off the 1 kHz row‐scan interrupts
+  queueInit(&keyQueue);     
+  keypadInit(&keyQueue); 
+  HAL_TIM_Base_Start_IT(&htim2);
 
   uint8_t state = 0;
 
@@ -355,14 +356,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-  keypadTIMHandler(htim);
-}
 
-// This overrides the weak HAL default for GPIO EXTI:
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-  keypadEXTIHandler(GPIO_Pin);
-}
 /* USER CODE END 4 */
 
 /**
