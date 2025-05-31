@@ -7,7 +7,6 @@ add_library(stm32cubemx INTERFACE)
 enable_language(C ASM)
 
 target_compile_definitions(stm32cubemx INTERFACE 
-	USE_FULL_LL_DRIVER 
 	USE_HAL_DRIVER 
 	STM32F411xE
     $<$<CONFIG:Debug>:DEBUG>
@@ -23,19 +22,15 @@ target_include_directories(stm32cubemx INTERFACE
 
 target_sources(stm32cubemx INTERFACE
     ../../Core/Src/main.c
-    ../../Core/Src/ssd1309.c
-    ../../Core/Src/menu.c
     ../../Core/Src/keypad.c
-    ../../Core/Src/fonts.c
     ../../Core/Src/bitmaps.c
+    ../../Core/Src/fonts.c
+    ../../Core/Src/queue.c
+    ../../Core/Src/ssd1309.c
     ../../Core/Src/stm32f4xx_it.c
     ../../Core/Src/stm32f4xx_hal_msp.c
-    ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_gpio.c
     ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
     ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c
-    ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_rcc.c
-    ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_utils.c
-    ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_exti.c
     ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
     ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
     ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
@@ -49,8 +44,9 @@ target_sources(stm32cubemx INTERFACE
     ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
     ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
     ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
-    ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usart.c
-    ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_dma.c
+    ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+    ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+    ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
     ../../Core/Src/system_stm32f4xx.c
     ../../Core/Src/sysmem.c
     ../../Core/Src/syscalls.c

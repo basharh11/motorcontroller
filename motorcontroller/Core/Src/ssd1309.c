@@ -5,7 +5,7 @@
  * Created: 20 May 2025
  */
 
-#include "../Inc/ssd1309.h"
+#include "ssd1309.h"
 
 static uint8_t SSD1309_FRAMEBUFFER[SSD1309_SIZE];
 

@@ -10,6 +10,7 @@
         "stdint.h": "c",
         "keypad.h": "c",
         "stm32f4xx_ll_gpio.h": "c",
-        "stm32f4xx.h": "c"
+        "stm32f4xx.h": "c",
+        "bitmaps.h": "c"
     }
 }
