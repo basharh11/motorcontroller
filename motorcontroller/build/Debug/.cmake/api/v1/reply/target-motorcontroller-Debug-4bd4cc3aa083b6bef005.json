@@ -123,7 +123,8 @@
 				26,
 				27,
 				28,
-				29
+				29,
+				30
 			]
 		},
 		{
@@ -174,7 +175,7 @@
 			"language" : "ASM",
 			"sourceIndexes" : 
 			[
-				30
+				31
 			]
 		}
 	],
@@ -236,14 +237,15 @@
 				26,
 				27,
 				28,
-				29
+				29,
+				30
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				30
+				31
 			]
 		}
 	],
@@ -277,6 +279,12 @@
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
 			"path" : "Core/Src/queue.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "Core/Src/menu.c",
 			"sourceGroupIndex" : 0
 		},
 		{

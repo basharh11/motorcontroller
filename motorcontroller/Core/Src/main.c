@@ -27,6 +27,7 @@
 #include "keypad.h"
 #include "queue.h"
 #include "override.h"
+#include "menu.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -102,9 +103,11 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  buildMenuTree();
+  MenuNode *current = &menu1;
 
   SSD1309_init();
-  SSD1309_drawBitmap(0, 0, 128, 64, Scroll[0]);
+  SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
   SSD1309_update();          
 
   static queue keyQueue;
@@ -112,26 +115,45 @@ int main(void)
   keypadInit(&keyQueue); 
   HAL_TIM_Base_Start_IT(&htim2);
 
-  uint8_t state = 0;
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-    while (1)
+    while(1)
     {
     /* USER CODE END WHILE */
-      uint8_t raw;
-      if (dequeue(&keyQueue, &raw)) {
-        char c = keypadDecodeKey(raw);
-        if (c == 'B' && state < 5) 
-          state++;
-        if (c == 'A' && state > 0) 
-          state--;
-        SSD1309_drawBitmap(0,0,128,64, Scroll[state]);
-        SSD1309_update();
-      }
+    
     /* USER CODE BEGIN 3 */
+    uint8_t raw;
+        if (dequeue(&keyQueue, &raw)) {
+            char c = keypadDecodeKey(raw);
+
+            if (c == 'B' && current->next) {
+                current = current->next;
+            }
+            else if (c == 'A' && current->prev) {
+                current = current->prev;
+            }
+            else if (c == '#' && current->child) {
+                current = current->child;
+            }
+            else if (c == '*' && current->parent) {
+                if(current == &menu41 || current == &menu42 ||current == &menu43 || current == &menu44)
+                    menu4.child = current;
+                if(current == &menu51 || current == &menu52 ||current == &menu53 || current == &menu54)
+                    menu5.child = current;
+                if(current == &menu341 || current == &menu342 ||current == &menu343 || current == &menu344)
+                    menu34.child = current;
+                if(current == &menu331 || current == &menu332 ||current == &menu333 || current == &menu334)
+                    menu33.child = current;
+                current = current->parent;
+            }
+            // else ignore other keys or out-of-range moves.
+
+            // Redraw whatever `current` points to:
+            SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
+            SSD1309_update();
+        }
     }
   /* USER CODE END 3 */
 }

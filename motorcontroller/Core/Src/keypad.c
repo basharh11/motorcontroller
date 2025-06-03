@@ -2,7 +2,7 @@
 #include "stm32f4xx_hal.h"
 #include <stdint.h>
 
-#define KEYPAD_DEBOUNCE 200 // delay in ms to prevent rapid double clicking within the mouse
+#define KEYPAD_DEBOUNCE 400 // delay in ms to prevent rapid double clicking within the mouse
 
 static uint8_t currentRow = 0;
 static queue *keyQueue = NULL; // pointer to user's queue
@@ -36,14 +36,14 @@ void keypadTIMHandler(TIM_HandleTypeDef *htim) {
 }
 
 void keypadEXTIHandler(uint16_t GPIO_Pin) {
-    if (!keyQueue) 
-        return;  // must register queue first
+    if(!keyQueue) // must ensure that queue isn't NULL
+        return;  
 
     uint32_t now = HAL_GetTick(); // returns a millisecond counter incremented by SysTick
 
     // if the new interrupt is received within 200 ms of the previous one 
     // clear the pending interrupt bit on the corresponding GPIO pin and return to ensure it won't be processed
-    if (now - previous < KEYPAD_DEBOUNCE) { 
+    if(now - previous < KEYPAD_DEBOUNCE) { 
         __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin); 
         return;
     }
