@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+extern const uint8_t runScreen[];
 
 extern const uint8_t mainMenu1[];
 
@@ -35,3 +36,7 @@ extern const uint8_t enabled[];
 extern const uint8_t enabledCheck[];
 extern const uint8_t disabled[];
 
+extern const uint8_t invalid[]; // 78 x 7
+
+extern const uint8_t rightArrow[]; // 13 x 7
+extern const uint8_t leftArrow[]; // 13 x 7

@@ -80,7 +80,7 @@ void SSD1309_update(void) {
 }
 
 void SSD1309_setPixel(uint8_t x, uint8_t y, bool state) {
-    if (x >= SSD1309_WIDTH || y >= SSD1309_HEIGHT) 
+    if(x >= SSD1309_WIDTH || y >= SSD1309_HEIGHT) 
         return;
 
     // formula to find position of pixel
@@ -135,7 +135,7 @@ void SSD1309_drawBitmap(uint8_t x, uint8_t y, uint8_t width, uint8_t height, con
     }
 }
 
-void SSD1309_drawText(uint8_t x, uint8_t y, uint16_t size, const char *text) {
+void SSD1309_drawText(uint8_t x, uint8_t y, uint16_t size, char *text) {
     const uint8_t *font, *drawChar;
 
     uint8_t runningX = x;
@@ -159,6 +159,14 @@ void SSD1309_drawText(uint8_t x, uint8_t y, uint16_t size, const char *text) {
 
         SSD1309_drawBitmap(runningX, runningY, size, size, drawChar);
         
-        runningX += size;
+        if(text[i] == '.' && text[i+1] == '1')
+            runningX += 4;
+        else if(text[i+1] == '1') 
+            runningX += 6;
+        else if(text[i] == '.') 
+            runningX += 5;
+        else {
+            runningX += 7;
+        }
     }
 }

@@ -35,6 +35,6 @@ void SSD1309_update(void);
 void SSD1309_setPixel(uint8_t x, uint8_t y, bool state);
 bool SSD1309_getPixel(uint8_t x, uint8_t y);
 void SSD1309_drawBitmap(uint8_t x, uint8_t y, uint8_t w, uint8_t h, const uint8_t *bitmap);
-void SSD1309_drawText(uint8_t x, uint8_t y, uint16_t size, const char *text);
+void SSD1309_drawText(uint8_t x, uint8_t y, uint16_t size, char *text);
 
 #endif // SSD1309_H

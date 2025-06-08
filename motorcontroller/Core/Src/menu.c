@@ -1,6 +1,8 @@
 
 #include "menu.h"
 
+MenuNode run;
+
 MenuNode menu1;
 MenuNode menu2;
 MenuNode menu3;
@@ -48,39 +50,42 @@ MenuNode menu53;
 MenuNode menu54;
 
 void buildMenuTree(void) {
-    // top level
+    run.bitmap = runScreen;
+    run.prev = NULL;
+    run.next = NULL;
+    run.child = &menu1;      
+    run.parent = NULL;     
+
     menu1.bitmap = mainMenu1;
     menu1.prev = NULL;
     menu1.next = &menu2;
-    menu1.child = NULL;       // no submenu under Scroll1
-    menu1.parent = NULL;       // top‐level node
+    menu1.child = NULL;      
+    menu1.parent = &run;     
 
     menu2.bitmap = mainMenu2;
     menu2.prev = &menu1;
     menu2.next = &menu3;
-    menu2.child = &menu21;    // its submenu starts at menu21
-    menu2.parent = NULL;
+    menu2.child = &menu21;    
+    menu2.parent = &run;
 
     menu3.bitmap = mainMenu3;
     menu3.prev = &menu2;
     menu3.next = &menu4;
-    menu3.child = &menu31;    // its submenu starts at menu31
-    menu3.parent = NULL;
+    menu3.child = &menu31;    
+    menu3.parent = &run;
 
     menu4.bitmap = mainMenu4;
     menu4.prev = &menu3;
     menu4.next = &menu5;
     menu4.child = &menu41;
-    menu4.parent = NULL;
+    menu4.parent = &run;
 
     menu5.bitmap = mainMenu5;
     menu5.prev = &menu4;
     menu5.next = NULL;
     menu5.child = &menu51;
-    menu5.parent = NULL;
+    menu5.parent = &run;
 
-    // ── Submenu of Scroll2 ───────────────────────────────────────────────
-    // menu21 ↔ menu22 ↔ menu23 ↔ menu24 ↔ menu25 ↔ menu26
     menu21.bitmap = inputs1;
     menu21.prev   = NULL;
     menu21.next   = &menu22;
@@ -117,18 +122,16 @@ void buildMenuTree(void) {
     menu26.child  = NULL;
     menu26.parent = &menu2;
 
-    // ── Submenu of Scroll3 ───────────────────────────────────────────────
-    // menu31 ↔ menu32 ↔ menu33 ↔ menu34
     menu31.bitmap = outputs1;
     menu31.prev   = NULL;
     menu31.next   = &menu32;
-    menu31.child  = &menu311;   // further submenu under Scroll31
+    menu31.child  = &menu311;  
     menu31.parent = &menu3;
 
     menu32.bitmap = outputs2;
     menu32.prev   = &menu31;
     menu32.next   = &menu33;
-    menu32.child  = &menu321;   // further submenu under Scroll32
+    menu32.child  = &menu321;  
     menu32.parent = &menu3;
 
     menu33.bitmap = outputs3;
@@ -191,9 +194,6 @@ void buildMenuTree(void) {
     menu344.child  = &menu341;
     menu344.parent = &menu34;
 
-
-    // ── Submenu of Scroll31 ──────────────────────────────────────────────
-    // menu311 ↔ menu312 ↔ menu313
     menu311.bitmap = motorConfig1;
     menu311.prev   = NULL;
     menu311.next   = &menu312;
@@ -212,8 +212,6 @@ void buildMenuTree(void) {
     menu313.child  = NULL;
     menu313.parent = &menu31;
 
-    // ── Submenu of Scroll32 ──────────────────────────────────────────────
-    // menu321 ↔ menu322 ↔ menu323
     menu321.bitmap = motorConfig1;
     menu321.prev   = NULL;
     menu321.next   = &menu322;

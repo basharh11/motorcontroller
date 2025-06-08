@@ -1,3 +1,6 @@
+#ifndef MENU_H
+#define MENU_H
+
 #include "bitmaps.h"
 #include <stdbool.h>
 
@@ -8,6 +11,8 @@ typedef struct MenuNode {
     struct MenuNode *child; // first child (to enter) of this item, or NULL if no child
     struct MenuNode *parent; // parent item (to exit), or NULL if top level
 } MenuNode;
+
+extern MenuNode run;
 
 extern MenuNode menu1;
 extern MenuNode menu2;
@@ -56,3 +61,5 @@ extern MenuNode menu53;
 extern MenuNode menu54;
 
 void buildMenuTree(void);
+
+#endif
