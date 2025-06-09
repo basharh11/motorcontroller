@@ -67,3 +67,17 @@
 262	400	1749420301233769797	motorcontroller.elf	ee05af4b8f20f5b5
 2	185	1749420686962696591	CMakeFiles/motorcontroller.dir/Core/Src/main.c.obj	37e662ef11c6ff88
 185	349	1749420687123700809	motorcontroller.elf	ee05af4b8f20f5b5
+8	152	1749505677660800880	CMakeFiles/motorcontroller.dir/Core/Src/menu.c.obj	6d028447742e6430
+7	309	1749505677817795502	CMakeFiles/motorcontroller.dir/Core/Src/main.c.obj	37e662ef11c6ff88
+2	61	1749505744573254532	CMakeFiles/motorcontroller.dir/Core/Src/menu.c.obj	6d028447742e6430
+61	194	1749505744704249094	motorcontroller.elf	ee05af4b8f20f5b5
+3	69	1749505894785131263	CMakeFiles/motorcontroller.dir/Core/Src/menu.c.obj	6d028447742e6430
+69	240	1749505894951122588	motorcontroller.elf	ee05af4b8f20f5b5
+3	71	1749506015725478401	CMakeFiles/motorcontroller.dir/Core/Src/menu.c.obj	6d028447742e6430
+71	219	1749506015869470145	motorcontroller.elf	ee05af4b8f20f5b5
+4	74	1749506238696070705	CMakeFiles/motorcontroller.dir/Core/Src/menu.c.obj	6d028447742e6430
+74	318	1749506238935055836	motorcontroller.elf	ee05af4b8f20f5b5
+4	100	1749506315609248485	CMakeFiles/motorcontroller.dir/Core/Src/menu.c.obj	6d028447742e6430
+100	295	1749506315799236492	motorcontroller.elf	ee05af4b8f20f5b5
+2	69	1749506360452407969	CMakeFiles/motorcontroller.dir/Core/Src/menu.c.obj	6d028447742e6430
+69	213	1749506360592399073	motorcontroller.elf	ee05af4b8f20f5b5

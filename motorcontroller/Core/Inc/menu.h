@@ -27,6 +27,26 @@ extern MenuNode menu24;
 extern MenuNode menu25;
 extern MenuNode menu26;
 
+extern MenuNode menu211;
+extern MenuNode menu212;
+extern MenuNode menu213;
+extern MenuNode menu214;
+
+extern MenuNode menu221;
+extern MenuNode menu222;
+extern MenuNode menu223;
+extern MenuNode menu224;
+
+extern MenuNode menu231;
+extern MenuNode menu232;
+extern MenuNode menu233;
+extern MenuNode menu234;
+
+extern MenuNode menu241;
+extern MenuNode menu242;
+extern MenuNode menu243;
+extern MenuNode menu244;
+
 extern MenuNode menu31;
 extern MenuNode menu32;
 extern MenuNode menu33;

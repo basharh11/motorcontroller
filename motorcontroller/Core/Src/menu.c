@@ -16,6 +16,26 @@ MenuNode menu24;
 MenuNode menu25;
 MenuNode menu26;
 
+MenuNode menu211;
+MenuNode menu212;
+MenuNode menu213;
+MenuNode menu214;
+
+MenuNode menu221;
+MenuNode menu222;
+MenuNode menu223;
+MenuNode menu224;
+
+MenuNode menu231;
+MenuNode menu232;
+MenuNode menu233;
+MenuNode menu234;
+
+MenuNode menu241;
+MenuNode menu242;
+MenuNode menu243;
+MenuNode menu244;
+
 MenuNode menu31;
 MenuNode menu32;
 MenuNode menu33;
@@ -89,14 +109,62 @@ void buildMenuTree(void) {
     menu21.bitmap = inputs1;
     menu21.prev   = NULL;
     menu21.next   = &menu22;
-    menu21.child  = NULL;
+    menu21.child  = &menu211;
     menu21.parent = &menu2;
+
+    menu211.bitmap = disabledCheck;
+    menu211.prev   = NULL;
+    menu211.next   = &menu212;
+    menu211.child  = NULL;
+    menu211.parent = &menu21;
+
+    menu212.bitmap = enabled;
+    menu212.prev   = &menu211;
+    menu212.next   = NULL;
+    menu212.child  = &menu213;
+    menu212.parent = &menu21;
+
+    menu213.bitmap = enabledCheck;
+    menu213.prev   = &menu214;
+    menu213.next   = NULL;
+    menu213.child  = NULL;
+    menu213.parent = &menu21;
+
+    menu214.bitmap = disabled;
+    menu214.prev   = NULL;
+    menu214.next   = &menu213;
+    menu214.child  = &menu211;
+    menu214.parent = &menu21;
 
     menu22.bitmap = inputs2;
     menu22.prev   = &menu21;
     menu22.next   = &menu23;
-    menu22.child  = NULL;
+    menu22.child  = &menu221;
     menu22.parent = &menu2;
+
+    menu221.bitmap = disabledCheck;
+    menu221.prev   = NULL;
+    menu221.next   = &menu222;
+    menu221.child  = NULL;
+    menu221.parent = &menu22;
+
+    menu222.bitmap = enabled;
+    menu222.prev   = &menu221;
+    menu222.next   = NULL;
+    menu222.child  = &menu223;
+    menu222.parent = &menu22;
+
+    menu223.bitmap = enabledCheck;
+    menu223.prev   = &menu224;
+    menu223.next   = NULL;
+    menu223.child  = NULL;
+    menu223.parent = &menu22;
+
+    menu224.bitmap = disabled;
+    menu224.prev   = NULL;
+    menu224.next   = &menu223;
+    menu224.child  = &menu221;
+    menu224.parent = &menu22;
 
     menu23.bitmap = inputs3;
     menu23.prev   = &menu22;
@@ -107,8 +175,32 @@ void buildMenuTree(void) {
     menu24.bitmap = inputs4;
     menu24.prev   = &menu23;
     menu24.next   = &menu25;
-    menu24.child  = NULL;
+    menu24.child  = &menu241;
     menu24.parent = &menu2;
+
+    menu241.bitmap = disabledCheck;
+    menu241.prev   = NULL;
+    menu241.next   = &menu242;
+    menu241.child  = NULL;
+    menu241.parent = &menu24;
+
+    menu242.bitmap = enabled;
+    menu242.prev   = &menu241;
+    menu242.next   = NULL;
+    menu242.child  = &menu243;
+    menu242.parent = &menu24;
+
+    menu243.bitmap = enabledCheck;
+    menu243.prev   = &menu244;
+    menu243.next   = NULL;
+    menu243.child  = NULL;
+    menu243.parent = &menu24;
+
+    menu244.bitmap = disabled;
+    menu244.prev   = NULL;
+    menu244.next   = &menu243;
+    menu244.child  = &menu241;
+    menu244.parent = &menu24;
 
     menu25.bitmap = inputs5;
     menu25.prev   = &menu24;
@@ -160,7 +252,7 @@ void buildMenuTree(void) {
 
     menu334.bitmap = disabled;
     menu334.prev   = NULL;
-    menu334.next   = &menu332;
+    menu334.next   = &menu333;
     menu334.child  = &menu331;
     menu334.parent = &menu33;
 
@@ -168,7 +260,7 @@ void buildMenuTree(void) {
     menu34.prev   = &menu33;
     menu34.next   = NULL;
     menu34.child  = &menu341;
-    menu34.parent = &menu34;
+    menu34.parent = &menu3;
 
     menu341.bitmap = disabledCheck;
     menu341.prev   = NULL;
@@ -190,7 +282,7 @@ void buildMenuTree(void) {
 
     menu344.bitmap = disabled;
     menu344.prev   = NULL;
-    menu344.next   = &menu342;
+    menu344.next   = &menu343;
     menu344.child  = &menu341;
     menu344.parent = &menu34;
 
