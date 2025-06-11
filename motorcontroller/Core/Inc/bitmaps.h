@@ -26,17 +26,19 @@ extern const uint8_t motorConfig3[];
 extern const uint8_t mainMenu4[];
 
 extern const uint8_t mainMenu5[];
-extern const uint8_t metricCheck[];
-extern const uint8_t imperial[];
-extern const uint8_t imperialCheck[];
-extern const uint8_t metric[];
+extern const uint8_t metricCheckBmp[];
+extern const uint8_t imperialBmp[];
+extern const uint8_t imperialCheckBmp[];
+extern const uint8_t metricBmp[];
 
-extern const uint8_t disabledCheck[];
-extern const uint8_t enabled[];
-extern const uint8_t enabledCheck[];
-extern const uint8_t disabled[];
+extern const uint8_t disabledCheckBmp[];
+extern const uint8_t enabledBmp[];
+extern const uint8_t enabledCheckBmp[];
+extern const uint8_t disabledBmp[];
 
 extern const uint8_t invalid[]; // 78 x 7
 
 extern const uint8_t rightArrow[]; // 13 x 7
 extern const uint8_t leftArrow[]; // 13 x 7
+
+extern const uint8_t inputScreen[];

@@ -12,6 +12,7 @@
         "stm32f4xx_ll_gpio.h": "c",
         "stm32f4xx.h": "c",
         "bitmaps.h": "c",
-        "override.h": "c"
+        "override.h": "c",
+        "navigation.h": "c"
     }
 }

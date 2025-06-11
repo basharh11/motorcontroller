@@ -28,6 +28,7 @@
 #include "queue.h"
 #include "override.h"
 #include "menu.h"
+#include "navigation.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -103,22 +104,7 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  MenuNode *current = &run;
-  queue keyQueue;
-  char target[11] = {' '};
-  bool arrowFlag = true;
-  buildMenuTree();
-
-  SSD1309_init();
-  SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
-  if(current == &run) {
-    SSD1309_drawText(51, 36, 8, target);
-    SSD1309_drawBitmap(53, 51, 13, 7, arrowFlag ? rightArrow : leftArrow);
-  }
-  SSD1309_update();          
-  
-  queueInit(&keyQueue);     
-  keypadInit(&keyQueue); 
+  navigationInit();
   HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
@@ -129,69 +115,7 @@ int main(void)
     /* USER CODE END WHILE */
     
     /* USER CODE BEGIN 3 */
-    uint8_t raw;
-
-    if(dequeue(&keyQueue, &raw)) {
-      char c = keypadDecodeKey(raw);
-
-      if (c == 'B' && current->next) {
-          current = current->next;
-      }
-      else if (c == 'A' && current->prev) {
-          current = current->prev;
-      }
-      else if (c == '#' && current->child) {
-          current = current->child;
-      }
-      else if (c == '*' && current->parent) {
-          if(current == &menu41 || current == &menu42 ||current == &menu43 || current == &menu44)
-              menu4.child = current;
-          if(current == &menu51 || current == &menu52 ||current == &menu53 || current == &menu54)
-              menu5.child = current;
-          if(current == &menu341 || current == &menu342 ||current == &menu343 || current == &menu344)
-              menu34.child = current;
-          if(current == &menu331 || current == &menu332 ||current == &menu333 || current == &menu334)
-              menu33.child = current;
-          current = current->parent;
-      }
-      else if (c == 'C' && current == &run) {
-          uint8_t pos = 0;
-          for(uint8_t i = 0; target[i] != '\0'; i++) 
-            target[i] = ' ';
-          SSD1309_drawText(51, 36, 8, target);
-          SSD1309_update();
-          while(keypadDecodeKey(raw) != '#' && pos < 10) {
-            if(dequeue(&keyQueue, &raw)) {
-              if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9') || keypadDecodeKey(raw) == '*') {
-                char character = keypadDecodeKey(raw);
-                if (keypadDecodeKey(raw) == '*')
-                  character = '.';
-                target[pos++] = character;
-              }
-              SSD1309_drawText(51, 36, 8, target);
-              SSD1309_update();
-            }
-          }
-          if(strtod(target, NULL) > 9000) {
-            for(uint8_t i = 0; target[i] != '\0'; i++) 
-              target[i] = ' ';
-            SSD1309_drawBitmap(48, 36, 78, 7, invalid);
-            SSD1309_update();
-            HAL_Delay(1000);
-          } 
-      }
-      else if (c == 'D' && current == &run) {
-        arrowFlag = !arrowFlag;
-
-  }
-  
-  SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
-  if(current == &run) {
-    SSD1309_drawText(51, 36, 8, target);
-    SSD1309_drawBitmap(53, 51, 13, 7, arrowFlag ? rightArrow : leftArrow);
-  }
-  SSD1309_update();
-  }
+    navigationLoop();
   /* USER CODE END 3 */
 }
 }
