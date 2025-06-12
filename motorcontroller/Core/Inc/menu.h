@@ -57,9 +57,17 @@ extern MenuNode menu311;
 extern MenuNode menu312;
 extern MenuNode menu313;
 
+extern MenuNode menu3111;
+extern MenuNode menu3121;
+extern MenuNode menu3131;
+
 extern MenuNode menu321;
 extern MenuNode menu322;
 extern MenuNode menu323;
+
+extern MenuNode menu3211;
+extern MenuNode menu3221;
+extern MenuNode menu3231;
 
 extern MenuNode menu331;
 extern MenuNode menu332;

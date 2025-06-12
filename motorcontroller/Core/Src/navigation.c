@@ -99,25 +99,30 @@ void navigationLoop() {
                 current->parent->child = &menu53;
             current = current->parent;
         }
-        else if (c == 'C' && current == &run) {
+        else if(target[0] == '\0' && current == &run) {
             uint8_t pos = 0;
-            target[0] = '\0';
-            SSD1309_drawText(51, 36, 8, target);
-            SSD1309_update();
-            while(keypadDecodeKey(raw) != '#' && pos < 10) {
+            bool decimalFlag = false;
+            if(c >= '0' && c <= '9') {
+                target[pos++] = c;
+                target[pos] = '\0';
+                SSD1309_drawText(51, 36, 8, target);
+                SSD1309_update();
+            }
+            while(keypadDecodeKey(raw) != '#' && pos < numberLength) {
                 if(dequeue(&keyQueue, &raw)) {
-                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9') || keypadDecodeKey(raw) == '*') {
+                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9') || (keypadDecodeKey(raw) == '*' && !decimalFlag)) {
                         char character = keypadDecodeKey(raw);
-                        if (keypadDecodeKey(raw) == '*')
+                        if (keypadDecodeKey(raw) == '*') {
                             character = '.';
+                            decimalFlag = true;
+                        }
                         target[pos++] = character;
                         target[pos] = '\0';
                     }
                     SSD1309_drawText(51, 36, 8, target);
                     SSD1309_update();
-                }
+                }  
             }
-            pos = 0;
             if(strtod(target, NULL) > 9000) {
                 target[0] = '\0';
                 SSD1309_drawBitmap(48, 36, 78, 7, invalid);
@@ -128,19 +133,30 @@ void navigationLoop() {
         else if(c == 'D' && current == &run) {
             arrowDir = !arrowDir;
         }
-        else if(c == 'C' && isInputScreen()) {
-            parameters[selectInputScreen()][0] = '\0';
+        else if(c == 'C' && (isInputScreen() || current == &run)) {
+            if(isInputScreen())
+                parameters[selectInputScreen()][0] = '\0';
+            else if(current == &run)
+                target[0] = '\0';
         }
         else if(parameters[selectInputScreen()][0] == '\0' && isInputScreen()) {
             uint8_t pos = 0;
+            bool decimalFlag = false;
             uint8_t idx = selectInputScreen();
-            parameters[idx][0] = '\0';
+            if(c >= '0' && c <= '9') {
+                parameters[idx][pos++] = c;
+                parameters[idx][pos] = '\0';
+                SSD1309_drawText(6, 6, 8, parameters[idx]);
+                SSD1309_update();
+            }
             while(keypadDecodeKey(raw) != '#' && pos < numberLength) {
                 if(dequeue(&keyQueue, &raw)) {
-                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9') || keypadDecodeKey(raw) == '*') {
+                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9') || (keypadDecodeKey(raw) == '*' && !decimalFlag)) {
                         char character = keypadDecodeKey(raw);
-                        if (keypadDecodeKey(raw) == '*')
+                        if(keypadDecodeKey(raw) == '*') {
                             character = '.';
+                            decimalFlag = true;
+                        }
                         parameters[idx][pos++] = character;
                         parameters[idx][pos] = '\0';
                     }
@@ -176,17 +192,17 @@ uint8_t selectInputScreen() {
         select = 1;
     else if(current == &menu261)
         select = 2;
-    else if(current == &menu321)
+    else if(current == &menu3111)
         select = 3;
-    else if(current == &menu322)
+    else if(current == &menu3121)
         select = 4;
-    else if(current == &menu323)
+    else if(current == &menu3131)
         select = 5;
-    else if(current == &menu321)
+    else if(current == &menu3211)
         select = 6;
-    else if(current == &menu322)
+    else if(current == &menu3221)
         select = 7;
-    else if(current == &menu322)
+    else if(current == &menu3231)
         select = 8;
     return select;
 }
@@ -199,17 +215,17 @@ bool isInputScreen() {
         inputScreen = true;
     else if(current == &menu261)
         inputScreen = true;
-    else if(current == &menu321)
+    else if(current == &menu3111)
         inputScreen = true;
-    else if(current == &menu322)
+    else if(current == &menu3121)
         inputScreen = true;
-    else if(current == &menu323)
+    else if(current == &menu3131)
         inputScreen = true;
-    else if(current == &menu321)
+    else if(current == &menu3211)
         inputScreen = true;
-    else if(current == &menu322)
+    else if(current == &menu3221)
         inputScreen = true;
-    else if(current == &menu322)
+    else if(current == &menu3231)
         inputScreen = true;
     return inputScreen;
 }
