@@ -38,14 +38,15 @@ extern MenuNode menu223;
 extern MenuNode menu224;
 
 extern MenuNode menu231;
-extern MenuNode menu232;
-extern MenuNode menu233;
-extern MenuNode menu234;
 
 extern MenuNode menu241;
 extern MenuNode menu242;
 extern MenuNode menu243;
 extern MenuNode menu244;
+
+extern MenuNode menu251;
+
+extern MenuNode menu261;
 
 extern MenuNode menu31;
 extern MenuNode menu32;

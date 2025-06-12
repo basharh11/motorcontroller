@@ -19,6 +19,7 @@ typedef enum {
 } direction;
 
 extern char target[MAX_LENGTH];
+extern char *parameters[];
 extern char slowZone[MAX_LENGTH];
 extern char motor1Range[MAX_LENGTH];
 extern char motor2Range[MAX_LENGTH];
@@ -36,3 +37,5 @@ extern MenuNode *current;
 void navigationInit();
 void navigationLoop();
 void updateParameters();
+uint8_t selectInputScreen();
+bool isInputScreen();
