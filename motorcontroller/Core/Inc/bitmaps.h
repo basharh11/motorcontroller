@@ -36,9 +36,12 @@ extern const uint8_t enabledBmp[];
 extern const uint8_t enabledCheckBmp[];
 extern const uint8_t disabledBmp[];
 
-extern const uint8_t invalid[]; // 78 x 7
+extern const uint8_t invalid[]; // 72 x 7
 
 extern const uint8_t rightArrow[]; // 13 x 7
 extern const uint8_t leftArrow[]; // 13 x 7
 
 extern const uint8_t inputScreen[];
+
+extern const uint8_t mm[]; // 19 x 6
+extern const uint8_t in[]; // 12 x 8

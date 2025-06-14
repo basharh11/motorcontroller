@@ -25,7 +25,7 @@ bool relay2 = disabled;
 bool analog = disabled;
 bool units = metric;
 
-uint8_t numberLength = 9;
+uint8_t numberLength;
 
 MenuNode *current = &run;
 
@@ -39,7 +39,7 @@ void updateParameters() {
     relay2 = menu34.child == &menu341 ? disabled : enabled;
     analog = menu4.child == &menu41 ? disabled : enabled;
     units = menu5.child == &menu51 ? metric : imperial;
-    numberLength = units ? 9 : 10;
+    numberLength = units ? 8 : 9;
 }
 
 void navigationInit() {
@@ -47,10 +47,6 @@ void navigationInit() {
     
     SSD1309_init();
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
-    if(current == &run) {
-        SSD1309_drawText(51, 36, 8, target);
-        SSD1309_drawBitmap(53, 51, 13, 7, arrowDir ? rightArrow : leftArrow);
-    }
     SSD1309_update();  
 
     queueInit(&keyQueue);     
@@ -62,17 +58,9 @@ void navigationLoop() {
 
     if(dequeue(&keyQueue, &raw)) {
         char c = keypadDecodeKey(raw);
-
-        if (c == 'B' && current->next) {
-            current = current->next;
-        }
-        else if (c == 'A' && current->prev) {
-            current = current->prev;
-        }
-        else if (c == '#' && current->child) {
+        if(c == '#' && current->child) {
             current = current->child;
-        }
-        else if (c == '*' && current->parent) {
+        } else if (c == '*' && current->parent) {
             if(current == &menu211 || current == &menu212)
                 current->parent->child = &menu211 ;
             else if(current == &menu213 || current == &menu214)
@@ -98,48 +86,48 @@ void navigationLoop() {
             else if(current == &menu53 || current == &menu54)
                 current->parent->child = &menu53;
             current = current->parent;
-        }
-        else if(target[0] == '\0' && current == &run) {
+        } else if (c == 'A' && current->prev) {
+            current = current->prev;
+        } else if(c == 'B' && current->next) {
+            current = current->next;
+        } else if(c == 'C' && (isInputScreen() || current == &run)) {
+            if(isInputScreen())
+                parameters[selectInputScreen()][0] = '\0';
+            else if(current == &run)
+                target[0] = '\0';
+        } else if(c == 'D' && current == &run) {
+            arrowDir = !arrowDir;
+        } else if(target[0] == '\0' && current == &run && c >= '0' && c <= '9') {
             uint8_t pos = 0;
             bool decimalFlag = false;
             if(c >= '0' && c <= '9') {
                 target[pos++] = c;
                 target[pos] = '\0';
-                SSD1309_drawText(51, 36, 8, target);
+                SSD1309_drawText(54, 36, 8, target);
                 SSD1309_update();
             }
-            while(keypadDecodeKey(raw) != '#' && pos < numberLength) {
+            while(keypadDecodeKey(raw) != '#' && pos < 9) {
                 if(dequeue(&keyQueue, &raw)) {
-                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9') || (keypadDecodeKey(raw) == '*' && !decimalFlag)) {
+                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9') || (keypadDecodeKey(raw) == '*' && !decimalFlag && (pos > 0 && pos < (units ? 4 : 5)))) {
                         char character = keypadDecodeKey(raw);
-                        if (keypadDecodeKey(raw) == '*') {
+                        if(keypadDecodeKey(raw) == '*') {
                             character = '.';
                             decimalFlag = true;
                         }
                         target[pos++] = character;
                         target[pos] = '\0';
                     }
-                    SSD1309_drawText(51, 36, 8, target);
+                    SSD1309_drawText(54, 36, 8, target);
                     SSD1309_update();
                 }  
             }
             if(strtod(target, NULL) > 9000) {
                 target[0] = '\0';
-                SSD1309_drawBitmap(48, 36, 78, 7, invalid);
+                SSD1309_drawBitmap(54, 36, 72, 7, invalid);
                 SSD1309_update();
-                HAL_Delay(1000);
+                HAL_Delay(1500);
             } 
-        }
-        else if(c == 'D' && current == &run) {
-            arrowDir = !arrowDir;
-        }
-        else if(c == 'C' && (isInputScreen() || current == &run)) {
-            if(isInputScreen())
-                parameters[selectInputScreen()][0] = '\0';
-            else if(current == &run)
-                target[0] = '\0';
-        }
-        else if(parameters[selectInputScreen()][0] == '\0' && isInputScreen()) {
+        } else if(parameters[selectInputScreen()][0] == '\0' && isInputScreen() && c >= '0' && c <= '9')  {
             uint8_t pos = 0;
             bool decimalFlag = false;
             uint8_t idx = selectInputScreen();
@@ -149,7 +137,7 @@ void navigationLoop() {
                 SSD1309_drawText(6, 6, 8, parameters[idx]);
                 SSD1309_update();
             }
-            while(keypadDecodeKey(raw) != '#' && pos < numberLength) {
+            while(keypadDecodeKey(raw) != '#' && pos < 9) {
                 if(dequeue(&keyQueue, &raw)) {
                     if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9') || (keypadDecodeKey(raw) == '*' && !decimalFlag)) {
                         char character = keypadDecodeKey(raw);
@@ -166,22 +154,24 @@ void navigationLoop() {
             }
             if(strtod(parameters[idx], NULL) > 9000) {
                 parameters[idx][0] = '\0';
-                SSD1309_drawBitmap(4, 6, 78, 7, invalid);
+                SSD1309_drawBitmap(6, 6, 72, 7, invalid);
                 SSD1309_update();
-                HAL_Delay(1000);
+                HAL_Delay(1500);
             } 
         }
     }
 
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
     if(current == &run) {
-        SSD1309_drawText(51, 36, 8, target);
-        SSD1309_drawBitmap(53, 51, 13, 7, arrowDir ? rightArrow : leftArrow);
+        SSD1309_drawText(54, 36, 8, target);
+        SSD1309_drawBitmap(54, 51, 13, 7, arrowDir ? rightArrow : leftArrow);
+        SSD1309_drawBitmap(units ? 113 : 106, units ? 50 : 52, units ? 12 : 19, units ? 8 : 6, units ? in : mm);
     }
     if(isInputScreen()) {
         SSD1309_drawText(6, 6, 8, parameters[selectInputScreen()]);
     }
     SSD1309_update();
+    updateParameters();
 }
 
 uint8_t selectInputScreen() {

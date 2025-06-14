@@ -159,14 +159,22 @@ void SSD1309_drawText(uint8_t x, uint8_t y, uint16_t size, char *text) {
 
         SSD1309_drawBitmap(runningX, runningY, size, size, drawChar);
         
-        if(text[i] == '.' && text[i+1] == '1')
-            runningX += 4;
-        else if(text[i+1] == '1') 
-            runningX += 6;
-        else if(text[i] == '.') 
+        
+
+        if(text[i] == '.')
             runningX += 5;
-        else {
+        else if(text[i] == '1')
+            runningX += 6;
+        else
             runningX += 7;
-        }
+
+
+        // else if(text[i+1] == '1') 
+        //     runningX += 6;
+        // else if(text[i] == '.')
+        //     runningX += 5;
+        // else {
+        //     runningX += 7;
+        // }
     }
 }
