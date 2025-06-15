@@ -3,6 +3,8 @@
 #include "queue.h"
 #include "keypad.h"
 #include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #define MAX_LENGTH 10
 
@@ -39,3 +41,4 @@ void navigationLoop();
 void updateParameters();
 uint8_t selectInputScreen();
 bool isInputScreen();
+

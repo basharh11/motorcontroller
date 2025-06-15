@@ -106,6 +106,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   navigationInit();
   HAL_TIM_Base_Start_IT(&htim2);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -116,8 +117,9 @@ int main(void)
     
     /* USER CODE BEGIN 3 */
     navigationLoop();
+
   /* USER CODE END 3 */
-}
+  }
 }
 
 /**

@@ -5,6 +5,7 @@ state currentState;
 direction currentDirection;
 
 char target[MAX_LENGTH] = {0};
+char targetIn[MAX_LENGTH] = {0};
 char *parameters[] = {slowZone, motor1Range, motor2Range, motor1PeakSpeed, motor1Acceleration, motor1Pulse, motor2PeakSpeed, motor2Acceleration, motor2Range};
 char slowZone[MAX_LENGTH] = {0};
 char motor1Range[MAX_LENGTH] = {0};
@@ -47,6 +48,11 @@ void navigationInit() {
     
     SSD1309_init();
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
+    if(current == &run) {
+        SSD1309_drawText(54, 36, 8, target);
+        SSD1309_drawBitmap(54, 51, 13, 7, arrowDir ? rightArrow : leftArrow);
+        SSD1309_drawBitmap(units ? 113 : 106, units ? 50 : 52, units ? 12 : 19, units ? 8 : 6, units ? in : mm);
+    }
     SSD1309_update();  
 
     queueInit(&keyQueue);     
@@ -54,6 +60,19 @@ void navigationInit() {
 }
 
 void navigationLoop() {
+    updateParameters();
+
+    SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
+    if(current == &run) {
+        SSD1309_drawText(54, 36, 8, target);
+        SSD1309_drawBitmap(54, 51, 13, 7, arrowDir ? rightArrow : leftArrow);
+        SSD1309_drawBitmap(units ? 113 : 106, units ? 50 : 52, units ? 12 : 19, units ? 8 : 6, units ? in : mm);
+    }
+    if(isInputScreen()) {
+        SSD1309_drawText(6, 6, 8, parameters[selectInputScreen()]);
+    }
+    SSD1309_update();
+
     uint8_t raw;
 
     if(dequeue(&keyQueue, &raw)) {
@@ -106,22 +125,24 @@ void navigationLoop() {
                 SSD1309_drawText(54, 36, 8, target);
                 SSD1309_update();
             }
-            while(keypadDecodeKey(raw) != '#' && pos < 9) {
+            while(keypadDecodeKey(raw) != '#' && pos < numberLength) {
                 if(dequeue(&keyQueue, &raw)) {
-                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9') || (keypadDecodeKey(raw) == '*' && !decimalFlag && (pos > 0 && pos < (units ? 4 : 5)))) {
+                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9' && ((pos < (units ? 3 : 4)) || target[numberLength - 5] == '.')) || (keypadDecodeKey(raw) == '*' && !decimalFlag && (pos > 0 && pos < (units ? 4 : 5)))) {
                         char character = keypadDecodeKey(raw);
                         if(keypadDecodeKey(raw) == '*') {
                             character = '.';
                             decimalFlag = true;
                         }
                         target[pos++] = character;
+                        if(target[pos-1] == '.') 
+                            numberLength -= ((units ? 3 : 4) - (pos - 1));
                         target[pos] = '\0';
                     }
                     SSD1309_drawText(54, 36, 8, target);
                     SSD1309_update();
                 }  
             }
-            if(strtod(target, NULL) > 9000) {
+            if(strtod(target, NULL) > 10000) { //strtod(motor1Range, NULL)
                 target[0] = '\0';
                 SSD1309_drawBitmap(54, 36, 72, 7, invalid);
                 SSD1309_update();
@@ -137,15 +158,17 @@ void navigationLoop() {
                 SSD1309_drawText(6, 6, 8, parameters[idx]);
                 SSD1309_update();
             }
-            while(keypadDecodeKey(raw) != '#' && pos < 9) {
+            while(keypadDecodeKey(raw) != '#' && pos < numberLength) {
                 if(dequeue(&keyQueue, &raw)) {
-                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9') || (keypadDecodeKey(raw) == '*' && !decimalFlag)) {
+                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9' && ((pos < (units ? 3 : 4)) || parameters[idx][numberLength - 5] == '.')) || (keypadDecodeKey(raw) == '*' && !decimalFlag && (pos > 0 && pos < (units ? 4 : 5)))) {
                         char character = keypadDecodeKey(raw);
                         if(keypadDecodeKey(raw) == '*') {
                             character = '.';
                             decimalFlag = true;
                         }
                         parameters[idx][pos++] = character;
+                        if(parameters[idx][pos-1] == '.') 
+                            numberLength -= ((units ? 3 : 4) - (pos - 1));
                         parameters[idx][pos] = '\0';
                     }
                     SSD1309_drawText(6, 6, 8, parameters[idx]);
@@ -160,18 +183,6 @@ void navigationLoop() {
             } 
         }
     }
-
-    SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
-    if(current == &run) {
-        SSD1309_drawText(54, 36, 8, target);
-        SSD1309_drawBitmap(54, 51, 13, 7, arrowDir ? rightArrow : leftArrow);
-        SSD1309_drawBitmap(units ? 113 : 106, units ? 50 : 52, units ? 12 : 19, units ? 8 : 6, units ? in : mm);
-    }
-    if(isInputScreen()) {
-        SSD1309_drawText(6, 6, 8, parameters[selectInputScreen()]);
-    }
-    SSD1309_update();
-    updateParameters();
 }
 
 uint8_t selectInputScreen() {
@@ -219,3 +230,4 @@ bool isInputScreen() {
         inputScreen = true;
     return inputScreen;
 }
+

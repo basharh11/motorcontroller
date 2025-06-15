@@ -13,6 +13,8 @@
         "stm32f4xx.h": "c",
         "bitmaps.h": "c",
         "override.h": "c",
-        "navigation.h": "c"
+        "navigation.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c"
     }
 }
