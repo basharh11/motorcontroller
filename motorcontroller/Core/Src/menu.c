@@ -386,7 +386,7 @@ void buildMenuTree(void) {
     menu323.bitmap = motorConfig3;
     menu323.prev   = &menu322;
     menu323.next   = NULL;
-    menu323.child  = NULL;
+    menu323.child  = &menu3231;
     menu323.parent = &menu32;
 
     menu3231.bitmap = inputScreen;

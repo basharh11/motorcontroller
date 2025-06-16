@@ -42,3 +42,10 @@ void updateParameters();
 uint8_t selectInputScreen();
 bool isInputScreen();
 
+void convertUnits(char* buf, bool units);
+
+void ftoa(char *buf, float val, int precision);
+
+void updateNumbers();
+
+

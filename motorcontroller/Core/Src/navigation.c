@@ -25,6 +25,7 @@ bool relay1 = disabled;
 bool relay2 = disabled;
 bool analog = disabled;
 bool units = metric;
+bool lastUnits = metric;
 
 uint8_t numberLength;
 
@@ -61,6 +62,7 @@ void navigationInit() {
 
 void navigationLoop() {
     updateParameters();
+    updateNumbers();
 
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
     if(current == &run) {
@@ -142,7 +144,7 @@ void navigationLoop() {
                     SSD1309_update();
                 }  
             }
-            if(strtod(target, NULL) > 10000) { //strtod(motor1Range, NULL)
+            if(strtof(target, NULL) > strtof(motor1Range, NULL) || (units == imperial && strtof(target, NULL) > 393.7007)) { //strtod(motor1Range, NULL)
                 target[0] = '\0';
                 SSD1309_drawBitmap(54, 36, 72, 7, invalid);
                 SSD1309_update();
@@ -175,7 +177,7 @@ void navigationLoop() {
                     SSD1309_update();
                 }  
             }
-            if(strtod(parameters[idx], NULL) > 9000) {
+            if(strtof(parameters[idx], NULL) > 9000) {
                 parameters[idx][0] = '\0';
                 SSD1309_drawBitmap(6, 6, 72, 7, invalid);
                 SSD1309_update();
@@ -231,3 +233,65 @@ bool isInputScreen() {
     return inputScreen;
 }
 
+void convertUnits(char* buf, bool units) {
+    float convNum = strtof(buf, NULL);
+    if(units) 
+        convNum /= 25.4;
+    else
+        convNum *= 25.4;
+    ftoa(buf, convNum, 4);
+}
+
+void ftoa(char *buf, float val, int precision) {
+    if (val < 0.0f) {
+        *buf++ = '-';
+        val = -val;
+    }
+
+    int32_t scale = 1;
+    for (int i = 0; i < precision;  ++i) {
+        scale *= 10;
+    }
+
+    int32_t scaled = (int32_t)(val * scale + 0.5f);
+    int32_t ip = scaled / scale;
+    int32_t fp = scaled % scale;
+
+    char tmp[12];
+    int ti = 0;
+    if (ip == 0) {
+        tmp[ti++] = '0';
+    } else {
+        while (ip > 0) {
+            tmp[ti++] = '0' + (ip % 10);
+            ip /= 10;
+        }
+    }
+    while (ti--) {
+        *buf++ = tmp[ti];
+    }
+
+    if (precision > 0) {
+        *buf++ = '.';
+        int32_t div = scale / 10;
+        for (int i = 0; i < precision; ++i) {
+            int digit = fp / div;
+            *buf++ = '0' + digit;
+            fp %= div;
+            div /= 10;
+        }
+    }
+
+    *buf = '\0';
+}
+
+void updateNumbers() {
+    if(lastUnits != units) { 
+        if(target[0] != '\0')
+            convertUnits(target, units);
+        for(uint8_t i = 0; i < 9; i++)
+            if(parameters[i][0] != '\0')
+                convertUnits(parameters[i], units);
+    }
+    lastUnits = units;
+}
