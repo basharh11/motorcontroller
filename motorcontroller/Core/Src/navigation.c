@@ -5,7 +5,6 @@ state currentState;
 direction currentDirection;
 
 char target[MAX_LENGTH] = {0};
-char targetIn[MAX_LENGTH] = {0};
 char *parameters[] = {slowZone, motor1Range, motor2Range, motor1PeakSpeed, motor1Acceleration, motor1Pulse, motor2PeakSpeed, motor2Acceleration, motor2Range};
 char slowZone[MAX_LENGTH] = {0};
 char motor1Range[MAX_LENGTH] = {0};
@@ -16,6 +15,9 @@ char motor1Pulse[MAX_LENGTH] = {0};
 char motor2PeakSpeed[MAX_LENGTH] = {0};
 char motor2Acceleration[MAX_LENGTH] = {0};
 char motor2Pulse[MAX_LENGTH] = {0};
+
+double motor1Pos;
+double motor2Pos;   
 
 bool arrowDir = right;
 bool home1 = disabled;
@@ -62,7 +64,6 @@ void navigationInit() {
 
 void navigationLoop() {
     updateParameters();
-    updateNumbers();
 
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
     if(current == &run) {
@@ -127,9 +128,9 @@ void navigationLoop() {
                 SSD1309_drawText(54, 36, 8, target);
                 SSD1309_update();
             }
-            while(keypadDecodeKey(raw) != '#' && pos < numberLength) {
+            while(keypadDecodeKey(raw) != '#' && pos < numberLength) {   
                 if(dequeue(&keyQueue, &raw)) {
-                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9' && ((pos < (units ? 3 : 4)) || target[numberLength - 5] == '.')) || (keypadDecodeKey(raw) == '*' && !decimalFlag && (pos > 0 && pos < (units ? 4 : 5)))) {
+                    if(((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9' && ((pos < (units ? 3 : 4)) || target[numberLength - 5] == '.')) || (keypadDecodeKey(raw) == '*' && !decimalFlag && (pos > 0 && pos < (units ? 4 : 5)))) && !(keypadDecodeKey(raw) == '0' && !decimalFlag && pos == 1 && target[0] == '0')) {
                         char character = keypadDecodeKey(raw);
                         if(keypadDecodeKey(raw) == '*') {
                             character = '.';
@@ -144,7 +145,9 @@ void navigationLoop() {
                     SSD1309_update();
                 }  
             }
-            if(strtof(target, NULL) > strtof(motor1Range, NULL) || (units == imperial && strtof(target, NULL) > 393.7007)) { //strtod(motor1Range, NULL)
+            if(target[pos-1] == '.')
+                target[pos-1] = '\0';
+            if(strtod(target, NULL) > strtod(motor1Range, NULL) || (units == imperial && strtod(target, NULL) > 393.7007)) { 
                 target[0] = '\0';
                 SSD1309_drawBitmap(54, 36, 72, 7, invalid);
                 SSD1309_update();
@@ -177,7 +180,7 @@ void navigationLoop() {
                     SSD1309_update();
                 }  
             }
-            if(strtof(parameters[idx], NULL) > 9000) {
+            if(strtod(parameters[idx], NULL) > 9000) {
                 parameters[idx][0] = '\0';
                 SSD1309_drawBitmap(6, 6, 72, 7, invalid);
                 SSD1309_update();
@@ -233,65 +236,59 @@ bool isInputScreen() {
     return inputScreen;
 }
 
-void convertUnits(char* buf, bool units) {
-    float convNum = strtof(buf, NULL);
-    if(units) 
-        convNum /= 25.4;
-    else
-        convNum *= 25.4;
-    ftoa(buf, convNum, 4);
-}
-
-void ftoa(char *buf, float val, int precision) {
-    if (val < 0.0f) {
+void dtoa(char *buf, double val, int precision) {
+    if (val < 0.0) {
         *buf++ = '-';
         val = -val;
     }
-
-    int32_t scale = 1;
-    for (int i = 0; i < precision;  ++i) {
+    int64_t scale = 1;
+    for (int i = 0; i < precision; ++i)
         scale *= 10;
-    }
 
-    int32_t scaled = (int32_t)(val * scale + 0.5f);
-    int32_t ip = scaled / scale;
-    int32_t fp = scaled % scale;
+    // ε = 1e-(precision+2) is small enough to not affect true truncation,
+    // but big enough to push 6666.66659999… up to 6666.66660000
+    double eps = 1.0 / pow(10.0, precision + 2);
+    double tmp = val * (double)scale + eps;
+    int64_t scaled = (int64_t)tmp;
 
-    char tmp[12];
+    int64_t ip = scaled / scale;
+    int64_t fp = scaled % scale;
+
+    // integer part (reverse into tmpbuf)
+    char tmpbuf[32];
     int ti = 0;
-    if (ip == 0) {
-        tmp[ti++] = '0';
-    } else {
-        while (ip > 0) {
-            tmp[ti++] = '0' + (ip % 10);
+    if (ip == 0) tmpbuf[ti++] = '0';
+    else {
+        while (ip) {
+            tmpbuf[ti++] = '0' + (ip % 10);
             ip /= 10;
         }
     }
-    while (ti--) {
-        *buf++ = tmp[ti];
-    }
+    while (ti--) *buf++ = tmpbuf[ti];
 
-    if (precision > 0) {
+    // fractional part
+    if (precision) {
         *buf++ = '.';
-        int32_t div = scale / 10;
+        int64_t div = scale / 10;
         for (int i = 0; i < precision; ++i) {
-            int digit = fp / div;
-            *buf++ = '0' + digit;
+            int d = fp / div;
+            *buf++ = '0' + d;
             fp %= div;
             div /= 10;
         }
     }
-
     *buf = '\0';
 }
 
-void updateNumbers() {
-    if(lastUnits != units) { 
-        if(target[0] != '\0')
-            convertUnits(target, units);
-        for(uint8_t i = 0; i < 9; i++)
-            if(parameters[i][0] != '\0')
-                convertUnits(parameters[i], units);
-    }
-    lastUnits = units;
+void clearAll() {
+    target[0] = '\0';
+    slowZone[0] = '\0';
+    motor1Range[0] = '\0';
+    motor2Range[0] = '\0';
+    motor1PeakSpeed[0] = '\0';
+    motor1Acceleration[0] = '\0';
+    motor1Pulse[0] = '\0';
+    motor2PeakSpeed[0] = '\0';
+    motor2Acceleration[0] = '\0';
+    motor2Pulse[0] = '\0';
 }

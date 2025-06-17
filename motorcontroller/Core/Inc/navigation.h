@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #define MAX_LENGTH 10
 
@@ -32,6 +33,9 @@ extern char motor2PeakSpeed[MAX_LENGTH];
 extern char motor2Acceleration[MAX_LENGTH];
 extern char motor2Pulse[MAX_LENGTH];
 
+extern double motor1Pos;
+extern double motor2Pos;
+
 extern queue keyQueue;
 extern bool arrowFlag;
 extern MenuNode *current;
@@ -42,10 +46,7 @@ void updateParameters();
 uint8_t selectInputScreen();
 bool isInputScreen();
 
-void convertUnits(char* buf, bool units);
+void dtoa(char *buf, double val, int precision);
 
-void ftoa(char *buf, float val, int precision);
-
-void updateNumbers();
-
+void clearAll();
 
