@@ -1,3 +1,6 @@
+#ifndef NAVIGATION_H
+#define NAVIGATION_H
+
 #include "menu.h"
 #include "ssd1309.h"
 #include "queue.h"
@@ -49,4 +52,6 @@ bool isInputScreen();
 void dtoa(char *buf, double val, int precision);
 
 void clearAll();
+
+#endif
 

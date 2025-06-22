@@ -1,17 +1,18 @@
 #include "navigation.h"
+#include "motor.h"
 
 systemOfMeasurement currentSysOfMeasurment;
 state currentState;
 direction currentDirection;
 
-char target[MAX_LENGTH] = {0};
+char target[MAX_LENGTH] = "100";
 char *parameters[] = {slowZone, motor1Range, motor2Range, motor1PeakSpeed, motor1Acceleration, motor1Pulse, motor2PeakSpeed, motor2Acceleration, motor2Range};
 char slowZone[MAX_LENGTH] = {0};
 char motor1Range[MAX_LENGTH] = {0};
 char motor2Range[MAX_LENGTH] = {0};
-char motor1PeakSpeed[MAX_LENGTH] = {0};
-char motor1Acceleration[MAX_LENGTH] = {0};
-char motor1Pulse[MAX_LENGTH] = {0};
+char motor1PeakSpeed[MAX_LENGTH] = "360";
+char motor1Acceleration[MAX_LENGTH] = "120";
+char motor1Pulse[MAX_LENGTH] = "1280";
 char motor2PeakSpeed[MAX_LENGTH] = {0};
 char motor2Acceleration[MAX_LENGTH] = {0};
 char motor2Pulse[MAX_LENGTH] = {0};
@@ -112,6 +113,8 @@ void navigationLoop() {
             current = current->prev;
         } else if(c == 'B' && current->next) {
             current = current->next;
+        } else if(c == 'A' && current == &run) {
+            on_menu_move();
         } else if(c == 'C' && (isInputScreen() || current == &run)) {
             if(isInputScreen())
                 parameters[selectInputScreen()][0] = '\0';

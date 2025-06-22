@@ -125,7 +125,8 @@
 				28,
 				29,
 				30,
-				31
+				31,
+				32
 			]
 		},
 		{
@@ -176,7 +177,7 @@
 			"language" : "ASM",
 			"sourceIndexes" : 
 			[
-				32
+				33
 			]
 		}
 	],
@@ -240,14 +241,15 @@
 				28,
 				29,
 				30,
-				31
+				31,
+				32
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				32
+				33
 			]
 		}
 	],
@@ -305,6 +307,12 @@
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
 			"path" : "Core/Src/navigation.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "Core/Src/motor.c",
 			"sourceGroupIndex" : 0
 		},
 		{
