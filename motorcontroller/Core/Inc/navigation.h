@@ -35,9 +35,14 @@ extern char motor1Pulse[MAX_LENGTH];
 extern char motor2PeakSpeed[MAX_LENGTH];
 extern char motor2Acceleration[MAX_LENGTH];
 extern char motor2Pulse[MAX_LENGTH];
+extern char motor1Position[MAX_LENGTH];
+extern char motor2Position[MAX_LENGTH];
 
 extern double motor1Pos;
 extern double motor2Pos;
+
+extern bool homing_reverse_started;
+extern bool homing_active;
 
 extern queue keyQueue;
 extern bool arrowFlag;

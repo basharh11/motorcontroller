@@ -16,3 +16,4 @@ extern bool lastUnits;
 void on_menu_move(void);
 void motor_init_timer(void);
 void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim);
+void home(void);

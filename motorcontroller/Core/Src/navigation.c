@@ -5,17 +5,19 @@ systemOfMeasurement currentSysOfMeasurment;
 state currentState;
 direction currentDirection;
 
-char target[MAX_LENGTH] = "100";
+char target[MAX_LENGTH] = "80";
 char *parameters[] = {slowZone, motor1Range, motor2Range, motor1PeakSpeed, motor1Acceleration, motor1Pulse, motor2PeakSpeed, motor2Acceleration, motor2Range};
 char slowZone[MAX_LENGTH] = {0};
 char motor1Range[MAX_LENGTH] = {0};
 char motor2Range[MAX_LENGTH] = {0};
-char motor1PeakSpeed[MAX_LENGTH] = "360";
-char motor1Acceleration[MAX_LENGTH] = "120";
+char motor1PeakSpeed[MAX_LENGTH] = "40";
+char motor1Acceleration[MAX_LENGTH] = "30";
 char motor1Pulse[MAX_LENGTH] = "1280";
 char motor2PeakSpeed[MAX_LENGTH] = {0};
 char motor2Acceleration[MAX_LENGTH] = {0};
 char motor2Pulse[MAX_LENGTH] = {0};
+char motor1Position[MAX_LENGTH] = {0};
+char motor2Position[MAX_LENGTH] = {0};
 
 double motor1Pos;
 double motor2Pos;   
@@ -54,6 +56,7 @@ void navigationInit() {
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
     if(current == &run) {
         SSD1309_drawText(54, 36, 8, target);
+        SSD1309_drawText(0, 0, 8, motor1Position);
         SSD1309_drawBitmap(54, 51, 13, 7, arrowDir ? rightArrow : leftArrow);
         SSD1309_drawBitmap(units ? 113 : 106, units ? 50 : 52, units ? 12 : 19, units ? 8 : 6, units ? in : mm);
     }
@@ -64,6 +67,12 @@ void navigationInit() {
 }
 
 void navigationLoop() {
+    if(homing_active && homing_reverse_started && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_SET) {
+        HAL_TIM_OC_Stop_IT(&htim3, TIM_CHANNEL_3);
+        homing_active = false;
+        homing_reverse_started = false;
+    }
+
     updateParameters();
 
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
@@ -80,6 +89,7 @@ void navigationLoop() {
     uint8_t raw;
 
     if(dequeue(&keyQueue, &raw)) {
+
         char c = keypadDecodeKey(raw);
         if(c == '#' && current->child) {
             current = current->child;
@@ -122,6 +132,8 @@ void navigationLoop() {
                 target[0] = '\0';
         } else if(c == 'D' && current == &run) {
             arrowDir = !arrowDir;
+        } else if(c == '#' && current == &menu1) {
+            home();
         } else if(target[0] == '\0' && current == &run && c >= '0' && c <= '9') {
             uint8_t pos = 0;
             bool decimalFlag = false;
