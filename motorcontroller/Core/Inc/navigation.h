@@ -38,8 +38,11 @@ extern char motor2Pulse[MAX_LENGTH];
 extern char motor1Position[MAX_LENGTH];
 extern char motor2Position[MAX_LENGTH];
 
-extern double motor1Pos;
-extern double motor2Pos;
+extern float motor1Pos;
+extern float motor2Pos;
+
+extern volatile int32_t motor1_step_count;
+extern float motor1_steps_per_unit;
 
 extern bool homing_reverse_started;
 extern bool homing_active;
@@ -54,7 +57,7 @@ void updateParameters();
 uint8_t selectInputScreen();
 bool isInputScreen();
 
-void dtoa(char *buf, double val, int precision);
+void dtoa(char *buf, float val, int precision);
 
 void clearAll();
 

@@ -19,8 +19,8 @@ char motor2Pulse[MAX_LENGTH] = {0};
 char motor1Position[MAX_LENGTH] = {0};
 char motor2Position[MAX_LENGTH] = {0};
 
-double motor1Pos;
-double motor2Pos;   
+float motor1Pos;
+float motor2Pos;   
 
 bool arrowDir = right;
 bool home1 = disabled;
@@ -67,10 +67,12 @@ void navigationInit() {
 }
 
 void navigationLoop() {
-    if(homing_active && homing_reverse_started && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_SET) {
+    if(homing_active && homing_reverse_started && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET) {
         HAL_TIM_OC_Stop_IT(&htim3, TIM_CHANNEL_3);
         homing_active = false;
         homing_reverse_started = false;
+        motor1_step_count = 0;
+        motor1Pos = 0;
     }
 
     updateParameters();
@@ -80,6 +82,8 @@ void navigationLoop() {
         SSD1309_drawText(54, 36, 8, target);
         SSD1309_drawBitmap(54, 51, 13, 7, arrowDir ? rightArrow : leftArrow);
         SSD1309_drawBitmap(units ? 113 : 106, units ? 50 : 52, units ? 12 : 19, units ? 8 : 6, units ? in : mm);
+        dtoa(motor1Position, motor1Pos, 4);
+        SSD1309_drawText(54, 6, 8, motor1Position);
     }
     if(isInputScreen()) {
         SSD1309_drawText(6, 6, 8, parameters[selectInputScreen()]);
@@ -162,7 +166,7 @@ void navigationLoop() {
             }
             if(target[pos-1] == '.')
                 target[pos-1] = '\0';
-            if(strtod(target, NULL) > strtod(motor1Range, NULL) || (units == imperial && strtod(target, NULL) > 393.7007)) { 
+            if(strtof(target, NULL) > strtof(motor1Range, NULL) || (units == imperial && strtof(target, NULL) > 393.7007)) { 
                 target[0] = '\0';
                 SSD1309_drawBitmap(54, 36, 72, 7, invalid);
                 SSD1309_update();
@@ -195,7 +199,7 @@ void navigationLoop() {
                     SSD1309_update();
                 }  
             }
-            if(strtod(parameters[idx], NULL) > 9000) {
+            if(strtof(parameters[idx], NULL) > 9000) {
                 parameters[idx][0] = '\0';
                 SSD1309_drawBitmap(6, 6, 72, 7, invalid);
                 SSD1309_update();
@@ -251,7 +255,7 @@ bool isInputScreen() {
     return inputScreen;
 }
 
-void dtoa(char *buf, double val, int precision) {
+void dtoa(char *buf, float val, int precision) {
     if (val < 0.0) {
         *buf++ = '-';
         val = -val;
@@ -262,8 +266,8 @@ void dtoa(char *buf, double val, int precision) {
 
     // ε = 1e-(precision+2) is small enough to not affect true truncation,
     // but big enough to push 6666.66659999… up to 6666.66660000
-    double eps = 1.0 / pow(10.0, precision + 2);
-    double tmp = val * (double)scale + eps;
+    float eps = 1.0 / pow(10.0, precision + 2);
+    float tmp = val * (float)scale + eps;
     int64_t scaled = (int64_t)tmp;
 
     int64_t ip = scaled / scale;

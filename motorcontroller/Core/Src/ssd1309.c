@@ -7,7 +7,7 @@
 
 #include "ssd1309.h"
 
-static uint8_t SSD1309_FRAMEBUFFER[SSD1309_SIZE];
+static uint8_t SSD1309_FRAMEBUFFER[SSD1309_SIZE*2];
 
 void SSD1309_reset(void) {} // for I2C do nothing
 
