@@ -109,7 +109,6 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   navigationInit();
-  HAL_TIM_Base_Start_IT(&htim2);
 
   /* USER CODE END 2 */
 

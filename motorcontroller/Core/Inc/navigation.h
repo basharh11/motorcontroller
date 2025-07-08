@@ -13,6 +13,10 @@
 
 #define MAX_LENGTH 10
 
+typedef struct motor motor;
+
+typedef struct movementProfile movementProfile;
+
 typedef enum {
     metric, imperial
 } systemOfMeasurement; 
@@ -39,20 +43,17 @@ extern char motor2Pulse[MAX_LENGTH];
 extern char motor1Position[MAX_LENGTH];
 extern char motor2Position[MAX_LENGTH];
 
+extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 
 extern float motor1Pos;
 extern float motor2Pos;
 
-extern volatile int32_t motor1_step_count;
-extern float motor1_steps_per_unit;
-
-extern bool homing_reverse_started;
-extern bool homing_active;
-
 extern queue keyQueue;
 extern bool arrowFlag;
 extern MenuNode *current;
+extern motor m1;
+extern movementProfile mp1;
 
 void navigationInit();
 void navigationLoop();

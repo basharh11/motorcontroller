@@ -1,13 +1,19 @@
     #include "motor.h"
-    #include "main.h"
-    #include <math.h>
-    
-    void setPorts(motor *m, TIM_HandleTypeDef *handle, GPIO_TypeDef *dport, uint16_t dpin, GPIO_TypeDef *hport, uint16_t hpin) {
+
+    void motorInit(motor *m, movementProfile *mp, TIM_HandleTypeDef *handle, GPIO_TypeDef *dport, uint16_t dpin, GPIO_TypeDef *hport, uint16_t hpin) {
         m->htim = handle;
         m->dirPort = dport;
         m->dirPin = dpin;
         m->homePort = hport;
         m->homePin = hpin;
+        m->movementProfile = mp;
+        setTimerFrequency(m);
+        HAL_TIM_Base_Start(handle);
+        resetStepCount(m);
+        m->distance = 0;
+        m->acceleration = 0;
+        m->pulsePerUnit = 0;
+        m->peakSpeed = 0;
     }
 
     void setTimerFrequency(motor *m) {
@@ -42,11 +48,14 @@
 
     void setHomingStatus(motor *m, bool status) {
         m->homingActive = status;
-
     }
 
     void setHomingReverseStatus(motor *m, bool status) {
         m->homingReverseStarted = status;
+    }
+
+    void resetStepCount(motor *m) {
+        m->stepCount = 0;
     }
 
     TIM_HandleTypeDef* getHandle(const motor *m) {
@@ -69,12 +78,12 @@
         return m->homePin;
     }
 
-    float getDistance(const motor *m) {
-        return m->pulsePerUnit;
-    }
-
     uint32_t getTimerFrequency(const motor *m) {
         return m->timerFrequency;
+    }
+
+    float getDistance(const motor *m) {
+        return m->distance;
     }
 
     float getPulsePerUnit(const motor *m) {
@@ -86,7 +95,7 @@
     }
     
     float getAcceleration(const motor *m) {
-        return m->pulsePerUnit;
+        return m->acceleration;
     }
 
     movementProfile* getMovementProfile(const motor *m) {
@@ -113,8 +122,8 @@
 
         setTotalPulses(getMovementProfile(m), getDistance(m), getPulsePerUnit(m));
         setAccelerationPPSS(getMovementProfile(m), getAcceleration(m), getPulsePerUnit(m));
-        setRequestedPeakSpeedPPS(getMovementProfile(m), getPulsePerUnit(m), getDistance(m));
-        setMaximumPeakSpeedPPS(getMovementProfile(m), getPulsePerUnit(m));
+        setRequestedPeakSpeedPPS(getMovementProfile(m), getPeakSpeed(m), getPulsePerUnit(m));
+        setMaximumPeakSpeedPPS(getMovementProfile(m), getTotalPulses(getMovementProfile(m)));
         setActualPeakSpeedPPS(getMovementProfile(m));
         setRampingDistanceP(getMovementProfile(m));
         setPulseIntervals(m, getMovementProfile(m));
@@ -125,8 +134,8 @@
     }
 
     void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim) {
-        if(getHandle(&motor1) == htim)
-            motorOCCallback(&motor1);
+        if(htim->Instance == TIM3)
+            motorOCCallback(&m1);
     }
 
     void switchEXTIHandler(motor *m) {
@@ -156,11 +165,12 @@
             return;
         }
         
-        uint32_t remainingPulses = getRemainingPulses(getMovementProfile(m));
-        if (--remainingPulses <= 0) {
+        if (getRemainingPulses(getMovementProfile(m)) == 0) {
             HAL_TIM_OC_Stop_IT(getHandle(m), TIM_CHANNEL_3);
             return;
         }
+
+        decrementRemainingPulses(getMovementProfile(m));
 
         setNextTick(m, getMovementProfile(m));
     

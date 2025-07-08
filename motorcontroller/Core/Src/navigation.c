@@ -9,7 +9,7 @@ char *parameters[] = {slowZone, motor1Range, motor2Range, motor1PeakSpeed, motor
 char slowZone[MAX_LENGTH] = {0};
 char motor1Range[MAX_LENGTH] = {0};
 char motor2Range[MAX_LENGTH] = {0};
-char motor1PeakSpeed[MAX_LENGTH] = "40";
+char motor1PeakSpeed[MAX_LENGTH] = "35";
 char motor1Acceleration[MAX_LENGTH] = "30";
 char motor1Pulse[MAX_LENGTH] = "1280";
 char motor2PeakSpeed[MAX_LENGTH] = {0};
@@ -37,7 +37,9 @@ MenuNode *current = &run;
 
 queue keyQueue;
 
-motor motor1;
+motor m1;
+
+movementProfile mp1;
 
 void updateParameters() {
     home1 = menu21.child == &menu211 ? disabled : enabled;
@@ -65,14 +67,17 @@ void navigationInit() {
 
     queueInit(&keyQueue);     
     keypadInit(&keyQueue); 
-    setPorts(&motor1, &htim3, GPIOC, GPIO_PIN_9, GPIOB, GPIO_PIN_0);
+    HAL_TIM_Base_Start_IT(&htim2);
+    mpInit(&mp1);
+    motorInit(&m1, &mp1, &htim3, GPIOC, GPIO_PIN_9, GPIOB, GPIO_PIN_0);
 }
 
 void navigationLoop() {
-    if(getHomingStatus(&motor1) && getHomingReverseStatus(&motor1) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET) {
-        HAL_TIM_OC_Stop_IT(getHandle(&motor1), TIM_CHANNEL_3);
-        setHomingStatus(&motor1, false);
-        setHomingReverseStatus(&motor1, false);
+    if(getHomingStatus(&m1) && getHomingReverseStatus(&m1) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET) {
+        HAL_TIM_OC_Stop_IT(getHandle(&m1), TIM_CHANNEL_3);
+        setHomingStatus(&m1, false);
+        setHomingReverseStatus(&m1, false);
+        resetStepCount(&m1);
         motor1Pos = 0;
     }
 
@@ -94,7 +99,6 @@ void navigationLoop() {
     uint8_t raw;
 
     if(dequeue(&keyQueue, &raw)) {
-
         char c = keypadDecodeKey(raw);
         if(c == '#' && current->child) {
             current = current->child;
@@ -129,7 +133,7 @@ void navigationLoop() {
         } else if(c == 'B' && current->next) {
             current = current->next;
         } else if(c == 'A' && current == &run) {
-            moveMotor(&motor1);
+            moveMotor(&m1);
         } else if(c == 'C' && (isInputScreen() || current == &run)) {
             if(isInputScreen())
                 parameters[selectInputScreen()][0] = '\0';
@@ -138,7 +142,7 @@ void navigationLoop() {
         } else if(c == 'D' && current == &run) {
             arrowDir = !arrowDir;
         } else if(c == '#' && current == &menu1) {
-            home(&motor1);
+            home(&m1);
         } else if(target[0] == '\0' && current == &run && c >= '0' && c <= '9') {
             uint8_t pos = 0;
             bool decimalFlag = false;

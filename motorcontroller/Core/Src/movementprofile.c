@@ -1,11 +1,29 @@
 #include "movementprofile.h"
-#include "motor.h"
 
-uint32_t getTotalPulses(const movementProfile *mp) {
-    return mp->accelerationPPSS;
+void mpInit(movementProfile *mp) {
+    mp->remainingPulses = 0;
+    mp->totalPulses = 0;
+
+    mp->accelerationPPSS = 0;
+    mp->requestedPeakSpeedPPS = 0;
+    mp->maximumPeakSpeedPPS = 0;
+    mp->actualPeakSpeedPPS = 0;
+    mp->rampingDistanceP = 0;
+
+    mp->stepIndex = 0;
+    mp->accelSteps = 0;
+    mp->peakSteps = 0;
+    mp->decelSteps = 0;
+
+    mp->firstTick = 0;
+    mp->nextTick = 0;
 }
 
-uint32_t getRemainingPulses(const movementProfile *mp) {
+uint32_t getTotalPulses(const movementProfile *mp) {
+    return mp->totalPulses;
+}
+
+int32_t getRemainingPulses(const movementProfile *mp) {
     return mp->remainingPulses;
 }
 
@@ -18,7 +36,7 @@ float getRequestedPeakSpeedPPS(const movementProfile *mp) {
 }
 
 float getMaximumPeakSpeedPPS(const movementProfile *mp) {
-    return mp->requestedPeakSpeedPPS;
+    return mp->maximumPeakSpeedPPS;
 }
 
 float getActualPeakSpeedPPS(const movementProfile *mp) {
@@ -65,8 +83,8 @@ void setRequestedPeakSpeedPPS(movementProfile *mp, uint32_t peakSpeed, uint32_t 
     mp->requestedPeakSpeedPPS = peakSpeed * pulsePerUnit;
 }
 
-void setMaximumPeakSpeedPPS(movementProfile *mp, uint32_t pulsePerUnit) {
-    mp->maximumPeakSpeedPPS = sqrtf(2.0f * getAccelerationPPSS(mp) * pulsePerUnit);
+void setMaximumPeakSpeedPPS(movementProfile *mp, uint32_t totalPulses) {
+    mp->maximumPeakSpeedPPS = sqrtf(2.0f * getAccelerationPPSS(mp) * totalPulses);
 }
 
 void setActualPeakSpeedPPS(movementProfile *mp) {
@@ -101,6 +119,11 @@ void setHomingPulseIntervals(motor *m, movementProfile *mp) {
 void incrementStepIndex(movementProfile *mp) {
     mp->stepIndex++;
 }
+
+void decrementRemainingPulses(movementProfile *mp) {
+    mp->remainingPulses--;
+}
+
 
 void setNextTick(motor *m, movementProfile *mp) {
     if(getStepIndex(mp) < getAccelSteps(mp)) {

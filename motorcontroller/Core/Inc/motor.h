@@ -24,11 +24,11 @@ typedef struct motor {
     bool homingActive;
     bool homingReverseStarted;
     
-    uint32_t stepCount;
+    int32_t stepCount;
 } motor;
 
-extern motor motor1;
-extern motor motor2;
+extern motor m1;
+extern motor m2;
 
 extern bool arrowDir;
 extern bool home1;
@@ -55,7 +55,7 @@ bool getHomingStatus(const motor *m);
 bool getHomingReverseStatus(const motor *m);
 uint32_t getStepCount(const motor *m);
 
-void setPorts(motor *m, TIM_HandleTypeDef *htim, GPIO_TypeDef *dirPort, uint16_t dirPin, GPIO_TypeDef *homePort, uint16_t homePin);
+void motorInit(motor *m, movementProfile *mp, TIM_HandleTypeDef *htim, GPIO_TypeDef *dirPort, uint16_t dirPin, GPIO_TypeDef *homePort, uint16_t homePin);
 void setTimerFrequency(motor *m);
 void setPulsePerUnit(motor *m);
 void setPeakSpeed(motor *m);
@@ -63,6 +63,7 @@ void setAcceleration(motor *m);
 void setDistance(motor *m);
 void setHomingStatus(motor *m, bool status);
 void setHomingReverseStatus(motor *m, bool status);
+void resetStepCount(motor *m);
 
 void startTimer(motor *m);
 void moveMotor(motor *m);
