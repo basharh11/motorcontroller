@@ -1,5 +1,4 @@
 #include "navigation.h"
-#include "motor.h"
 
 systemOfMeasurement currentSysOfMeasurment;
 state currentState;
