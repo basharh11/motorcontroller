@@ -2,10 +2,12 @@
     #include "main.h"
     #include <math.h>
     
-    void setPorts(motor *m, TIM_HandleTypeDef *handle, GPIO_TypeDef *port, uint16_t pin) {
+    void setPorts(motor *m, TIM_HandleTypeDef *handle, GPIO_TypeDef *dport, uint16_t dpin, GPIO_TypeDef *hport, uint16_t hpin) {
         m->htim = handle;
-        m->dirPort = port;
-        m->dirPin = pin;
+        m->dirPort = dport;
+        m->dirPin = dpin;
+        m->homePort = hport;
+        m->homePin = hpin;
     }
 
     void setTimerFrequency(motor *m) {
@@ -31,6 +33,22 @@
         m->distance = strtof(target, NULL);
     }
 
+    void startTimer(motor *m) {
+        __HAL_TIM_SET_AUTORELOAD(getHandle(m), getFirstTick(getMovementProfile(m)) - 1);
+        __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getFirstTick(getMovementProfile(m)) / 2);
+
+        HAL_TIM_OC_Start_IT(getHandle(m), TIM_CHANNEL_3);
+    }
+
+    void setHomingStatus(motor *m, bool status) {
+        m->homingActive = status;
+
+    }
+
+    void setHomingReverseStatus(motor *m, bool status) {
+        m->homingReverseStarted = status;
+    }
+
     TIM_HandleTypeDef* getHandle(const motor *m) {
         return m->htim;
     }
@@ -41,6 +59,14 @@
 
     uint16_t getDirPin(const motor *m) {
         return m->dirPin;
+    }
+
+    GPIO_TypeDef* getHomePort(const motor *m) {
+        return m->homePort;
+    }
+
+    uint16_t getHomePin(const motor *m) {
+        return m->homePin;
     }
 
     float getDistance(const motor *m) {
@@ -75,6 +101,10 @@
         return m->homingReverseStarted;
     }
 
+    uint32_t getStepCount(const motor *m) {
+        return m->stepCount;
+    }
+
     void moveMotor(motor *m) {
         setPulsePerUnit(m);
         setPeakSpeed(m);
@@ -87,28 +117,29 @@
         setMaximumPeakSpeedPPS(getMovementProfile(m), getPulsePerUnit(m));
         setActualPeakSpeedPPS(getMovementProfile(m));
         setRampingDistanceP(getMovementProfile(m));
-        setPulseIntervals(getMovementProfile(m));
+        setPulseIntervals(m, getMovementProfile(m));
 
         HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
 
-        startTimer(m, getMovementProfile(m));
+        startTimer(m);
     }
 
     void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim) {
-
+        if(getHandle(&motor1) == htim)
+            motorOCCallback(&motor1);
     }
 
-    void switchEXTIHandler(uint16_t GPIO_Pin) {
-        if(GPIO_Pin != GPIO_PIN_0)    
+    void switchEXTIHandler(motor *m) {
+        if(getHomePin(m) != GPIO_PIN_0)    
             return;  
 
-        if(!homing_active)            
+        if(!getHomingStatus(m))            
             return;  
 
-        if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_SET && !homing_reverse_started) {
+        if(HAL_GPIO_ReadPin(getHomePort(m), getHomePin(m)) == GPIO_PIN_SET && !getHomingReverseStatus(m)) {
             arrowDir = !arrowDir;
-            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
-            homing_reverse_started = true;
+            HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
+            setHomingReverseStatus(m, true);
         }             
     }
 
@@ -118,65 +149,40 @@
 
         if(getHomingStatus(m)) {
             if(getHomingReverseStatus(m)) {
-                setRequestedPeakSpeedPPS(getMovementProfile(m), 2, getPulsePerUnit(m));
-                float homing_pps = getRequestedPeakSpeedPPS(m) * getPulsePerUnit(m);
-                if (homing_pps < 1.0f) 
-                    homing_pps = 1.0f;
-                uint32_t dt = (uint32_t)(timerTickHz / homing_pps + 0.5f);
-
-                homing_dt_ticks = dt;
+                setHomingPulseIntervals(m, getMovementProfile(m));
             }
-            __HAL_TIM_SET_AUTORELOAD(&htim3, homing_dt_ticks - 1);
-            __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, homing_dt_ticks / 2);
+            __HAL_TIM_SET_AUTORELOAD(getHandle(m), getFirstTick(getMovementProfile(m)) - 1);
+            __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getFirstTick(getMovementProfile(m)) / 2);
+            return;
+        }
+        
+        uint32_t remainingPulses = getRemainingPulses(getMovementProfile(m));
+        if (--remainingPulses <= 0) {
+            HAL_TIM_OC_Stop_IT(getHandle(m), TIM_CHANNEL_3);
             return;
         }
 
-        if (--pulses_left <= 0) {
-            HAL_TIM_OC_Stop_IT(&htim3, TIM_CHANNEL_3);
-            return;
-        }
+        setNextTick(m, getMovementProfile(m));
+    
+        __HAL_TIM_SET_AUTORELOAD(getHandle(m), getNextTick(getMovementProfile(m)) - 1);
+        __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getNextTick(getMovementProfile(m)) / 2);
 
-        uint32_t dt_ticks;
-        if (step_index < accel_steps) {
-            float t0 = sqrtf(2.0f * step_index / accel_rate);
-            float t1 = sqrtf(2.0f * (step_index+1) / accel_rate);
-            dt_ticks = (uint32_t)((t1 - t0) * timerTickHz + 0.5f);
-        } else if (step_index < accel_steps + cruise_steps) {
-            dt_ticks = (uint32_t)(timerTickHz / cruise_rate + 0.5f);
-        } else {
-            uint32_t i = total_pulses - step_index;
-            float t0 = sqrtf(2.0f * i / accel_rate);
-            float t1 = sqrtf(2.0f * (i-1) / accel_rate);
-            dt_ticks = (uint32_t)((t0 - t1) * timerTickHz + 0.5f);
-        }
+        incrementStepIndex(getMovementProfile(m));
 
-        __HAL_TIM_SET_AUTORELOAD(&htim3, dt_ticks - 1);
-        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, dt_ticks / 2);
-
-        step_index++;
-
-        motor1_step_count += (arrowDir ? -1 : +1);
-        motor1Pos = motor1_step_count / getPulsePerUnit();
+        m->stepCount += (arrowDir ? -1 : +1);
+        motor1Pos = getStepCount(m) / getPulsePerUnit(m);
     }
 
-    void home(void) {
-        float ppu = strtof(motor1Pulse, NULL);
-        float vmax_u_s = 10;
+    void home(motor *m) {
+        setHomingPulseIntervals(m, getMovementProfile(m));
 
-        float homing_pps = vmax_u_s * ppu;
-        if (homing_pps < 1.0f) 
-            homing_pps = 1.0f;
+        setHomingStatus(m, true);
+        setHomingReverseStatus(m, false);
 
-        uint32_t dt = (uint32_t)(timerTickHz / homing_pps + 0.5f);
+        HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
 
-        homing_dt_ticks = dt;
-        homing_active = true;
-        homing_reverse_started = false;
+        __HAL_TIM_SET_AUTORELOAD(getHandle(m), getFirstTick(getMovementProfile(m)) - 1);
+        __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getFirstTick(getMovementProfile(m)) / 2);
 
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
-
-        __HAL_TIM_SET_AUTORELOAD(&htim3, dt - 1);
-        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, dt / 2);
-
-        HAL_TIM_OC_Start_IT(&htim3, TIM_CHANNEL_3);
+        HAL_TIM_OC_Start_IT(getHandle(m), TIM_CHANNEL_3);
     }

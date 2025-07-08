@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <motor.h>
 
 #define MAX_LENGTH 10
 
@@ -37,6 +38,8 @@ extern char motor2Acceleration[MAX_LENGTH];
 extern char motor2Pulse[MAX_LENGTH];
 extern char motor1Position[MAX_LENGTH];
 extern char motor2Position[MAX_LENGTH];
+
+extern TIM_HandleTypeDef htim3;
 
 extern float motor1Pos;
 extern float motor2Pos;

@@ -45,11 +45,19 @@ uint32_t getDecelSteps(const movementProfile *mp) {
     return mp->decelSteps;
 }
 
+uint32_t getFirstTick(const movementProfile *mp) {
+    return mp->firstTick;
+}
+
+uint32_t getNextTick(const movementProfile *mp) {
+    return mp->nextTick;
+}
+
 void setTotalPulses(movementProfile *mp, uint32_t distance, uint32_t pulsePerUnit) {
     mp->totalPulses = (uint32_t)roundf(distance * pulsePerUnit);
 }
 
-void setAccelerationPPPS(movementProfile *mp, uint32_t acceleration, uint32_t pulsePerUnit) {
+void setAccelerationPPSS(movementProfile *mp, uint32_t acceleration, uint32_t pulsePerUnit) {
     mp->accelerationPPSS = acceleration * pulsePerUnit;
 }
 
@@ -69,7 +77,7 @@ void setRampingDistanceP(movementProfile *mp) {
     mp->rampingDistanceP = (getActualPeakSpeedPPS(mp) * getActualPeakSpeedPPS(mp)) / (2.0f * getAccelerationPPSS(mp));
 }
 
-void setPulseIntervals(movementProfile *mp) {
+void setPulseIntervals(motor *m, movementProfile *mp) {
     if(getRampingDistanceP(mp) >= getTotalPulses(mp)) {
         mp->accelSteps = getTotalPulses(mp) / 2;
         mp->peakSteps = 0;
@@ -81,15 +89,33 @@ void setPulseIntervals(movementProfile *mp) {
 
     mp->remainingPulses = getTotalPulses(mp);
     mp->stepIndex = 0;
+
+    mp->firstTick = (uint32_t)(sqrtf(2.0f / getAccelerationPPSS(mp)) * getTimerFrequency(m) + 0.5f);
 }
 
-void startTimer(motor* motor, movementProfile *mp) {
-    uint32_t dt0 = (uint32_t)(sqrtf(2.0f / getAccelerationPPSS(mp)) * getTimerFrequency(motor) + 0.5f);
-
-    __HAL_TIM_SET_AUTORELOAD(getHandle(motor), dt0 - 1);
-    __HAL_TIM_SET_COMPARE(getHandle(motor), TIM_CHANNEL_3, dt0 / 2);
-
-    HAL_TIM_OC_Start_IT(getHandle(motor), TIM_CHANNEL_3);
+void setHomingPulseIntervals(motor *m, movementProfile *mp) {
+    setRequestedPeakSpeedPPS(getMovementProfile(m), 10, getPulsePerUnit(m));
+    mp->firstTick = (uint32_t)(getTimerFrequency(m) / getActualPeakSpeedPPS(mp) * getPulsePerUnit(m) + 0.5f);
 }
+
+void incrementStepIndex(movementProfile *mp) {
+    mp->stepIndex++;
+}
+
+void setNextTick(motor *m, movementProfile *mp) {
+    if(getStepIndex(mp) < getAccelSteps(mp)) {
+        float t0 = sqrtf(2.0f * getStepIndex(mp) / getAccelerationPPSS(mp));
+        float t1 = sqrtf(2.0f * (getStepIndex(mp) + 1) / getAccelerationPPSS(mp));
+        mp->nextTick = (uint32_t)((t1 - t0) * getTimerFrequency(m) + 0.5f);
+    } else if (getStepIndex(mp) < getAccelSteps(mp) + getPeakSteps(mp)) {
+        mp->nextTick = (uint32_t)(getTimerFrequency(m) / getActualPeakSpeedPPS(mp) + 0.5f);
+    } else {
+        uint32_t i = getTotalPulses(mp) - getStepIndex(mp);
+        float t0 = sqrtf(2.0f * i / getAccelerationPPSS(mp));
+        float t1 = sqrtf(2.0f * (i - 1) / getAccelerationPPSS(mp));
+        mp->nextTick = (uint32_t)((t0 - t1) * getTimerFrequency(m) + 0.5f);
+    }
+}
+
 
     

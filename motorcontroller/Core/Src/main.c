@@ -110,7 +110,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
   navigationInit();
   HAL_TIM_Base_Start_IT(&htim2);
-  motor_init_timer();
 
   /* USER CODE END 2 */
 

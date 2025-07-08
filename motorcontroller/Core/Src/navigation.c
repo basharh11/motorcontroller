@@ -37,6 +37,8 @@ MenuNode *current = &run;
 
 queue keyQueue;
 
+motor motor1;
+
 void updateParameters() {
     home1 = menu21.child == &menu211 ? disabled : enabled;
     home2 = menu22.child == &menu221 ? disabled : enabled;
@@ -63,14 +65,14 @@ void navigationInit() {
 
     queueInit(&keyQueue);     
     keypadInit(&keyQueue); 
+    setPorts(&motor1, &htim3, GPIOC, GPIO_PIN_9, GPIOB, GPIO_PIN_0);
 }
 
 void navigationLoop() {
-    if(homing_active && homing_reverse_started && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET) {
-        HAL_TIM_OC_Stop_IT(&htim3, TIM_CHANNEL_3);
-        homing_active = false;
-        homing_reverse_started = false;
-        motor1_step_count = 0;
+    if(getHomingStatus(&motor1) && getHomingReverseStatus(&motor1) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET) {
+        HAL_TIM_OC_Stop_IT(getHandle(&motor1), TIM_CHANNEL_3);
+        setHomingStatus(&motor1, false);
+        setHomingReverseStatus(&motor1, false);
         motor1Pos = 0;
     }
 
@@ -127,7 +129,7 @@ void navigationLoop() {
         } else if(c == 'B' && current->next) {
             current = current->next;
         } else if(c == 'A' && current == &run) {
-            on_menu_move();
+            moveMotor(&motor1);
         } else if(c == 'C' && (isInputScreen() || current == &run)) {
             if(isInputScreen())
                 parameters[selectInputScreen()][0] = '\0';
@@ -136,7 +138,7 @@ void navigationLoop() {
         } else if(c == 'D' && current == &run) {
             arrowDir = !arrowDir;
         } else if(c == '#' && current == &menu1) {
-            home();
+            home(&motor1);
         } else if(target[0] == '\0' && current == &run && c >= '0' && c <= '9') {
             uint8_t pos = 0;
             bool decimalFlag = false;
