@@ -65,7 +65,6 @@ void setHomingStatus(motor *m, bool status);
 void setHomingReverseStatus(motor *m, bool status);
 void resetStepCount(motor *m);
 
-void startTimer(motor *m);
 void moveMotor(motor *m);
 void home(motor *m);
 

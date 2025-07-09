@@ -22,6 +22,8 @@ typedef struct movementProfile {
 
     uint32_t firstTick;
     uint32_t nextTick;
+
+    uint32_t homingTicks;
 } movementProfile;
 
 void mpInit(movementProfile *mp);
@@ -39,6 +41,7 @@ uint32_t getPeakSteps(const movementProfile *mp);
 uint32_t getDecelSteps(const movementProfile *mp);
 uint32_t getFirstTick(const movementProfile *mp);
 uint32_t getNextTick(const movementProfile *mp);
+uint32_t getHomingTicks(const movementProfile *mp);
 
 void setTotalPulses(movementProfile *mp, uint32_t distance, uint32_t pulsePerUnit);
 void setAccelerationPPSS(movementProfile *mp, uint32_t acceleration, uint32_t pulsePerUnit);

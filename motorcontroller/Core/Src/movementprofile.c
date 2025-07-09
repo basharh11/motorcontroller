@@ -1,24 +1,5 @@
 #include "movementprofile.h"
 
-void mpInit(movementProfile *mp) {
-    mp->remainingPulses = 0;
-    mp->totalPulses = 0;
-
-    mp->accelerationPPSS = 0;
-    mp->requestedPeakSpeedPPS = 0;
-    mp->maximumPeakSpeedPPS = 0;
-    mp->actualPeakSpeedPPS = 0;
-    mp->rampingDistanceP = 0;
-
-    mp->stepIndex = 0;
-    mp->accelSteps = 0;
-    mp->peakSteps = 0;
-    mp->decelSteps = 0;
-
-    mp->firstTick = 0;
-    mp->nextTick = 0;
-}
-
 uint32_t getTotalPulses(const movementProfile *mp) {
     return mp->totalPulses;
 }
@@ -71,6 +52,10 @@ uint32_t getNextTick(const movementProfile *mp) {
     return mp->nextTick;
 }
 
+uint32_t getHomingTicks(const movementProfile *mp) {
+    return mp->homingTicks;
+}
+
 void setTotalPulses(movementProfile *mp, uint32_t distance, uint32_t pulsePerUnit) {
     mp->totalPulses = (uint32_t)roundf(distance * pulsePerUnit);
 }
@@ -107,13 +92,14 @@ void setPulseIntervals(motor *m, movementProfile *mp) {
 
     mp->remainingPulses = getTotalPulses(mp);
     mp->stepIndex = 0;
-
     mp->firstTick = (uint32_t)(sqrtf(2.0f / getAccelerationPPSS(mp)) * getTimerFrequency(m) + 0.5f);
 }
 
 void setHomingPulseIntervals(motor *m, movementProfile *mp) {
-    setRequestedPeakSpeedPPS(getMovementProfile(m), 10, getPulsePerUnit(m));
-    mp->firstTick = (uint32_t)(getTimerFrequency(m) / getActualPeakSpeedPPS(mp) * getPulsePerUnit(m) + 0.5f);
+    setRequestedPeakSpeedPPS(getMovementProfile(m), getHomingReverseStatus(m) ? 2 : 10, getPulsePerUnit(m));
+    setMaximumPeakSpeedPPS(getMovementProfile(m), getPulsePerUnit(m));
+    setActualPeakSpeedPPS(getMovementProfile(m));
+    mp->homingTicks = (uint32_t)(getTimerFrequency(m) / getActualPeakSpeedPPS(mp) + 0.5f);
 }
 
 void incrementStepIndex(movementProfile *mp) {
@@ -123,7 +109,6 @@ void incrementStepIndex(movementProfile *mp) {
 void decrementRemainingPulses(movementProfile *mp) {
     mp->remainingPulses--;
 }
-
 
 void setNextTick(motor *m, movementProfile *mp) {
     if(getStepIndex(mp) < getAccelSteps(mp)) {

@@ -16,6 +16,7 @@
         "navigation.h": "c",
         "stdlib.h": "c",
         "stdio.h": "c",
-        "movementprofile.h": "c"
+        "movementprofile.h": "c",
+        "compare": "c"
     }
 }

@@ -9,8 +9,8 @@ char *parameters[] = {slowZone, motor1Range, motor2Range, motor1PeakSpeed, motor
 char slowZone[MAX_LENGTH] = {0};
 char motor1Range[MAX_LENGTH] = {0};
 char motor2Range[MAX_LENGTH] = {0};
-char motor1PeakSpeed[MAX_LENGTH] = "35";
-char motor1Acceleration[MAX_LENGTH] = "30";
+char motor1PeakSpeed[MAX_LENGTH] = "30";
+char motor1Acceleration[MAX_LENGTH] = "50";
 char motor1Pulse[MAX_LENGTH] = "1280";
 char motor2PeakSpeed[MAX_LENGTH] = {0};
 char motor2Acceleration[MAX_LENGTH] = {0};
@@ -68,7 +68,6 @@ void navigationInit() {
     queueInit(&keyQueue);     
     keypadInit(&keyQueue); 
     HAL_TIM_Base_Start_IT(&htim2);
-    mpInit(&mp1);
     motorInit(&m1, &mp1, &htim3, GPIOC, GPIO_PIN_9, GPIOB, GPIO_PIN_0);
 }
 
