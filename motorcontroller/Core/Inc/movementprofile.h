@@ -43,9 +43,9 @@ uint32_t getFirstTick(const movementProfile *mp);
 uint32_t getNextTick(const movementProfile *mp);
 uint32_t getHomingTicks(const movementProfile *mp);
 
-void setTotalPulses(movementProfile *mp, uint32_t distance, uint32_t pulsePerUnit);
-void setAccelerationPPSS(movementProfile *mp, uint32_t acceleration, uint32_t pulsePerUnit);
-void setRequestedPeakSpeedPPS(movementProfile *mp, uint32_t peakSpeed, uint32_t pulsePerUnit);
+void setTotalPulses(movementProfile *mp, float distance, float pulsePerUnit);
+void setAccelerationPPSS(movementProfile *mp, float acceleration, float pulsePerUnit);
+void setRequestedPeakSpeedPPS(movementProfile *mp, float peakSpeed, float pulsePerUnit);
 void setMaximumPeakSpeedPPS(movementProfile *mp, uint32_t totalPulses);
 void setActualPeakSpeedPPS(movementProfile *mp);
 void setRampingDistanceP(movementProfile *mp);

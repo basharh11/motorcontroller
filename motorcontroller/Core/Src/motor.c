@@ -7,6 +7,7 @@
         m->homePort = hport;
         m->homePin = hpin;
         m->movementProfile = mp;
+        m->moveActive = false;
         m->homingActive = false;
         m->homingReverseStarted = false;
         setTimerFrequency(m);
@@ -35,6 +36,10 @@
 
     void setDistance(motor *m) {
         m->distance = strtof(target, NULL);
+    }
+
+    void setMoveStatus(motor *m, bool status) {
+        m->moveActive = status;
     }
 
     void setHomingStatus(motor *m, bool status) {
@@ -93,6 +98,10 @@
         return m->movementProfile;
     }
 
+    bool getMoveStatus(const motor *m) {
+        return m->moveActive;
+    }
+
     bool getHomingStatus(const motor *m) {
         return m->homingActive;
     }
@@ -101,88 +110,101 @@
         return m->homingReverseStarted;
     }
 
-    uint32_t getStepCount(const motor *m) {
+    int32_t getStepCount(const motor *m) {
         return m->stepCount;
     }
 
     void moveMotor(motor *m) {
+        movementProfile *mp = getMovementProfile(m);
+        
         setPulsePerUnit(m);
         setPeakSpeed(m);
         setAcceleration(m);
         setDistance(m);
 
-        setTotalPulses(getMovementProfile(m), getDistance(m), getPulsePerUnit(m));
-        setAccelerationPPSS(getMovementProfile(m), getAcceleration(m), getPulsePerUnit(m));
-        setRequestedPeakSpeedPPS(getMovementProfile(m), getPeakSpeed(m), getPulsePerUnit(m));
-        setMaximumPeakSpeedPPS(getMovementProfile(m), getTotalPulses(getMovementProfile(m)));
-        setActualPeakSpeedPPS(getMovementProfile(m));
-        setRampingDistanceP(getMovementProfile(m));
-        setPulseIntervals(m, getMovementProfile(m));
+        setTotalPulses(mp, getDistance(m), getPulsePerUnit(m));
+        setAccelerationPPSS(mp, getAcceleration(m), getPulsePerUnit(m));
+        setRequestedPeakSpeedPPS(mp, getPeakSpeed(m), getPulsePerUnit(m));
+        setMaximumPeakSpeedPPS(mp, getTotalPulses(mp));
+        setActualPeakSpeedPPS(mp);
+        setRampingDistanceP(mp);
+        setPulseIntervals(m, mp);
 
         HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
 
-        __HAL_TIM_SET_AUTORELOAD(getHandle(m), getFirstTick(getMovementProfile(m)) - 1);
-        __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getFirstTick(getMovementProfile(m)) / 2);
+        __HAL_TIM_SET_AUTORELOAD(getHandle(m), getFirstTick(mp) - 1);
+        __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getFirstTick(mp) / 2);
+
+        setMoveStatus(m, true);
 
         HAL_TIM_OC_Start_IT(getHandle(m), TIM_CHANNEL_3);
     }
 
     void home(motor *m) {
-        setHomingPulseIntervals(m, getMovementProfile(m));
+        movementProfile *mp = getMovementProfile(m);
+        TIM_HandleTypeDef *handle = getHandle(m);
+
+        setPulsePerUnit(m); 
+
+        setHomingPulseIntervals(m, mp);
 
         setHomingStatus(m, true);
         setHomingReverseStatus(m, false);
 
         HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
 
-        __HAL_TIM_SET_AUTORELOAD(getHandle(m), getHomingTicks(getMovementProfile(m)) - 1);
-        __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getHomingTicks(getMovementProfile(m)) / 2);
+        __HAL_TIM_SET_AUTORELOAD(handle, getHomingTicks(mp) - 1);
+        __HAL_TIM_SET_COMPARE(handle, TIM_CHANNEL_3, getHomingTicks(mp) / 2);
 
-        HAL_TIM_OC_Start_IT(getHandle(m), TIM_CHANNEL_3);
+        HAL_TIM_OC_Start_IT(handle, TIM_CHANNEL_3);
     }
 
     void motorOCCallback(motor *m) {
-        if(getHandle(m)->Instance != TIM3) 
+        movementProfile *mp = getMovementProfile(m);
+        TIM_HandleTypeDef *handle = getHandle(m);
+
+        if(handle->Instance != TIM3) 
             return;
 
-        if(getHomingStatus(m)) {
-            if(getHomingReverseStatus(m)) {
-                setHomingPulseIntervals(m, getMovementProfile(m));
+        if(m->homingActive) {
+            if(m->homingReverseStarted) {
+                setHomingPulseIntervals(m, mp);
             }
-            __HAL_TIM_SET_AUTORELOAD(getHandle(m), getHomingTicks(getMovementProfile(m)) - 1);
-            __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getHomingTicks(getMovementProfile(m)) / 2);
+            __HAL_TIM_SET_AUTORELOAD(handle, getHomingTicks(mp) - 1);
+            __HAL_TIM_SET_COMPARE(handle, TIM_CHANNEL_3, getHomingTicks(mp) / 2);
             return;
         }
         
-        if (getRemainingPulses(getMovementProfile(m)) == 0) {
+        if(getRemainingPulses(mp) == 0) {
+            setMoveStatus(m, false);
             HAL_TIM_OC_Stop_IT(getHandle(m), TIM_CHANNEL_3);
             return;
         }
 
-        decrementRemainingPulses(getMovementProfile(m));
+        decrementRemainingPulses(mp);
 
-        setNextTick(m, getMovementProfile(m));
+        setNextTick(m, mp);
     
-        __HAL_TIM_SET_AUTORELOAD(getHandle(m), getNextTick(getMovementProfile(m)) - 1);
-        __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getNextTick(getMovementProfile(m)) / 2);
+        __HAL_TIM_SET_AUTORELOAD(handle, getNextTick(mp) - 1);
+        __HAL_TIM_SET_COMPARE(handle, TIM_CHANNEL_3, getNextTick(mp) / 2);
 
-        incrementStepIndex(getMovementProfile(m));
+        incrementStepIndex(mp);
 
         m->stepCount += (arrowDir ? -1 : +1);
-        motor1Pos = getStepCount(m) / getPulsePerUnit(m);
+        motor1Pos = m->stepCount / m->pulsePerUnit;
     }
 
     void homeSensor(motor *m) {
-        if(getHomePin(m) != GPIO_PIN_0)    
+        if(m->homePin != GPIO_PIN_0)    
             return;  
 
-        if(!getHomingStatus(m))            
+        if(!m->homingActive)            
             return;  
 
-        if(HAL_GPIO_ReadPin(getHomePort(m), getHomePin(m)) == GPIO_PIN_SET && !getHomingReverseStatus(m)) {
+        if(HAL_GPIO_ReadPin(m->homePort, m->homePin) == GPIO_PIN_SET && !m->homingReverseStarted) {
             arrowDir = !arrowDir;
-            HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
-            setHomingReverseStatus(m, true);
+            HAL_GPIO_WritePin(m->dirPort, m->dirPin, arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
+            m->homingReverseStarted = true;
         }             
     }
 

@@ -56,15 +56,15 @@ uint32_t getHomingTicks(const movementProfile *mp) {
     return mp->homingTicks;
 }
 
-void setTotalPulses(movementProfile *mp, uint32_t distance, uint32_t pulsePerUnit) {
+void setTotalPulses(movementProfile *mp, float distance, float pulsePerUnit) {
     mp->totalPulses = (uint32_t)roundf(distance * pulsePerUnit);
 }
 
-void setAccelerationPPSS(movementProfile *mp, uint32_t acceleration, uint32_t pulsePerUnit) {
+void setAccelerationPPSS(movementProfile *mp, float acceleration, float pulsePerUnit) {
     mp->accelerationPPSS = acceleration * pulsePerUnit;
 }
 
-void setRequestedPeakSpeedPPS(movementProfile *mp, uint32_t peakSpeed, uint32_t pulsePerUnit) {
+void setRequestedPeakSpeedPPS(movementProfile *mp, float peakSpeed, float pulsePerUnit) {
     mp->requestedPeakSpeedPPS = peakSpeed * pulsePerUnit;
 }
 
@@ -88,6 +88,7 @@ void setPulseIntervals(motor *m, movementProfile *mp) {
         mp->accelSteps = (uint32_t)ceilf(getRampingDistanceP(mp));
         mp->peakSteps = getTotalPulses(mp) - 2 * getAccelSteps(mp);
     }
+
     mp->decelSteps = getAccelSteps(mp);
 
     mp->remainingPulses = getTotalPulses(mp);
@@ -96,10 +97,7 @@ void setPulseIntervals(motor *m, movementProfile *mp) {
 }
 
 void setHomingPulseIntervals(motor *m, movementProfile *mp) {
-    setRequestedPeakSpeedPPS(getMovementProfile(m), getHomingReverseStatus(m) ? 2 : 10, getPulsePerUnit(m));
-    setMaximumPeakSpeedPPS(getMovementProfile(m), getPulsePerUnit(m));
-    setActualPeakSpeedPPS(getMovementProfile(m));
-    mp->homingTicks = (uint32_t)(getTimerFrequency(m) / getActualPeakSpeedPPS(mp) + 0.5f);
+    mp->homingTicks = (uint32_t)(m->timerFrequency / (((m->homingReverseStarted) ? 2 : 10) * m->pulsePerUnit) + 0.5f);
 }
 
 void incrementStepIndex(movementProfile *mp) {
@@ -111,19 +109,28 @@ void decrementRemainingPulses(movementProfile *mp) {
 }
 
 void setNextTick(motor *m, movementProfile *mp) {
-    if(getStepIndex(mp) < getAccelSteps(mp)) {
-        float t0 = sqrtf(2.0f * getStepIndex(mp) / getAccelerationPPSS(mp));
-        float t1 = sqrtf(2.0f * (getStepIndex(mp) + 1) / getAccelerationPPSS(mp));
-        mp->nextTick = (uint32_t)((t1 - t0) * getTimerFrequency(m) + 0.5f);
-    } else if (getStepIndex(mp) < getAccelSteps(mp) + getPeakSteps(mp)) {
-        mp->nextTick = (uint32_t)(getTimerFrequency(m) / getActualPeakSpeedPPS(mp) + 0.5f);
-    } else {
-        uint32_t i = getTotalPulses(mp) - getStepIndex(mp);
-        float t0 = sqrtf(2.0f * i / getAccelerationPPSS(mp));
-        float t1 = sqrtf(2.0f * (i - 1) / getAccelerationPPSS(mp));
-        mp->nextTick = (uint32_t)((t0 - t1) * getTimerFrequency(m) + 0.5f);
+    uint32_t stepIndex = m->movementProfile->stepIndex;
+    uint32_t accelSteps = m->movementProfile->accelSteps;
+    float accelerationPPPS = m->movementProfile->accelerationPPSS;
+    uint32_t timFreq = m->timerFrequency;
+    uint32_t peakSteps = m->movementProfile->peakSteps;
+    float actualPeakSpeed = m->movementProfile->actualPeakSpeedPPS;
+    uint32_t totalPulses = m->movementProfile->totalPulses;
+
+    if(stepIndex < accelSteps) {
+        float t0 = sqrtf(2.0f * stepIndex / accelerationPPPS);
+        float t1 = sqrtf(2.0f * (stepIndex + 1) / accelerationPPPS);
+        mp->nextTick = (uint32_t)((t1 - t0) * timFreq + 0.5f);
+    } else if (stepIndex < accelSteps + peakSteps) {
+        mp->nextTick = (uint32_t)(timFreq / actualPeakSpeed + 0.5f);
+    } else {    
+        uint32_t i = totalPulses - stepIndex;
+        float t0 = sqrtf(2.0f * i / accelerationPPPS);
+        float t1 = sqrtf(2.0f * (i - 1) / accelerationPPPS);
+        mp->nextTick = (uint32_t)((t0 - t1) * timFreq + 0.5f);
     }
 }
+
 
 
     

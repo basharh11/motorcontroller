@@ -9,9 +9,9 @@ char *parameters[] = {slowZone, motor1Range, motor2Range, motor1PeakSpeed, motor
 char slowZone[MAX_LENGTH] = {0};
 char motor1Range[MAX_LENGTH] = {0};
 char motor2Range[MAX_LENGTH] = {0};
-char motor1PeakSpeed[MAX_LENGTH] = "30";
-char motor1Acceleration[MAX_LENGTH] = "50";
-char motor1Pulse[MAX_LENGTH] = "1280";
+char motor1PeakSpeed[MAX_LENGTH] = "50";
+char motor1Acceleration[MAX_LENGTH] = "100";
+char motor1Pulse[MAX_LENGTH] = "640";
 char motor2PeakSpeed[MAX_LENGTH] = {0};
 char motor2Acceleration[MAX_LENGTH] = {0};
 char motor2Pulse[MAX_LENGTH] = {0};
@@ -131,16 +131,16 @@ void navigationLoop() {
             current = current->prev;
         } else if(c == 'B' && current->next) {
             current = current->next;
-        } else if(c == 'A' && current == &run) {
+        } else if(c == 'A' && current == &run && !getHomingStatus(&m1) && !getMoveStatus(&m1)) {
             moveMotor(&m1);
         } else if(c == 'C' && (isInputScreen() || current == &run)) {
             if(isInputScreen())
                 parameters[selectInputScreen()][0] = '\0';
             else if(current == &run)
                 target[0] = '\0';
-        } else if(c == 'D' && current == &run) {
+        } else if(c == 'D' && current == &run && !getHomingStatus(&m1) && !getMoveStatus(&m1)) {
             arrowDir = !arrowDir;
-        } else if(c == '#' && current == &menu1) {
+        } else if(c == '#' && current == &menu1 && !getHomingStatus(&m1) && !getMoveStatus(&m1)) {
             home(&m1);
         } else if(target[0] == '\0' && current == &run && c >= '0' && c <= '9') {
             uint8_t pos = 0;
