@@ -1,154 +1,220 @@
     #include "motor.h"
-    #include "main.h"
-    #include <math.h>
 
-    static uint32_t timerTickHz;
-    static int32_t  pulses_left;
-    static uint32_t total_pulses;
-    static uint32_t step_index;
-    static uint32_t accel_steps;
-    static uint32_t cruise_steps;
-    static uint32_t decel_steps;
-    static float cruise_rate;
-    static float accel_rate;
-
-    volatile int32_t motor1_step_count = 0;
-    float motor1_steps_per_unit;
-
-    bool homing_active = false;
-    bool homing_reverse_started = false;
-    static uint32_t homing_dt_ticks;
-
-    static uint32_t TimerClockHz(void) {
-        uint32_t pclk1 = HAL_RCC_GetPCLK1Freq();
-        if ((RCC->CFGR & RCC_CFGR_PPRE1) != RCC_CFGR_PPRE1_DIV1) 
-            pclk1 *= 2;
-        return pclk1;
+    void motorInit(motor *m, movementProfile *mp, TIM_HandleTypeDef *handle, GPIO_TypeDef *dport, uint16_t dpin, GPIO_TypeDef *hport, uint16_t hpin) {
+        m->htim = handle;
+        m->dirPort = dport;
+        m->dirPin = dpin;
+        m->homePort = hport;
+        m->homePin = hpin;
+        m->movementProfile = mp;
+        m->moveActive = false;
+        m->homingActive = false;
+        m->homingReverseStarted = false;
+        setTimerFrequency(m);
+        HAL_TIM_Base_Start(handle);
+        resetStepCount(m);
     }
 
-    void motor_init_timer(void) {
-        timerTickHz = TimerClockHz() / (htim3.Init.Prescaler + 1);
-        HAL_TIM_Base_Start(&htim3);
+    void setTimerFrequency(motor *m) {
+        m->timerFrequency = HAL_RCC_GetPCLK1Freq();
+        if((RCC->CFGR & RCC_CFGR_PPRE1) != RCC_CFGR_PPRE1_DIV1) 
+            m->timerFrequency *= 2;
+        m->timerFrequency /= (getHandle(m)->Init.Prescaler + 1);
     }
 
-    void on_menu_move(void) {
-        float ppu = strtof(motor1Pulse, NULL);
-        motor1_steps_per_unit = ppu;
-        float vmax_u_s = strtof(motor1PeakSpeed, NULL);
-        float accel_u_s2 = strtof(motor1Acceleration, NULL);
-        float dist_u = strtof(target, NULL);
-
-        total_pulses = (uint32_t)roundf(dist_u * ppu);
-        accel_rate = accel_u_s2 * ppu;
-        float v_req = vmax_u_s * ppu;
-        float v_peak = sqrtf(2.0f * accel_rate * total_pulses);
-        cruise_rate = v_req < v_peak ? v_req : v_peak;
-
-        float dp = (cruise_rate * cruise_rate) / (2.0f * accel_rate);
-        if (dp >= total_pulses) {
-            accel_steps  = total_pulses / 2;
-            cruise_steps = 0;
-        } else {
-            accel_steps  = (uint32_t)ceilf(cruise_rate * cruise_rate / (2.0f * accel_rate));
-            cruise_steps = total_pulses - 2 * accel_steps;
-        }
-        decel_steps = accel_steps;
-
-        pulses_left   = total_pulses;
-        step_index    = 0;
-        homing_active = false;
-
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
-
-        uint32_t dt0 = (uint32_t)(sqrtf(2.0f / accel_rate) * timerTickHz + 0.5f);
-   
-        __HAL_TIM_SET_AUTORELOAD(&htim3, dt0 - 1);
-        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, dt0 / 2);
-
-        HAL_TIM_OC_Start_IT(&htim3, TIM_CHANNEL_3);
+    void setPulsePerUnit(motor *m) {
+        m->pulsePerUnit = strtof(motor1Pulse, NULL);
     }
 
-   void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim) {
-        if (htim->Instance != TIM3) 
+    void setPeakSpeed(motor *m) {
+        m->peakSpeed = strtof(motor1PeakSpeed, NULL);
+    }
+    
+    void setAcceleration(motor *m) {
+        m->acceleration = strtof(motor1Acceleration, NULL);
+    }
+
+    void setDistance(motor *m) {
+        m->distance = strtof(target, NULL);
+    }
+
+    void setMoveStatus(motor *m, bool status) {
+        m->moveActive = status;
+    }
+
+    void setHomingStatus(motor *m, bool status) {
+        m->homingActive = status;
+    }
+
+    void setHomingReverseStatus(motor *m, bool status) {
+        m->homingReverseStarted = status;
+    }
+
+    void resetStepCount(motor *m) {
+        m->stepCount = 0;
+    }
+
+    TIM_HandleTypeDef* getHandle(const motor *m) {
+        return m->htim;
+    }
+
+    GPIO_TypeDef* getDirPort(const motor *m) {
+        return m->dirPort;
+    }
+
+    uint16_t getDirPin(const motor *m) {
+        return m->dirPin;
+    }
+
+    GPIO_TypeDef* getHomePort(const motor *m) {
+        return m->homePort;
+    }
+
+    uint16_t getHomePin(const motor *m) {
+        return m->homePin;
+    }
+
+    uint32_t getTimerFrequency(const motor *m) {
+        return m->timerFrequency;
+    }
+
+    float getDistance(const motor *m) {
+        return m->distance;
+    }
+
+    float getPulsePerUnit(const motor *m) {
+        return m->pulsePerUnit;
+    }
+
+    float getPeakSpeed(const motor *m) {
+        return m->peakSpeed;
+    }
+    
+    float getAcceleration(const motor *m) {
+        return m->acceleration;
+    }
+
+    movementProfile* getMovementProfile(const motor *m) {
+        return m->movementProfile;
+    }
+
+    bool getMoveStatus(const motor *m) {
+        return m->moveActive;
+    }
+
+    bool getHomingStatus(const motor *m) {
+        return m->homingActive;
+    }
+
+    bool getHomingReverseStatus(const motor *m) {
+        return m->homingReverseStarted;
+    }
+
+    int32_t getStepCount(const motor *m) {
+        return m->stepCount;
+    }
+
+    void moveMotor(motor *m) {
+        movementProfile *mp = getMovementProfile(m);
+        
+        setPulsePerUnit(m);
+        setPeakSpeed(m);
+        setAcceleration(m);
+        setDistance(m);
+
+        setTotalPulses(mp, getDistance(m), getPulsePerUnit(m));
+        setAccelerationPPSS(mp, getAcceleration(m), getPulsePerUnit(m));
+        setRequestedPeakSpeedPPS(mp, getPeakSpeed(m), getPulsePerUnit(m));
+        setMaximumPeakSpeedPPS(mp, getTotalPulses(mp));
+        setActualPeakSpeedPPS(mp);
+        setRampingDistanceP(mp);
+        setPulseIntervals(m, mp);
+
+        HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
+
+        __HAL_TIM_SET_AUTORELOAD(getHandle(m), getFirstTick(mp) - 1);
+        __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getFirstTick(mp) / 2);
+
+        setMoveStatus(m, true);
+
+        HAL_TIM_OC_Start_IT(getHandle(m), TIM_CHANNEL_3);
+    }
+
+    void home(motor *m) {
+        movementProfile *mp = getMovementProfile(m);
+        TIM_HandleTypeDef *handle = getHandle(m);
+
+        setPulsePerUnit(m); 
+
+        setHomingPulseIntervals(m, mp);
+
+        setHomingStatus(m, true);
+        setHomingReverseStatus(m, false);
+
+        HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
+
+        __HAL_TIM_SET_AUTORELOAD(handle, getHomingTicks(mp) - 1);
+        __HAL_TIM_SET_COMPARE(handle, TIM_CHANNEL_3, getHomingTicks(mp) / 2);
+
+        HAL_TIM_OC_Start_IT(handle, TIM_CHANNEL_3);
+    }
+
+    void motorOCCallback(motor *m) {
+        movementProfile *mp = getMovementProfile(m);
+        TIM_HandleTypeDef *handle = getHandle(m);
+
+        if(handle->Instance != TIM3) 
             return;
 
-        if (homing_active) {
-            if(homing_reverse_started) {
-                float ppu = strtof(motor1Pulse, NULL);
-                float vmax_u_s = 2;
-                float homing_pps = vmax_u_s * ppu;
-                if (homing_pps < 1.0f) 
-                    homing_pps = 1.0f;
-                uint32_t dt = (uint32_t)(timerTickHz / homing_pps + 0.5f);
-
-                homing_dt_ticks = dt;
+        if(m->homingActive) {
+            if(m->homingReverseStarted) {
+                setHomingPulseIntervals(m, mp);
             }
-            __HAL_TIM_SET_AUTORELOAD(&htim3, homing_dt_ticks - 1);
-            __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, homing_dt_ticks / 2);
+            __HAL_TIM_SET_AUTORELOAD(handle, getHomingTicks(mp) - 1);
+            __HAL_TIM_SET_COMPARE(handle, TIM_CHANNEL_3, getHomingTicks(mp) / 2);
+            return;
+        }
+        
+        if(getRemainingPulses(mp) == 0) {
+            setMoveStatus(m, false);
+            HAL_TIM_OC_Stop_IT(getHandle(m), TIM_CHANNEL_3);
             return;
         }
 
-        if (--pulses_left <= 0) {
-            HAL_TIM_OC_Stop_IT(&htim3, TIM_CHANNEL_3);
-            return;
-        }
+        decrementRemainingPulses(mp);
 
-        uint32_t dt_ticks;
-        if (step_index < accel_steps) {
-            float t0 = sqrtf(2.0f * step_index / accel_rate);
-            float t1 = sqrtf(2.0f * (step_index+1) / accel_rate);
-            dt_ticks = (uint32_t)((t1 - t0) * timerTickHz + 0.5f);
-        } else if (step_index < accel_steps + cruise_steps) {
-            dt_ticks = (uint32_t)(timerTickHz / cruise_rate + 0.5f);
-        } else {
-            uint32_t i = total_pulses - step_index;
-            float t0 = sqrtf(2.0f * i / accel_rate);
-            float t1 = sqrtf(2.0f * (i-1) / accel_rate);
-            dt_ticks = (uint32_t)((t0 - t1) * timerTickHz + 0.5f);
-        }
+        setNextTick(m, mp);
+    
+        __HAL_TIM_SET_AUTORELOAD(handle, getNextTick(mp) - 1);
+        __HAL_TIM_SET_COMPARE(handle, TIM_CHANNEL_3, getNextTick(mp) / 2);
 
-        __HAL_TIM_SET_AUTORELOAD(&htim3, dt_ticks - 1);
-        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, dt_ticks / 2);
+        incrementStepIndex(mp);
 
-        step_index++;
-
-        motor1_step_count += (arrowDir ? -1 : +1);
-        motor1Pos = motor1_step_count / motor1_steps_per_unit;
+        m->stepCount += (arrowDir ? -1 : +1);
+        motor1Pos = m->stepCount / m->pulsePerUnit;
     }
 
-    void switchEXTIHandler(uint16_t GPIO_Pin) {
-        if(GPIO_Pin != GPIO_PIN_0)    
+    void homeSensor(motor *m) {
+        if(m->homePin != GPIO_PIN_0)    
             return;  
 
-        if(!homing_active)            
+        if(!m->homingActive)            
             return;  
 
-        if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_SET && !homing_reverse_started) {
+        if(HAL_GPIO_ReadPin(m->homePort, m->homePin) == GPIO_PIN_SET && !m->homingReverseStarted) {
             arrowDir = !arrowDir;
-            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
-            homing_reverse_started = true;
+            HAL_GPIO_WritePin(m->dirPort, m->dirPin, arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
+            m->homingReverseStarted = true;
         }             
     }
 
-    void home(void) {
-        float ppu = strtof(motor1Pulse, NULL);
-        motor1_steps_per_unit = ppu;
-        float vmax_u_s = 10;
-
-        float homing_pps = vmax_u_s * ppu;
-        if (homing_pps < 1.0f) 
-            homing_pps = 1.0f;
-
-        uint32_t dt = (uint32_t)(timerTickHz / homing_pps + 0.5f);
-
-        homing_dt_ticks = dt;
-        homing_active = true;
-        homing_reverse_started = false;
-
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
-
-        __HAL_TIM_SET_AUTORELOAD(&htim3, dt - 1);
-        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, dt / 2);
-
-        HAL_TIM_OC_Start_IT(&htim3, TIM_CHANNEL_3);
+    void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim) {
+        if(htim->Instance == TIM3)
+            motorOCCallback(&m1);
     }
+
+    void switchEXTIHandler(uint16_t GPIO_Pin) {
+        if(GPIO_Pin == getHomePin(&m1))
+            homeSensor(&m1);
+    }
+

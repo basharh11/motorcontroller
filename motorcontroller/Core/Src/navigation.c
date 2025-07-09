@@ -1,5 +1,4 @@
 #include "navigation.h"
-#include "motor.h"
 
 systemOfMeasurement currentSysOfMeasurment;
 state currentState;
@@ -10,9 +9,9 @@ char *parameters[] = {slowZone, motor1Range, motor2Range, motor1PeakSpeed, motor
 char slowZone[MAX_LENGTH] = {0};
 char motor1Range[MAX_LENGTH] = {0};
 char motor2Range[MAX_LENGTH] = {0};
-char motor1PeakSpeed[MAX_LENGTH] = "35";
-char motor1Acceleration[MAX_LENGTH] = "30";
-char motor1Pulse[MAX_LENGTH] = "1280";
+char motor1PeakSpeed[MAX_LENGTH] = "50";
+char motor1Acceleration[MAX_LENGTH] = "100";
+char motor1Pulse[MAX_LENGTH] = "640";
 char motor2PeakSpeed[MAX_LENGTH] = {0};
 char motor2Acceleration[MAX_LENGTH] = {0};
 char motor2Pulse[MAX_LENGTH] = {0};
@@ -37,6 +36,10 @@ uint8_t numberLength;
 MenuNode *current = &run;
 
 queue keyQueue;
+
+motor m1;
+
+movementProfile mp1;
 
 void updateParameters() {
     home1 = menu21.child == &menu211 ? disabled : enabled;
@@ -64,14 +67,16 @@ void navigationInit() {
 
     queueInit(&keyQueue);     
     keypadInit(&keyQueue); 
+    HAL_TIM_Base_Start_IT(&htim2);
+    motorInit(&m1, &mp1, &htim3, GPIOC, GPIO_PIN_9, GPIOB, GPIO_PIN_0);
 }
 
 void navigationLoop() {
-    if(homing_active && homing_reverse_started && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET) {
-        HAL_TIM_OC_Stop_IT(&htim3, TIM_CHANNEL_3);
-        homing_active = false;
-        homing_reverse_started = false;
-        motor1_step_count = 0;
+    if(getHomingStatus(&m1) && getHomingReverseStatus(&m1) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET) {
+        HAL_TIM_OC_Stop_IT(getHandle(&m1), TIM_CHANNEL_3);
+        setHomingStatus(&m1, false);
+        setHomingReverseStatus(&m1, false);
+        resetStepCount(&m1);
         motor1Pos = 0;
     }
 
@@ -93,7 +98,6 @@ void navigationLoop() {
     uint8_t raw;
 
     if(dequeue(&keyQueue, &raw)) {
-
         char c = keypadDecodeKey(raw);
         if(c == '#' && current->child) {
             current = current->child;
@@ -127,17 +131,17 @@ void navigationLoop() {
             current = current->prev;
         } else if(c == 'B' && current->next) {
             current = current->next;
-        } else if(c == 'A' && current == &run) {
-            on_menu_move();
+        } else if(c == 'A' && current == &run && !getHomingStatus(&m1) && !getMoveStatus(&m1)) {
+            moveMotor(&m1);
         } else if(c == 'C' && (isInputScreen() || current == &run)) {
             if(isInputScreen())
                 parameters[selectInputScreen()][0] = '\0';
             else if(current == &run)
                 target[0] = '\0';
-        } else if(c == 'D' && current == &run) {
+        } else if(c == 'D' && current == &run && !getHomingStatus(&m1) && !getMoveStatus(&m1)) {
             arrowDir = !arrowDir;
-        } else if(c == '#' && current == &menu1) {
-            home();
+        } else if(c == '#' && current == &menu1 && !getHomingStatus(&m1) && !getMoveStatus(&m1)) {
+            home(&m1);
         } else if(target[0] == '\0' && current == &run && c >= '0' && c <= '9') {
             uint8_t pos = 0;
             bool decimalFlag = false;
