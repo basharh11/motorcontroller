@@ -26,41 +26,20 @@ extern menuNode menu2;
     // Home 1
     extern menuNode menu21;
 
-    extern menuNode menu211;
-    extern menuNode menu212;
-    extern menuNode menu213;
-    extern menuNode menu214;
-
     // Home 2
     extern menuNode menu22;
-    
-    extern menuNode menu221;
-    extern menuNode menu222;
-    extern menuNode menu223;
-    extern menuNode menu224;
-    
+
     // Homing Slow Zone (should be removed)
     extern menuNode menu23;
-
-    extern menuNode menu231;
 
     // Emergency Stop
     extern menuNode menu24;
 
-    extern menuNode menu241;
-    extern menuNode menu242;
-    extern menuNode menu243;
-    extern menuNode menu244;
-
     // Motor 1 Range
     extern menuNode menu25;
 
-    extern menuNode menu251;
-
     // Motor 2 Range
     extern menuNode menu26;
-    
-    extern menuNode menu261;
 
 // Outputs
 extern menuNode menu3;
@@ -71,17 +50,11 @@ extern menuNode menu3;
         // Motor 1 Peak Speed
         extern menuNode menu311;
 
-        extern menuNode menu3111;
-
         // Motor 1 Acceleration
         extern menuNode menu312;
 
-        extern menuNode menu3121;
-
         // Motor 1 Pulse
         extern menuNode menu313;
-
-        extern menuNode menu3131;
 
     // Motor 2 Config
     extern menuNode menu32;
@@ -89,41 +62,20 @@ extern menuNode menu3;
         // Motor 2 Peak Speed
         extern menuNode menu321;
 
-        extern menuNode menu3211;
-
         // Motor 2 Acceleration
         extern menuNode menu322;
-
-        extern menuNode menu3221;
 
         // Motor 2 Pulse
         extern menuNode menu323;
 
-        extern menuNode menu3231;
-
     // Relay 1
     extern menuNode menu33;
 
-    extern menuNode menu331;
-    extern menuNode menu332;
-    extern menuNode menu333;
-    extern menuNode menu334;
-
     // Relay 2
     extern menuNode menu34;
-
-    extern menuNode menu341;
-    extern menuNode menu342;
-    extern menuNode menu343;
-    extern menuNode menu344;
-
+    
 // 0-10V Analog
 extern menuNode menu4;
-    
-extern menuNode menu41;
-extern menuNode menu42;
-extern menuNode menu43;
-extern menuNode menu44;
 
 // Units
 extern menuNode menu5;
@@ -151,8 +103,7 @@ void setNext(menuNode name);
 void setChild(menuNode name);
 void setParent(menuNode name);
 
-void updateInputLinkage(menuNode *name);
-void updateAbilityLinkage(menuNode *name, state s);
+void updateLinkage(menuNode *cur, menuNode *ch);
 
 void buildMenuTree();
 

@@ -31,17 +31,7 @@ typedef struct motor {
 extern motor m1;
 extern motor m2;
 
-extern bool arrowDir;
-extern bool home1;
-extern bool home2;
-extern bool emergencyStop;
-extern bool relay1;
-extern bool relay2;
-extern bool analog;
-extern bool units;
-extern bool lastUnits;
-
-extern float motor1Pos;
+extern parameters p;
 
 TIM_HandleTypeDef *getHandle(const motor *m);
 GPIO_TypeDef *getDirPort(const motor *m);

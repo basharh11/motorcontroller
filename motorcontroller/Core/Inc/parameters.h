@@ -45,9 +45,12 @@ typedef struct parameters {
     uint8_t numberLength;
 } parameters;
 
+void parametersInit(parameters *p);
+
 state getState(const menuNode *m, const parameters *p);
 systemOfMeasurement getUnits(const parameters *p);
 uint8_t getNumberLength(const parameters *p);
+uint8_t getInputScreen(menuNode *c);
 
 void updateParameters(parameters *p);
 

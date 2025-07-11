@@ -23,19 +23,19 @@
     }
 
     void setPulsePerUnit(motor *m) {
-        m->pulsePerUnit = strtof(motor1Pulse, NULL);
+        m->pulsePerUnit = strtof(p.motor1Pulse, NULL);
     }
 
     void setPeakSpeed(motor *m) {
-        m->peakSpeed = strtof(motor1PeakSpeed, NULL);
+        m->peakSpeed = strtof(p.motor1PeakSpeed, NULL);
     }
     
     void setAcceleration(motor *m) {
-        m->acceleration = strtof(motor1Acceleration, NULL);
+        m->acceleration = strtof(p.motor1Acceleration, NULL);
     }
 
     void setDistance(motor *m) {
-        m->distance = strtof(target, NULL);
+        m->distance = strtof(p.target, NULL);
     }
 
     void setMoveStatus(motor *m, bool status) {
@@ -130,7 +130,7 @@
         setRampingDistanceP(mp);
         setPulseIntervals(m, mp);
 
-        HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
+        HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), p.arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
 
         __HAL_TIM_SET_AUTORELOAD(getHandle(m), getFirstTick(mp) - 1);
         __HAL_TIM_SET_COMPARE(getHandle(m), TIM_CHANNEL_3, getFirstTick(mp) / 2);
@@ -151,7 +151,7 @@
         setHomingStatus(m, true);
         setHomingReverseStatus(m, false);
 
-        HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
+        HAL_GPIO_WritePin(getDirPort(m), getDirPin(m), p.arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
 
         __HAL_TIM_SET_AUTORELOAD(handle, getHomingTicks(mp) - 1);
         __HAL_TIM_SET_COMPARE(handle, TIM_CHANNEL_3, getHomingTicks(mp) / 2);
@@ -190,8 +190,8 @@
 
         incrementStepIndex(mp);
 
-        m->stepCount += (arrowDir ? -1 : +1);
-        motor1Pos = m->stepCount / m->pulsePerUnit;
+        m->stepCount += (p.arrowDir ? -1 : +1);
+        p.motor1Pos = m->stepCount / m->pulsePerUnit;
     }
 
     void homeSensor(motor *m) {
@@ -202,8 +202,8 @@
             return;  
 
         if(HAL_GPIO_ReadPin(m->homePort, m->homePin) == GPIO_PIN_SET && !m->homingReverseStarted) {
-            arrowDir = !arrowDir;
-            HAL_GPIO_WritePin(m->dirPort, m->dirPin, arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
+            p.arrowDir = !p.arrowDir;
+            HAL_GPIO_WritePin(m->dirPort, m->dirPin, p.arrowDir ? GPIO_PIN_RESET : GPIO_PIN_SET);
             m->homingReverseStarted = true;
         }             
     }
