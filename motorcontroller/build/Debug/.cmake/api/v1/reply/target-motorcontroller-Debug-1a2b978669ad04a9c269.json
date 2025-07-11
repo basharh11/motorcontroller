@@ -127,7 +127,9 @@
 				30,
 				31,
 				32,
-				33
+				33,
+				34,
+				35
 			]
 		},
 		{
@@ -178,7 +180,7 @@
 			"language" : "ASM",
 			"sourceIndexes" : 
 			[
-				34
+				36
 			]
 		}
 	],
@@ -244,14 +246,16 @@
 				30,
 				31,
 				32,
-				33
+				33,
+				34,
+				35
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				34
+				36
 			]
 		}
 	],
@@ -321,6 +325,18 @@
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
 			"path" : "Core/Src/movementprofile.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "Core/Src/parameters.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "Core/Src/enums.c",
 			"sourceGroupIndex" : 0
 		},
 		{

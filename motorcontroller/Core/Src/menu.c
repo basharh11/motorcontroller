@@ -1,88 +1,152 @@
-
 #include "menu.h"
 
-MenuNode run;
+// Run Screen
+menuNode run;
 
-MenuNode menu1;
-MenuNode menu2;
-MenuNode menu3;
-MenuNode menu4;
-MenuNode menu5;
+// Home
+menuNode menu1;
 
-MenuNode menu21;
-MenuNode menu22;
-MenuNode menu23;
-MenuNode menu24;
-MenuNode menu25;
-MenuNode menu26;
+// Inputs
+menuNode menu2;
 
-MenuNode menu211;
-MenuNode menu212;
-MenuNode menu213;
-MenuNode menu214;
+    // Home 1
+    menuNode menu21;
 
-MenuNode menu221;
-MenuNode menu222;
-MenuNode menu223;
-MenuNode menu224;
+    menuNode menu211;
+    menuNode menu212;
+    menuNode menu213;
+    menuNode menu214;
 
-MenuNode menu231;
+    // Home 2
+    menuNode menu22;
+    
+    menuNode menu221;
+    menuNode menu222;
+    menuNode menu223;
+    menuNode menu224;
+    
+    // Homing Slow Zone (should be removed)
+    menuNode menu23;
 
-MenuNode menu241;
-MenuNode menu242;
-MenuNode menu243;
-MenuNode menu244;
+    menuNode menu231;
 
-MenuNode menu251;
+    // Emergency Stop
+    menuNode menu24;
 
-MenuNode menu261;
+    menuNode menu241;
+    menuNode menu242;
+    menuNode menu243;
+    menuNode menu244;
 
-MenuNode menu31;
-MenuNode menu32;
-MenuNode menu33;
-MenuNode menu34;
+    // Motor 1 Range
+    menuNode menu25;
 
-MenuNode menu311;
-MenuNode menu312;
-MenuNode menu313;
+    menuNode menu251;
 
-MenuNode menu3111;
+    // Motor 2 Range
+    menuNode menu26;
+    
+    menuNode menu261;
 
-MenuNode menu3121;
+// Outputs
+menuNode menu3;
 
-MenuNode menu3131;
+    // Motor 1 Config
+    menuNode menu31;
 
-MenuNode menu321;
-MenuNode menu322;
-MenuNode menu323;
+        // Motor 1 Peak Speed
+        menuNode menu311;
 
-MenuNode menu3211;
+        menuNode menu3111;
 
-MenuNode menu3221;
+        // Motor 1 Acceleration
+        menuNode menu312;
 
-MenuNode menu3231;
+        menuNode menu3121;
 
-MenuNode menu331;
-MenuNode menu332;
-MenuNode menu333;
-MenuNode menu334;
+        // Motor 1 Pulse
+        menuNode menu313;
 
-MenuNode menu341;
-MenuNode menu342;
-MenuNode menu343;
-MenuNode menu344;
+        menuNode menu3131;
 
-MenuNode menu41;
-MenuNode menu42;
-MenuNode menu43;
-MenuNode menu44;
+    // Motor 2 Config
+    menuNode menu32;
+        
+        // Motor 2 Peak Speed
+        menuNode menu321;
 
-MenuNode menu51;
-MenuNode menu52;
-MenuNode menu53;
-MenuNode menu54;
+        menuNode menu3211;
 
-void buildMenuTree(void) {
+        // Motor 2 Acceleration
+        menuNode menu322;
+
+        menuNode menu3221;
+
+        // Motor 2 Pulse
+        menuNode menu323;
+
+        menuNode menu3231;
+
+    // Relay 1
+    menuNode menu33;
+
+    menuNode menu331;
+    menuNode menu332;
+    menuNode menu333;
+    menuNode menu334;
+
+    // Relay 2
+    menuNode menu34;
+
+    menuNode menu341;
+    menuNode menu342;
+    menuNode menu343;
+    menuNode menu344;
+
+// 0-10V Analog
+menuNode menu4;
+    
+menuNode menu41;
+menuNode menu42;
+menuNode menu43;
+menuNode menu44;
+
+// Units
+menuNode menu5;
+
+menuNode menu51;
+menuNode menu52;
+menuNode menu53;
+menuNode menu54;
+
+menuNode userInput;
+
+menuNode disabledCheck;
+menuNode enabled;
+menuNode enabledCheck;
+menuNode disabled;
+
+const uint8_t* getBitmap(const menuNode *name) {
+    return name->bitmap;
+}
+
+menuNode *getPrev(const menuNode *name) {
+    return name->prev;
+}
+
+menuNode *getNext(const menuNode *name) {
+    return name->next;
+}
+
+menuNode *getChild(const menuNode *name) {
+    return name->child;
+}
+
+menuNode *getParent(const menuNode *name) {
+    return name->parent;
+}
+
+void buildMenuTree() {
     run.bitmap = runScreen;
     run.prev = NULL;
     run.next = NULL;
@@ -110,7 +174,7 @@ void buildMenuTree(void) {
     menu4.bitmap = mainMenu4;
     menu4.prev = &menu3;
     menu4.next = &menu5;
-    menu4.child = &menu41;
+    menu4.child = &disabledCheck;
     menu4.parent = &run;
 
     menu5.bitmap = mainMenu5;
@@ -326,14 +390,8 @@ void buildMenuTree(void) {
     menu311.bitmap = motorConfig1;
     menu311.prev   = NULL;
     menu311.next   = &menu312;
-    menu311.child  = &menu3111;
+    menu311.child  = &userInput;
     menu311.parent = &menu31;
-
-    menu3111.bitmap = inputScreen;
-    menu3111.prev   = NULL;
-    menu3111.next   = NULL;
-    menu3111.child  = NULL;
-    menu3111.parent = &menu311;
 
     menu312.bitmap = motorConfig2;
     menu312.prev   = &menu311;
@@ -395,14 +453,14 @@ void buildMenuTree(void) {
     menu3231.child  = NULL;
     menu3231.parent = &menu323;
 
-    menu41.bitmap = disabledCheckBmp;
-    menu41.prev   = NULL;
-    menu41.next   = &menu42;
-    menu41.child  = NULL;
-    menu41.parent = &menu4;
+    disabledCheck.bitmap = disabledCheckBmp;
+    disabledCheck.prev   = NULL;
+    disabledCheck.next   = &enabled;
+    disabledCheck.child  = NULL;
+    disabledCheck.parent = &menu4;
 
     menu42.bitmap = enabledBmp;
-    menu42.prev   = &menu41;
+    menu42.prev   = &disabledCheck;
     menu42.next   = NULL;
     menu42.child  = &menu43;
     menu42.parent = &menu4;
@@ -416,7 +474,7 @@ void buildMenuTree(void) {
     menu44.bitmap = disabledBmp;
     menu44.prev   = NULL;
     menu44.next   = &menu43;
-    menu44.child  = &menu41;
+    menu44.child  = &disabledCheck;
     menu44.parent = &menu4;
 
     menu51.bitmap = metricCheckBmp;
@@ -442,4 +500,47 @@ void buildMenuTree(void) {
     menu54.next   = &menu53;
     menu54.child  = &menu51;
     menu54.parent = &menu5;
+
+    disabledCheck.bitmap = disabledCheckBmp;
+    disabledCheck.prev   = NULL;
+    disabledCheck.next   = &enabled;
+    disabledCheck.child  = NULL;
+    disabledCheck.parent = NULL;
+
+    enabled.bitmap = enabledBmp;
+    enabled.prev   = &disabledCheck;
+    enabled.next   = NULL;
+    enabled.child  = &enabledCheck;
+    enabled.parent = NULL;
+
+    enabledCheck.bitmap = enabledCheckBmp;
+    enabledCheck.prev   = &disabled;
+    enabledCheck.next   = NULL;
+    enabledCheck.child  = NULL;
+    enabledCheck.parent = &menu4;
+
+    disabled.bitmap = disabledBmp;
+    disabled.prev   = NULL;
+    disabled.next   = &enabledCheck;
+    disabled.child  = &disabledCheck;
+    disabled.parent = NULL;
+
+    userInput.bitmap = inputScreen;
+    userInput.prev   = NULL;
+    userInput.next   = NULL;
+    userInput.child  = NULL;
+    userInput.parent = NULL;
 }
+
+void updateInputLinkage(menuNode *name) {
+    if(name->next == &userInput)
+        name->next->parent = name;
+}
+
+void updateAbilityLinkage(menuNode *name) {
+    if(name->child == &disabledCheck || name->child == &enabled)
+        name->child->parent = &disabledCheck;
+    if(name->child == &enabledCheck || name->child == &disabled)
+        name->child->parent = &enabledCheck;
+}
+

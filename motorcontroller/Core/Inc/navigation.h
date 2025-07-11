@@ -5,55 +5,21 @@
 #include "ssd1309.h"
 #include "queue.h"
 #include "keypad.h"
+#include "parameters.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include <motor.h>
-
-#define MAX_LENGTH 10
-
-typedef struct motor motor;
-
-typedef struct movementProfile movementProfile;
-
-typedef enum {
-    metric, imperial
-} systemOfMeasurement; 
-
-typedef enum {
-    disabled, enabled
-} state;
-
-typedef enum {
-    left, right
-} direction;
-
-extern char target[MAX_LENGTH];
-extern char *parameters[];
-extern char slowZone[MAX_LENGTH];
-extern char motor1Range[MAX_LENGTH];
-extern char motor2Range[MAX_LENGTH];
-extern char motor1PeakSpeed[MAX_LENGTH];
-extern char motor1Acceleration[MAX_LENGTH];
-extern char motor1Pulse[MAX_LENGTH];
-extern char motor2PeakSpeed[MAX_LENGTH];
-extern char motor2Acceleration[MAX_LENGTH];
-extern char motor2Pulse[MAX_LENGTH];
-extern char motor1Position[MAX_LENGTH];
-extern char motor2Position[MAX_LENGTH];
+#include "motor.h"
 
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 
-extern float motor1Pos;
-extern float motor2Pos;
-
 extern queue keyQueue;
 extern bool arrowFlag;
-extern MenuNode *current;
-extern motor m1;
-extern movementProfile mp1;
+extern menuNode *current;
+extern struct motor m1;
+extern struct movementProfile mp1;
 
 void navigationInit();
 void navigationLoop();

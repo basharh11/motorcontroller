@@ -17,6 +17,11 @@
         "stdlib.h": "c",
         "stdio.h": "c",
         "movementprofile.h": "c",
-        "compare": "c"
+        "compare": "c",
+        "type_traits": "c",
+        "menu.h": "c",
+        "new": "c",
+        "cstdlib": "c",
+        "typeinfo": "c"
     }
 }

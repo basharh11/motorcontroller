@@ -32,6 +32,8 @@ target_sources(stm32cubemx INTERFACE
     ../../Core/Src/navigation.c
     ../../Core/Src/motor.c
     ../../Core/Src/movementprofile.c
+    ../../Core/Src/parameters.c
+    ../../Core/Src/enums.c
     ../../Core/Src/stm32f4xx_it.c
     ../../Core/Src/stm32f4xx_hal_msp.c
     ../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c

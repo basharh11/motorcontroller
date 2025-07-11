@@ -4,36 +4,9 @@ systemOfMeasurement currentSysOfMeasurment;
 state currentState;
 direction currentDirection;
 
-char target[MAX_LENGTH] = "80";
-char *parameters[] = {slowZone, motor1Range, motor2Range, motor1PeakSpeed, motor1Acceleration, motor1Pulse, motor2PeakSpeed, motor2Acceleration, motor2Range};
-char slowZone[MAX_LENGTH] = {0};
-char motor1Range[MAX_LENGTH] = {0};
-char motor2Range[MAX_LENGTH] = {0};
-char motor1PeakSpeed[MAX_LENGTH] = "50";
-char motor1Acceleration[MAX_LENGTH] = "100";
-char motor1Pulse[MAX_LENGTH] = "640";
-char motor2PeakSpeed[MAX_LENGTH] = {0};
-char motor2Acceleration[MAX_LENGTH] = {0};
-char motor2Pulse[MAX_LENGTH] = {0};
-char motor1Position[MAX_LENGTH] = {0};
-char motor2Position[MAX_LENGTH] = {0};
+parameters *p;
 
-float motor1Pos;
-float motor2Pos;   
-
-bool arrowDir = right;
-bool home1 = disabled;
-bool home2 = disabled;
-bool emergencyStop = disabled;
-bool relay1 = disabled;
-bool relay2 = disabled;
-bool analog = disabled;
-bool units = metric;
-bool lastUnits = metric;
-
-uint8_t numberLength;
-
-MenuNode *current = &run;
+menuNode *current = &run;
 
 queue keyQueue;
 
@@ -41,28 +14,19 @@ motor m1;
 
 movementProfile mp1;
 
-void updateParameters() {
-    home1 = menu21.child == &menu211 ? disabled : enabled;
-    home2 = menu22.child == &menu221 ? disabled : enabled;
-    emergencyStop = menu24.child == &menu241 ? disabled : enabled;
-    relay1 = menu33.child == &menu331 ? disabled : enabled;
-    relay2 = menu34.child == &menu341 ? disabled : enabled;
-    analog = menu4.child == &menu41 ? disabled : enabled;
-    units = menu5.child == &menu51 ? metric : imperial;
-    numberLength = units ? 8 : 9;
-}
-
 void navigationInit() {
     buildMenuTree();
     
     SSD1309_init();
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
+
     if(current == &run) {
-        SSD1309_drawText(54, 36, 8, target);
-        SSD1309_drawText(0, 0, 8, motor1Position);
-        SSD1309_drawBitmap(54, 51, 13, 7, arrowDir ? rightArrow : leftArrow);
-        SSD1309_drawBitmap(units ? 113 : 106, units ? 50 : 52, units ? 12 : 19, units ? 8 : 6, units ? in : mm);
+        SSD1309_drawText(54, 36, 8, p->target);
+        SSD1309_drawText(0, 0, 8, p->motor1Position);
+        SSD1309_drawBitmap(54, 51, 13, 7, p->arrowDir ? rightArrow : leftArrow);
+        SSD1309_drawBitmap(p->units ? 113 : 106, p->units ? 50 : 52, p->units ? 12 : 19, p->units ? 8 : 6, p->units ? in : mm);
     }
+
     SSD1309_update();  
 
     queueInit(&keyQueue);     
@@ -80,17 +44,19 @@ void navigationLoop() {
         motor1Pos = 0;
     }
 
-    updateParameters();
+    updateInputLinkage(current);
+    updateAbilityLinkage(current);
+    updateParameters(current);
 
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
     if(current == &run) {
-        SSD1309_drawText(54, 36, 8, target);
+        SSD1309_drawText(54, 36, 8, p->target);
         SSD1309_drawBitmap(54, 51, 13, 7, arrowDir ? rightArrow : leftArrow);
         SSD1309_drawBitmap(units ? 113 : 106, units ? 50 : 52, units ? 12 : 19, units ? 8 : 6, units ? in : mm);
-        dtoa(motor1Position, motor1Pos, 4);
-        SSD1309_drawText(54, 6, 8, motor1Position);
+        dtoa(p->motor1Position, p->motor1Pos, 4);
+        SSD1309_drawText(54, 6, 8, p->motor1Position);
     }
-    if(isInputScreen()) {
+    if(current->next == &inputScreen) {
         SSD1309_drawText(6, 6, 8, parameters[selectInputScreen()]);
     }
     SSD1309_update();
@@ -102,30 +68,6 @@ void navigationLoop() {
         if(c == '#' && current->child) {
             current = current->child;
         } else if (c == '*' && current->parent) {
-            if(current == &menu211 || current == &menu212)
-                current->parent->child = &menu211 ;
-            else if(current == &menu213 || current == &menu214)
-                current->parent->child = &menu213; 
-            else if(current == &menu221 || current == &menu222)
-                current->parent->child = &menu221; 
-            else if(current == &menu223 || current == &menu224)
-                current->parent->child = &menu223; 
-            else if(current == &menu241 || current == &menu242)
-                current->parent->child = &menu241; 
-            else if(current == &menu243 || current == &menu244)
-                current->parent->child = &menu243; 
-            else if(current == &menu331 || current == &menu332)
-                current->parent->child = &menu331; 
-            else if(current == &menu333 || current == &menu334)
-                current->parent->child = &menu333; 
-            else if(current == &menu41 || current == &menu42)
-                current->parent->child = &menu41; 
-            else if(current == &menu43 || current == &menu44)
-                current->parent->child = &menu43; 
-            else if(current == &menu51 || current == &menu52)
-                current->parent->child = &menu51; 
-            else if(current == &menu53 || current == &menu54)
-                current->parent->child = &menu53;
             current = current->parent;
         } else if (c == 'A' && current->prev) {
             current = current->prev;

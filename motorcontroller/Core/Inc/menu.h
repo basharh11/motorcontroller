@@ -1,94 +1,159 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "bitmaps.h"
 #include <stdbool.h>
+#include "bitmaps.h"
+#include "parameters.h"
+#include "enums.h"
 
-typedef struct MenuNode {
+typedef struct menuNode {
     const uint8_t *bitmap; // pointer to bitmap to be rendered
-    struct MenuNode *prev; // previous item on the same level
-    struct MenuNode *next; // next item on the same level
-    struct MenuNode *child; // first child (to enter) of this item, or NULL if no child
-    struct MenuNode *parent; // parent item (to exit), or NULL if top level
-} MenuNode;
+    struct menuNode *prev; // previous item on the same level
+    struct menuNode *next; // next item on the same level
+    struct menuNode *child; // first child (to enter) of this item, or NULL if no child
+    struct menuNode *parent; // parent item (to exit), or NULL if top level
+} menuNode;
 
-extern MenuNode run;
+// Run Screen
+extern menuNode run;
 
-extern MenuNode menu1;
-extern MenuNode menu2;
-extern MenuNode menu3;
-extern MenuNode menu4;
-extern MenuNode menu5;
+// Home
+extern menuNode menu1;
 
-extern MenuNode menu21;
-extern MenuNode menu22;
-extern MenuNode menu23;
-extern MenuNode menu24;
-extern MenuNode menu25;
-extern MenuNode menu26;
+// Inputs
+extern menuNode menu2;
 
-extern MenuNode menu211;
-extern MenuNode menu212;
-extern MenuNode menu213;
-extern MenuNode menu214;
+    // Home 1
+    extern menuNode menu21;
 
-extern MenuNode menu221;
-extern MenuNode menu222;
-extern MenuNode menu223;
-extern MenuNode menu224;
+    extern menuNode menu211;
+    extern menuNode menu212;
+    extern menuNode menu213;
+    extern menuNode menu214;
 
-extern MenuNode menu231;
+    // Home 2
+    extern menuNode menu22;
+    
+    extern menuNode menu221;
+    extern menuNode menu222;
+    extern menuNode menu223;
+    extern menuNode menu224;
+    
+    // Homing Slow Zone (should be removed)
+    extern menuNode menu23;
 
-extern MenuNode menu241;
-extern MenuNode menu242;
-extern MenuNode menu243;
-extern MenuNode menu244;
+    extern menuNode menu231;
 
-extern MenuNode menu251;
+    // Emergency Stop
+    extern menuNode menu24;
 
-extern MenuNode menu261;
+    extern menuNode menu241;
+    extern menuNode menu242;
+    extern menuNode menu243;
+    extern menuNode menu244;
 
-extern MenuNode menu31;
-extern MenuNode menu32;
-extern MenuNode menu33;
-extern MenuNode menu34;
+    // Motor 1 Range
+    extern menuNode menu25;
 
-extern MenuNode menu311;
-extern MenuNode menu312;
-extern MenuNode menu313;
+    extern menuNode menu251;
 
-extern MenuNode menu3111;
-extern MenuNode menu3121;
-extern MenuNode menu3131;
+    // Motor 2 Range
+    extern menuNode menu26;
+    
+    extern menuNode menu261;
 
-extern MenuNode menu321;
-extern MenuNode menu322;
-extern MenuNode menu323;
+// Outputs
+extern menuNode menu3;
 
-extern MenuNode menu3211;
-extern MenuNode menu3221;
-extern MenuNode menu3231;
+    // Motor 1 Config
+    extern menuNode menu31;
 
-extern MenuNode menu331;
-extern MenuNode menu332;
-extern MenuNode menu333;
-extern MenuNode menu334;
+        // Motor 1 Peak Speed
+        extern menuNode menu311;
 
-extern MenuNode menu341;
-extern MenuNode menu342;
-extern MenuNode menu343;
-extern MenuNode menu344;
+        extern menuNode menu3111;
 
-extern MenuNode menu41;
-extern MenuNode menu42;
-extern MenuNode menu43;
-extern MenuNode menu44;
+        // Motor 1 Acceleration
+        extern menuNode menu312;
 
-extern MenuNode menu51;
-extern MenuNode menu52;
-extern MenuNode menu53;
-extern MenuNode menu54;
+        extern menuNode menu3121;
 
-void buildMenuTree(void);
+        // Motor 1 Pulse
+        extern menuNode menu313;
+
+        extern menuNode menu3131;
+
+    // Motor 2 Config
+    extern menuNode menu32;
+        
+        // Motor 2 Peak Speed
+        extern menuNode menu321;
+
+        extern menuNode menu3211;
+
+        // Motor 2 Acceleration
+        extern menuNode menu322;
+
+        extern menuNode menu3221;
+
+        // Motor 2 Pulse
+        extern menuNode menu323;
+
+        extern menuNode menu3231;
+
+    // Relay 1
+    extern menuNode menu33;
+
+    extern menuNode menu331;
+    extern menuNode menu332;
+    extern menuNode menu333;
+    extern menuNode menu334;
+
+    // Relay 2
+    extern menuNode menu34;
+
+    extern menuNode menu341;
+    extern menuNode menu342;
+    extern menuNode menu343;
+    extern menuNode menu344;
+
+// 0-10V Analog
+extern menuNode menu4;
+    
+extern menuNode menu41;
+extern menuNode menu42;
+extern menuNode menu43;
+extern menuNode menu44;
+
+// Units
+extern menuNode menu5;
+
+extern menuNode menu51;
+extern menuNode menu52;
+extern menuNode menu53;
+extern menuNode menu54;
+
+extern menuNode userInput;
+
+extern menuNode disabledCheck;
+extern menuNode enabled;
+extern menuNode enabledCheck;
+extern menuNode disabled;
+
+const uint8_t* getBitmap(const menuNode *name);
+menuNode* getPrev(const menuNode *name);
+menuNode* getNext(const menuNode *name);
+menuNode* getChild(const menuNode *name);
+menuNode* getParent(const menuNode *name);
+
+void setPrev(menuNode name);
+void setNext(menuNode name);
+void setChild(menuNode name);
+void setParent(menuNode name);
+
+void updateInputLinkage(menuNode *name);
+void updateAbilityLinkage(menuNode *name, state s);
+
+void buildMenuTree();
 
 #endif
