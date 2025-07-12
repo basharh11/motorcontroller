@@ -4377,7 +4377,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtn.o
                 0x08000000                g_pfnVectors
                 0x08000198                        . = ALIGN (0x4)
 
-.text           0x080001c0     0xc788
+.text           0x080001c0     0xc818
                 0x080001c0                        . = ALIGN (0x4)
  *(.text)
  .text          0x080001c0       0x88 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
@@ -4728,692 +4728,692 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtn.o
                 0x08007840                navigationInit
  *fill*         0x08007974        0x4 
  .text.navigationLoop
-                0x08007978      0x844 CMakeFiles/motorcontroller.dir/Core/Src/navigation.c.obj
+                0x08007978      0x8d4 CMakeFiles/motorcontroller.dir/Core/Src/navigation.c.obj
                 0x08007978                navigationLoop
- *fill*         0x080081bc        0x4 
- .text.dtoa     0x080081c0      0x23c CMakeFiles/motorcontroller.dir/Core/Src/navigation.c.obj
-                0x080081c0                dtoa
+ *fill*         0x0800824c        0x4 
+ .text.dtoa     0x08008250      0x23c CMakeFiles/motorcontroller.dir/Core/Src/navigation.c.obj
+                0x08008250                dtoa
  .text.motorInit
-                0x080083fc       0x64 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080083fc                motorInit
+                0x0800848c       0x64 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x0800848c                motorInit
  .text.setTimerFrequency
-                0x08008460       0x4c CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x08008460                setTimerFrequency
+                0x080084f0       0x4c CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x080084f0                setTimerFrequency
  .text.setPulsePerUnit
-                0x080084ac       0x28 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080084ac                setPulsePerUnit
+                0x0800853c       0x28 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x0800853c                setPulsePerUnit
  .text.setPeakSpeed
-                0x080084d4       0x28 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080084d4                setPeakSpeed
+                0x08008564       0x28 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008564                setPeakSpeed
  .text.setAcceleration
-                0x080084fc       0x28 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080084fc                setAcceleration
+                0x0800858c       0x28 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x0800858c                setAcceleration
  .text.setDistance
-                0x08008524       0x28 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x08008524                setDistance
+                0x080085b4       0x28 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x080085b4                setDistance
  .text.setMoveStatus
-                0x0800854c       0x20 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x0800854c                setMoveStatus
+                0x080085dc       0x20 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x080085dc                setMoveStatus
  .text.setHomingStatus
-                0x0800856c       0x20 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x0800856c                setHomingStatus
+                0x080085fc       0x20 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x080085fc                setHomingStatus
  .text.setHomingReverseStatus
-                0x0800858c       0x20 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x0800858c                setHomingReverseStatus
+                0x0800861c       0x20 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x0800861c                setHomingReverseStatus
  .text.resetStepCount
-                0x080085ac       0x1a CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080085ac                resetStepCount
+                0x0800863c       0x1a CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x0800863c                resetStepCount
  .text.getHandle
-                0x080085c6       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080085c6                getHandle
+                0x08008656       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008656                getHandle
  .text.getDirPort
-                0x080085de       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080085de                getDirPort
+                0x0800866e       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x0800866e                getDirPort
  .text.getDirPin
-                0x080085f6       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080085f6                getDirPin
+                0x08008686       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008686                getDirPin
  .text.getHomePin
-                0x0800860e       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x0800860e                getHomePin
+                0x0800869e       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x0800869e                getHomePin
  .text.getTimerFrequency
-                0x08008626       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x08008626                getTimerFrequency
- .text.getDistance
-                0x0800863e       0x1e CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x0800863e                getDistance
- .text.getPulsePerUnit
-                0x0800865c       0x1e CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x0800865c                getPulsePerUnit
- .text.getPeakSpeed
-                0x0800867a       0x1e CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x0800867a                getPeakSpeed
- .text.getAcceleration
-                0x08008698       0x1e CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x08008698                getAcceleration
- .text.getMovementProfile
                 0x080086b6       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080086b6                getMovementProfile
+                0x080086b6                getTimerFrequency
+ .text.getDistance
+                0x080086ce       0x1e CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x080086ce                getDistance
+ .text.getPulsePerUnit
+                0x080086ec       0x1e CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x080086ec                getPulsePerUnit
+ .text.getPeakSpeed
+                0x0800870a       0x1e CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x0800870a                getPeakSpeed
+ .text.getAcceleration
+                0x08008728       0x1e CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008728                getAcceleration
+ .text.getMovementProfile
+                0x08008746       0x18 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008746                getMovementProfile
  .text.getMoveStatus
-                0x080086ce       0x1a CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080086ce                getMoveStatus
+                0x0800875e       0x1a CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x0800875e                getMoveStatus
  .text.getHomingStatus
-                0x080086e8       0x1a CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x080086e8                getHomingStatus
+                0x08008778       0x1a CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008778                getHomingStatus
  .text.getHomingReverseStatus
-                0x08008702       0x1a CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x08008702                getHomingReverseStatus
+                0x08008792       0x1a CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008792                getHomingReverseStatus
  .text.moveMotor
-                0x0800871c      0x144 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x0800871c                moveMotor
- .text.home     0x08008860       0xa0 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x08008860                home
+                0x080087ac      0x144 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x080087ac                moveMotor
+ .text.home     0x080088f0       0xa0 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x080088f0                home
  .text.motorOCCallback
-                0x08008900      0x120 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x08008900                motorOCCallback
+                0x08008990      0x120 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008990                motorOCCallback
  .text.homeSensor
-                0x08008a20       0x9c CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x08008a20                homeSensor
+                0x08008ab0       0x9c CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008ab0                homeSensor
  .text.HAL_TIM_OC_DelayElapsedCallback
-                0x08008abc       0x28 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x08008abc                HAL_TIM_OC_DelayElapsedCallback
+                0x08008b4c       0x28 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008b4c                HAL_TIM_OC_DelayElapsedCallback
  .text.switchEXTIHandler
-                0x08008ae4       0x2c CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
-                0x08008ae4                switchEXTIHandler
+                0x08008b74       0x2c CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+                0x08008b74                switchEXTIHandler
  .text.getTotalPulses
-                0x08008b10       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008b10                getTotalPulses
+                0x08008ba0       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008ba0                getTotalPulses
  .text.getRemainingPulses
-                0x08008b28       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008b28                getRemainingPulses
+                0x08008bb8       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008bb8                getRemainingPulses
  .text.getAccelerationPPSS
-                0x08008b40       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008b40                getAccelerationPPSS
+                0x08008bd0       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008bd0                getAccelerationPPSS
  .text.getRequestedPeakSpeedPPS
-                0x08008b5e       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008b5e                getRequestedPeakSpeedPPS
+                0x08008bee       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008bee                getRequestedPeakSpeedPPS
  .text.getMaximumPeakSpeedPPS
-                0x08008b7c       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008b7c                getMaximumPeakSpeedPPS
+                0x08008c0c       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008c0c                getMaximumPeakSpeedPPS
  .text.getActualPeakSpeedPPS
-                0x08008b9a       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008b9a                getActualPeakSpeedPPS
+                0x08008c2a       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008c2a                getActualPeakSpeedPPS
  .text.getRampingDistanceP
-                0x08008bb8       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008bb8                getRampingDistanceP
+                0x08008c48       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008c48                getRampingDistanceP
  .text.getAccelSteps
-                0x08008bd6       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008bd6                getAccelSteps
+                0x08008c66       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008c66                getAccelSteps
  .text.getFirstTick
-                0x08008bee       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008bee                getFirstTick
+                0x08008c7e       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008c7e                getFirstTick
  .text.getNextTick
-                0x08008c06       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008c06                getNextTick
+                0x08008c96       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008c96                getNextTick
  .text.getHomingTicks
-                0x08008c1e       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008c1e                getHomingTicks
+                0x08008cae       0x18 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008cae                getHomingTicks
  .text.setTotalPulses
-                0x08008c36       0x3c CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008c36                setTotalPulses
+                0x08008cc6       0x3c CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008cc6                setTotalPulses
  .text.setAccelerationPPSS
-                0x08008c72       0x2e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008c72                setAccelerationPPSS
+                0x08008d02       0x2e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008d02                setAccelerationPPSS
  .text.setRequestedPeakSpeedPPS
-                0x08008ca0       0x2e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008ca0                setRequestedPeakSpeedPPS
+                0x08008d30       0x2e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008d30                setRequestedPeakSpeedPPS
  .text.setMaximumPeakSpeedPPS
-                0x08008cce       0x40 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008cce                setMaximumPeakSpeedPPS
+                0x08008d5e       0x40 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008d5e                setMaximumPeakSpeedPPS
  .text.setActualPeakSpeedPPS
-                0x08008d0e       0x52 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008d0e                setActualPeakSpeedPPS
+                0x08008d9e       0x52 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008d9e                setActualPeakSpeedPPS
  .text.setRampingDistanceP
-                0x08008d60       0x48 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008d60                setRampingDistanceP
+                0x08008df0       0x48 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008df0                setRampingDistanceP
  .text.setPulseIntervals
-                0x08008da8       0xf0 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008da8                setPulseIntervals
+                0x08008e38       0xf0 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008e38                setPulseIntervals
  .text.setHomingPulseIntervals
-                0x08008e98       0x58 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008e98                setHomingPulseIntervals
+                0x08008f28       0x58 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008f28                setHomingPulseIntervals
  .text.incrementStepIndex
-                0x08008ef0       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008ef0                incrementStepIndex
+                0x08008f80       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008f80                incrementStepIndex
  .text.decrementRemainingPulses
-                0x08008f0e       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008f0e                decrementRemainingPulses
+                0x08008f9e       0x1e CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008f9e                decrementRemainingPulses
  .text.setNextTick
-                0x08008f2c      0x176 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
-                0x08008f2c                setNextTick
+                0x08008fbc      0x176 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+                0x08008fbc                setNextTick
  .text.parametersInit
-                0x080090a2       0x88 CMakeFiles/motorcontroller.dir/Core/Src/parameters.c.obj
-                0x080090a2                parametersInit
- *fill*         0x0800912a        0x2 
+                0x08009132       0x88 CMakeFiles/motorcontroller.dir/Core/Src/parameters.c.obj
+                0x08009132                parametersInit
+ *fill*         0x080091ba        0x2 
  .text.updateParameters
-                0x0800912c       0xe8 CMakeFiles/motorcontroller.dir/Core/Src/parameters.c.obj
-                0x0800912c                updateParameters
+                0x080091bc       0xe8 CMakeFiles/motorcontroller.dir/Core/Src/parameters.c.obj
+                0x080091bc                updateParameters
  .text.getInputScreen
-                0x08009214       0xb8 CMakeFiles/motorcontroller.dir/Core/Src/parameters.c.obj
-                0x08009214                getInputScreen
+                0x080092a4       0xb8 CMakeFiles/motorcontroller.dir/Core/Src/parameters.c.obj
+                0x080092a4                getInputScreen
  .text.NMI_Handler
-                0x080092cc        0x8 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x080092cc                NMI_Handler
+                0x0800935c        0x8 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x0800935c                NMI_Handler
  .text.HardFault_Handler
-                0x080092d4        0x8 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x080092d4                HardFault_Handler
+                0x08009364        0x8 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x08009364                HardFault_Handler
  .text.MemManage_Handler
-                0x080092dc        0x8 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x080092dc                MemManage_Handler
+                0x0800936c        0x8 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x0800936c                MemManage_Handler
  .text.BusFault_Handler
-                0x080092e4        0x8 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x080092e4                BusFault_Handler
+                0x08009374        0x8 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x08009374                BusFault_Handler
  .text.UsageFault_Handler
-                0x080092ec        0x8 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x080092ec                UsageFault_Handler
+                0x0800937c        0x8 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x0800937c                UsageFault_Handler
  .text.SVC_Handler
-                0x080092f4        0xe CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x080092f4                SVC_Handler
+                0x08009384        0xe CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x08009384                SVC_Handler
  .text.DebugMon_Handler
-                0x08009302        0xe CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x08009302                DebugMon_Handler
+                0x08009392        0xe CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x08009392                DebugMon_Handler
  .text.PendSV_Handler
-                0x08009310        0xe CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x08009310                PendSV_Handler
+                0x080093a0        0xe CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x080093a0                PendSV_Handler
  .text.SysTick_Handler
-                0x0800931e        0xc CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x0800931e                SysTick_Handler
+                0x080093ae        0xc CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x080093ae                SysTick_Handler
  .text.EXTI0_IRQHandler
-                0x0800932a        0xe CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x0800932a                EXTI0_IRQHandler
+                0x080093ba        0xe CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x080093ba                EXTI0_IRQHandler
  .text.EXTI4_IRQHandler
-                0x08009338        0xe CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x08009338                EXTI4_IRQHandler
- *fill*         0x08009346        0x2 
+                0x080093c8        0xe CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x080093c8                EXTI4_IRQHandler
+ *fill*         0x080093d6        0x2 
  .text.EXTI9_5_IRQHandler
-                0x08009348       0x4c CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x08009348                EXTI9_5_IRQHandler
+                0x080093d8       0x4c CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x080093d8                EXTI9_5_IRQHandler
  .text.TIM2_IRQHandler
-                0x08009394       0x14 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x08009394                TIM2_IRQHandler
+                0x08009424       0x14 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x08009424                TIM2_IRQHandler
  .text.TIM3_IRQHandler
-                0x080093a8       0x14 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
-                0x080093a8                TIM3_IRQHandler
+                0x08009438       0x14 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+                0x08009438                TIM3_IRQHandler
  .text.HAL_MspInit
-                0x080093bc       0x50 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
-                0x080093bc                HAL_MspInit
+                0x0800944c       0x50 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
+                0x0800944c                HAL_MspInit
  .text.HAL_I2C_MspInit
-                0x0800940c       0x90 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
-                0x0800940c                HAL_I2C_MspInit
+                0x0800949c       0x90 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
+                0x0800949c                HAL_I2C_MspInit
  .text.HAL_TIM_Base_MspInit
-                0x0800949c       0x88 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
-                0x0800949c                HAL_TIM_Base_MspInit
+                0x0800952c       0x88 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
+                0x0800952c                HAL_TIM_Base_MspInit
  .text.HAL_TIM_MspPostInit
-                0x08009524       0x74 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
-                0x08009524                HAL_TIM_MspPostInit
+                0x080095b4       0x74 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
+                0x080095b4                HAL_TIM_MspPostInit
  .text.HAL_UART_MspInit
-                0x08009598       0x90 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
-                0x08009598                HAL_UART_MspInit
+                0x08009628       0x90 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
+                0x08009628                HAL_UART_MspInit
  .text.HAL_I2C_Init
-                0x08009628      0x288 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
-                0x08009628                HAL_I2C_Init
+                0x080096b8      0x288 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
+                0x080096b8                HAL_I2C_Init
  .text.HAL_I2C_Mem_Write
-                0x080098b0      0x1f4 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
-                0x080098b0                HAL_I2C_Mem_Write
+                0x08009940      0x1f4 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
+                0x08009940                HAL_I2C_Mem_Write
  .text.I2C_RequestMemoryWrite
-                0x08009aa4      0x12c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
+                0x08009b34      0x12c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
  .text.I2C_WaitOnFlagUntilTimeout
-                0x08009bd0       0xf4 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
+                0x08009c60       0xf4 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
  .text.I2C_WaitOnMasterAddressFlagUntilTimeout
-                0x08009cc4      0x140 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
+                0x08009d54      0x140 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
  .text.I2C_WaitOnTXEFlagUntilTimeout
-                0x08009e04       0x90 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
- .text.I2C_WaitOnBTFFlagUntilTimeout
                 0x08009e94       0x90 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
+ .text.I2C_WaitOnBTFFlagUntilTimeout
+                0x08009f24       0x90 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
  .text.I2C_IsAcknowledgeFailed
-                0x08009f24       0x5e CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
- *fill*         0x08009f82        0x2 
+                0x08009fb4       0x5e CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
+ *fill*         0x0800a012        0x2 
  .text.HAL_RCC_OscConfig
-                0x08009f84      0x4f0 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
-                0x08009f84                HAL_RCC_OscConfig
+                0x0800a014      0x4f0 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
+                0x0800a014                HAL_RCC_OscConfig
  .text.HAL_RCC_ClockConfig
-                0x0800a474      0x1cc CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
-                0x0800a474                HAL_RCC_ClockConfig
+                0x0800a504      0x1cc CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
+                0x0800a504                HAL_RCC_ClockConfig
  .text.HAL_RCC_GetSysClockFreq
-                0x0800a640      0x20c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
-                0x0800a640                HAL_RCC_GetSysClockFreq
+                0x0800a6d0      0x20c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
+                0x0800a6d0                HAL_RCC_GetSysClockFreq
  .text.HAL_RCC_GetHCLKFreq
-                0x0800a84c       0x18 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
-                0x0800a84c                HAL_RCC_GetHCLKFreq
+                0x0800a8dc       0x18 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
+                0x0800a8dc                HAL_RCC_GetHCLKFreq
  .text.HAL_RCC_GetPCLK1Freq
-                0x0800a864       0x28 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
-                0x0800a864                HAL_RCC_GetPCLK1Freq
+                0x0800a8f4       0x28 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
+                0x0800a8f4                HAL_RCC_GetPCLK1Freq
  .text.HAL_RCC_GetPCLK2Freq
-                0x0800a88c       0x28 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
-                0x0800a88c                HAL_RCC_GetPCLK2Freq
+                0x0800a91c       0x28 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
+                0x0800a91c                HAL_RCC_GetPCLK2Freq
  .text.HAL_GPIO_Init
-                0x0800a8b4      0x308 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj
-                0x0800a8b4                HAL_GPIO_Init
+                0x0800a944      0x308 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj
+                0x0800a944                HAL_GPIO_Init
  .text.HAL_GPIO_ReadPin
-                0x0800abbc       0x30 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj
-                0x0800abbc                HAL_GPIO_ReadPin
+                0x0800ac4c       0x30 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj
+                0x0800ac4c                HAL_GPIO_ReadPin
  .text.HAL_GPIO_WritePin
-                0x0800abec       0x32 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj
-                0x0800abec                HAL_GPIO_WritePin
- *fill*         0x0800ac1e        0x2 
+                0x0800ac7c       0x32 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj
+                0x0800ac7c                HAL_GPIO_WritePin
+ *fill*         0x0800acae        0x2 
  .text.HAL_GPIO_EXTI_IRQHandler
-                0x0800ac20       0x30 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj
-                0x0800ac20                HAL_GPIO_EXTI_IRQHandler
+                0x0800acb0       0x30 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj
+                0x0800acb0                HAL_GPIO_EXTI_IRQHandler
  .text.__NVIC_SetPriorityGrouping
-                0x0800ac50       0x48 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+                0x0800ace0       0x48 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
  .text.__NVIC_GetPriorityGrouping
-                0x0800ac98       0x1c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+                0x0800ad28       0x1c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
  .text.__NVIC_EnableIRQ
-                0x0800acb4       0x3c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+                0x0800ad44       0x3c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
  .text.__NVIC_SetPriority
-                0x0800acf0       0x54 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+                0x0800ad80       0x54 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
  .text.NVIC_EncodePriority
-                0x0800ad44       0x66 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
- *fill*         0x0800adaa        0x2 
+                0x0800add4       0x66 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+ *fill*         0x0800ae3a        0x2 
  .text.SysTick_Config
-                0x0800adac       0x44 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+                0x0800ae3c       0x44 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
  .text.HAL_NVIC_SetPriorityGrouping
-                0x0800adf0       0x16 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
-                0x0800adf0                HAL_NVIC_SetPriorityGrouping
+                0x0800ae80       0x16 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+                0x0800ae80                HAL_NVIC_SetPriorityGrouping
  .text.HAL_NVIC_SetPriority
-                0x0800ae06       0x38 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
-                0x0800ae06                HAL_NVIC_SetPriority
+                0x0800ae96       0x38 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+                0x0800ae96                HAL_NVIC_SetPriority
  .text.HAL_NVIC_EnableIRQ
-                0x0800ae3e       0x1c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
-                0x0800ae3e                HAL_NVIC_EnableIRQ
+                0x0800aece       0x1c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+                0x0800aece                HAL_NVIC_EnableIRQ
  .text.HAL_SYSTICK_Config
-                0x0800ae5a       0x18 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
-                0x0800ae5a                HAL_SYSTICK_Config
- *fill*         0x0800ae72        0x2 
+                0x0800aeea       0x18 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+                0x0800aeea                HAL_SYSTICK_Config
+ *fill*         0x0800af02        0x2 
  .text.HAL_Init
-                0x0800ae74       0x44 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
-                0x0800ae74                HAL_Init
+                0x0800af04       0x44 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
+                0x0800af04                HAL_Init
  .text.HAL_InitTick
-                0x0800aeb8       0x60 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
-                0x0800aeb8                HAL_InitTick
+                0x0800af48       0x60 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
+                0x0800af48                HAL_InitTick
  .text.HAL_IncTick
-                0x0800af18       0x28 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
-                0x0800af18                HAL_IncTick
+                0x0800afa8       0x28 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
+                0x0800afa8                HAL_IncTick
  .text.HAL_GetTick
-                0x0800af40       0x18 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
-                0x0800af40                HAL_GetTick
+                0x0800afd0       0x18 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
+                0x0800afd0                HAL_GetTick
  .text.HAL_Delay
-                0x0800af58       0x48 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
-                0x0800af58                HAL_Delay
+                0x0800afe8       0x48 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
+                0x0800afe8                HAL_Delay
  .text.HAL_TIM_Base_Init
-                0x0800afa0       0x9e CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800afa0                HAL_TIM_Base_Init
- *fill*         0x0800b03e        0x2 
+                0x0800b030       0x9e CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800b030                HAL_TIM_Base_Init
+ *fill*         0x0800b0ce        0x2 
  .text.HAL_TIM_Base_Start
-                0x0800b040       0xb4 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800b040                HAL_TIM_Base_Start
+                0x0800b0d0       0xb4 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800b0d0                HAL_TIM_Base_Start
  .text.HAL_TIM_Base_Start_IT
-                0x0800b0f4       0xc4 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800b0f4                HAL_TIM_Base_Start_IT
+                0x0800b184       0xc4 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800b184                HAL_TIM_Base_Start_IT
  .text.HAL_TIM_OC_Start_IT
-                0x0800b1b8      0x1fc CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800b1b8                HAL_TIM_OC_Start_IT
+                0x0800b248      0x1fc CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800b248                HAL_TIM_OC_Start_IT
  .text.HAL_TIM_OC_Stop_IT
-                0x0800b3b4      0x164 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800b3b4                HAL_TIM_OC_Stop_IT
+                0x0800b444      0x164 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800b444                HAL_TIM_OC_Stop_IT
  .text.HAL_TIM_PWM_Init
-                0x0800b518       0x9e CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800b518                HAL_TIM_PWM_Init
+                0x0800b5a8       0x9e CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800b5a8                HAL_TIM_PWM_Init
  .text.HAL_TIM_PWM_MspInit
-                0x0800b5b6       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800b5b6                HAL_TIM_PWM_MspInit
+                0x0800b646       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800b646                HAL_TIM_PWM_MspInit
  .text.HAL_TIM_IRQHandler
-                0x0800b5ca      0x1e0 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800b5ca                HAL_TIM_IRQHandler
- *fill*         0x0800b7aa        0x2 
+                0x0800b65a      0x1e0 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800b65a                HAL_TIM_IRQHandler
+ *fill*         0x0800b83a        0x2 
  .text.HAL_TIM_PWM_ConfigChannel
-                0x0800b7ac      0x184 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800b7ac                HAL_TIM_PWM_ConfigChannel
+                0x0800b83c      0x184 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800b83c                HAL_TIM_PWM_ConfigChannel
  .text.HAL_TIM_ConfigClockSource
-                0x0800b930      0x18e CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800b930                HAL_TIM_ConfigClockSource
+                0x0800b9c0      0x18e CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800b9c0                HAL_TIM_ConfigClockSource
  .text.HAL_TIM_IC_CaptureCallback
-                0x0800babe       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800babe                HAL_TIM_IC_CaptureCallback
+                0x0800bb4e       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800bb4e                HAL_TIM_IC_CaptureCallback
  .text.HAL_TIM_PWM_PulseFinishedCallback
-                0x0800bad2       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800bad2                HAL_TIM_PWM_PulseFinishedCallback
+                0x0800bb62       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800bb62                HAL_TIM_PWM_PulseFinishedCallback
  .text.HAL_TIM_TriggerCallback
-                0x0800bae6       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800bae6                HAL_TIM_TriggerCallback
- *fill*         0x0800bafa        0x2 
+                0x0800bb76       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800bb76                HAL_TIM_TriggerCallback
+ *fill*         0x0800bb8a        0x2 
  .text.TIM_Base_SetConfig
-                0x0800bafc      0x10c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800bafc                TIM_Base_SetConfig
+                0x0800bb8c      0x10c CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800bb8c                TIM_Base_SetConfig
  .text.TIM_OC1_SetConfig
-                0x0800bc08       0xcc CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800bc98       0xcc CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
  .text.TIM_OC2_SetConfig
-                0x0800bcd4       0xd8 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800bcd4                TIM_OC2_SetConfig
+                0x0800bd64       0xd8 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800bd64                TIM_OC2_SetConfig
  .text.TIM_OC3_SetConfig
-                0x0800bdac       0xd4 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800be3c       0xd4 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
  .text.TIM_OC4_SetConfig
-                0x0800be80       0xa0 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800bf10       0xa0 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
  .text.TIM_TI1_ConfigInputStage
-                0x0800bf20       0x5e CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800bfb0       0x5e CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
  .text.TIM_TI2_ConfigInputStage
-                0x0800bf7e       0x60 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800c00e       0x60 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
  .text.TIM_ITRx_SetConfig
-                0x0800bfde       0x36 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800c06e       0x36 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
  .text.TIM_ETR_SetConfig
-                0x0800c014       0x40 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800c014                TIM_ETR_SetConfig
+                0x0800c0a4       0x40 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800c0a4                TIM_ETR_SetConfig
  .text.TIM_CCxChannelCmd
-                0x0800c054       0x4a CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
-                0x0800c054                TIM_CCxChannelCmd
- *fill*         0x0800c09e        0x2 
+                0x0800c0e4       0x4a CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+                0x0800c0e4                TIM_CCxChannelCmd
+ *fill*         0x0800c12e        0x2 
  .text.HAL_TIMEx_MasterConfigSynchronization
-                0x0800c0a0       0xdc CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj
-                0x0800c0a0                HAL_TIMEx_MasterConfigSynchronization
+                0x0800c130       0xdc CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj
+                0x0800c130                HAL_TIMEx_MasterConfigSynchronization
  .text.HAL_TIMEx_CommutCallback
-                0x0800c17c       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj
-                0x0800c17c                HAL_TIMEx_CommutCallback
+                0x0800c20c       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj
+                0x0800c20c                HAL_TIMEx_CommutCallback
  .text.HAL_TIMEx_BreakCallback
-                0x0800c190       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj
-                0x0800c190                HAL_TIMEx_BreakCallback
+                0x0800c220       0x14 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj
+                0x0800c220                HAL_TIMEx_BreakCallback
  .text.HAL_UART_Init
-                0x0800c1a4       0xa0 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj
-                0x0800c1a4                HAL_UART_Init
+                0x0800c234       0xa0 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj
+                0x0800c234                HAL_UART_Init
  .text.UART_SetConfig
-                0x0800c244      0x4e8 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj
+                0x0800c2d4      0x4e8 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj
  .text.SystemInit
-                0x0800c72c       0x24 CMakeFiles/motorcontroller.dir/Core/Src/system_stm32f4xx.c.obj
-                0x0800c72c                SystemInit
- .text._sbrk    0x0800c750       0x6c CMakeFiles/motorcontroller.dir/Core/Src/sysmem.c.obj
-                0x0800c750                _sbrk
- .text._getpid  0x0800c7bc       0x10 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
-                0x0800c7bc                _getpid
- .text._kill    0x0800c7cc       0x20 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
-                0x0800c7cc                _kill
- .text._exit    0x0800c7ec       0x16 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
-                0x0800c7ec                _exit
- .text._read    0x0800c802       0x3a CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
-                0x0800c802                _read
- .text._write   0x0800c83c       0x38 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
-                0x0800c83c                _write
- .text._close   0x0800c874       0x18 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
-                0x0800c874                _close
- .text._fstat   0x0800c88c       0x20 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
-                0x0800c88c                _fstat
- .text._isatty  0x0800c8ac       0x16 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
-                0x0800c8ac                _isatty
- .text._lseek   0x0800c8c2       0x1a CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
-                0x0800c8c2                _lseek
+                0x0800c7bc       0x24 CMakeFiles/motorcontroller.dir/Core/Src/system_stm32f4xx.c.obj
+                0x0800c7bc                SystemInit
+ .text._sbrk    0x0800c7e0       0x6c CMakeFiles/motorcontroller.dir/Core/Src/sysmem.c.obj
+                0x0800c7e0                _sbrk
+ .text._getpid  0x0800c84c       0x10 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
+                0x0800c84c                _getpid
+ .text._kill    0x0800c85c       0x20 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
+                0x0800c85c                _kill
+ .text._exit    0x0800c87c       0x16 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
+                0x0800c87c                _exit
+ .text._read    0x0800c892       0x3a CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
+                0x0800c892                _read
+ .text._write   0x0800c8cc       0x38 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
+                0x0800c8cc                _write
+ .text._close   0x0800c904       0x18 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
+                0x0800c904                _close
+ .text._fstat   0x0800c91c       0x20 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
+                0x0800c91c                _fstat
+ .text._isatty  0x0800c93c       0x16 CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
+                0x0800c93c                _isatty
+ .text._lseek   0x0800c952       0x1a CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
+                0x0800c952                _lseek
  .text.Reset_Handler
-                0x0800c8dc       0x50 CMakeFiles/motorcontroller.dir/startup_stm32f411xe.s.obj
-                0x0800c8dc                Reset_Handler
+                0x0800c96c       0x50 CMakeFiles/motorcontroller.dir/startup_stm32f411xe.s.obj
+                0x0800c96c                Reset_Handler
  .text.Default_Handler
-                0x0800c92c        0x2 CMakeFiles/motorcontroller.dir/startup_stm32f411xe.s.obj
-                0x0800c92c                RTC_Alarm_IRQHandler
-                0x0800c92c                EXTI2_IRQHandler
-                0x0800c92c                SPI4_IRQHandler
-                0x0800c92c                TIM1_CC_IRQHandler
-                0x0800c92c                DMA2_Stream5_IRQHandler
-                0x0800c92c                DMA1_Stream5_IRQHandler
-                0x0800c92c                PVD_IRQHandler
-                0x0800c92c                SDIO_IRQHandler
-                0x0800c92c                TAMP_STAMP_IRQHandler
-                0x0800c92c                EXTI3_IRQHandler
-                0x0800c92c                TIM1_UP_TIM10_IRQHandler
-                0x0800c92c                I2C3_ER_IRQHandler
-                0x0800c92c                I2C2_EV_IRQHandler
-                0x0800c92c                DMA1_Stream2_IRQHandler
-                0x0800c92c                FPU_IRQHandler
-                0x0800c92c                DMA2_Stream2_IRQHandler
-                0x0800c92c                SPI1_IRQHandler
-                0x0800c92c                TIM1_BRK_TIM9_IRQHandler
-                0x0800c92c                DMA2_Stream3_IRQHandler
-                0x0800c92c                USART6_IRQHandler
-                0x0800c92c                DMA2_Stream0_IRQHandler
-                0x0800c92c                TIM4_IRQHandler
-                0x0800c92c                I2C1_EV_IRQHandler
-                0x0800c92c                DMA1_Stream6_IRQHandler
-                0x0800c92c                DMA1_Stream1_IRQHandler
-                0x0800c92c                RCC_IRQHandler
-                0x0800c92c                Default_Handler
-                0x0800c92c                EXTI15_10_IRQHandler
-                0x0800c92c                ADC_IRQHandler
-                0x0800c92c                DMA1_Stream7_IRQHandler
-                0x0800c92c                SPI5_IRQHandler
-                0x0800c92c                TIM5_IRQHandler
-                0x0800c92c                DMA2_Stream7_IRQHandler
-                0x0800c92c                I2C3_EV_IRQHandler
-                0x0800c92c                RTC_WKUP_IRQHandler
-                0x0800c92c                SPI2_IRQHandler
-                0x0800c92c                DMA1_Stream0_IRQHandler
-                0x0800c92c                WWDG_IRQHandler
-                0x0800c92c                OTG_FS_WKUP_IRQHandler
-                0x0800c92c                TIM1_TRG_COM_TIM11_IRQHandler
-                0x0800c92c                EXTI1_IRQHandler
-                0x0800c92c                USART2_IRQHandler
-                0x0800c92c                I2C2_ER_IRQHandler
-                0x0800c92c                DMA2_Stream1_IRQHandler
-                0x0800c92c                FLASH_IRQHandler
-                0x0800c92c                DMA2_Stream4_IRQHandler
-                0x0800c92c                USART1_IRQHandler
-                0x0800c92c                OTG_FS_IRQHandler
-                0x0800c92c                SPI3_IRQHandler
-                0x0800c92c                DMA1_Stream4_IRQHandler
-                0x0800c92c                I2C1_ER_IRQHandler
-                0x0800c92c                DMA2_Stream6_IRQHandler
-                0x0800c92c                DMA1_Stream3_IRQHandler
+                0x0800c9bc        0x2 CMakeFiles/motorcontroller.dir/startup_stm32f411xe.s.obj
+                0x0800c9bc                RTC_Alarm_IRQHandler
+                0x0800c9bc                EXTI2_IRQHandler
+                0x0800c9bc                SPI4_IRQHandler
+                0x0800c9bc                TIM1_CC_IRQHandler
+                0x0800c9bc                DMA2_Stream5_IRQHandler
+                0x0800c9bc                DMA1_Stream5_IRQHandler
+                0x0800c9bc                PVD_IRQHandler
+                0x0800c9bc                SDIO_IRQHandler
+                0x0800c9bc                TAMP_STAMP_IRQHandler
+                0x0800c9bc                EXTI3_IRQHandler
+                0x0800c9bc                TIM1_UP_TIM10_IRQHandler
+                0x0800c9bc                I2C3_ER_IRQHandler
+                0x0800c9bc                I2C2_EV_IRQHandler
+                0x0800c9bc                DMA1_Stream2_IRQHandler
+                0x0800c9bc                FPU_IRQHandler
+                0x0800c9bc                DMA2_Stream2_IRQHandler
+                0x0800c9bc                SPI1_IRQHandler
+                0x0800c9bc                TIM1_BRK_TIM9_IRQHandler
+                0x0800c9bc                DMA2_Stream3_IRQHandler
+                0x0800c9bc                USART6_IRQHandler
+                0x0800c9bc                DMA2_Stream0_IRQHandler
+                0x0800c9bc                TIM4_IRQHandler
+                0x0800c9bc                I2C1_EV_IRQHandler
+                0x0800c9bc                DMA1_Stream6_IRQHandler
+                0x0800c9bc                DMA1_Stream1_IRQHandler
+                0x0800c9bc                RCC_IRQHandler
+                0x0800c9bc                Default_Handler
+                0x0800c9bc                EXTI15_10_IRQHandler
+                0x0800c9bc                ADC_IRQHandler
+                0x0800c9bc                DMA1_Stream7_IRQHandler
+                0x0800c9bc                SPI5_IRQHandler
+                0x0800c9bc                TIM5_IRQHandler
+                0x0800c9bc                DMA2_Stream7_IRQHandler
+                0x0800c9bc                I2C3_EV_IRQHandler
+                0x0800c9bc                RTC_WKUP_IRQHandler
+                0x0800c9bc                SPI2_IRQHandler
+                0x0800c9bc                DMA1_Stream0_IRQHandler
+                0x0800c9bc                WWDG_IRQHandler
+                0x0800c9bc                OTG_FS_WKUP_IRQHandler
+                0x0800c9bc                TIM1_TRG_COM_TIM11_IRQHandler
+                0x0800c9bc                EXTI1_IRQHandler
+                0x0800c9bc                USART2_IRQHandler
+                0x0800c9bc                I2C2_ER_IRQHandler
+                0x0800c9bc                DMA2_Stream1_IRQHandler
+                0x0800c9bc                FLASH_IRQHandler
+                0x0800c9bc                DMA2_Stream4_IRQHandler
+                0x0800c9bc                USART1_IRQHandler
+                0x0800c9bc                OTG_FS_IRQHandler
+                0x0800c9bc                SPI3_IRQHandler
+                0x0800c9bc                DMA1_Stream4_IRQHandler
+                0x0800c9bc                I2C1_ER_IRQHandler
+                0x0800c9bc                DMA2_Stream6_IRQHandler
+                0x0800c9bc                DMA1_Stream3_IRQHandler
  *(.glue_7)
- .glue_7        0x0800c92e        0x0 linker stubs
+ .glue_7        0x0800c9be        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0800c92e        0x0 linker stubs
+ .glue_7t       0x0800c9be        0x0 linker stubs
  *(.eh_frame)
- *fill*         0x0800c92e        0x2 
- .eh_frame      0x0800c930        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+ *fill*         0x0800c9be        0x2 
+ .eh_frame      0x0800c9c0        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
  *(.init)
- .init          0x0800c930        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crti.o
-                0x0800c930                _init
- .init          0x0800c934        0x8 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtn.o
+ .init          0x0800c9c0        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crti.o
+                0x0800c9c0                _init
+ .init          0x0800c9c4        0x8 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtn.o
  *(.fini)
- .fini          0x0800c93c        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crti.o
-                0x0800c93c                _fini
- .fini          0x0800c940        0x8 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtn.o
-                0x0800c948                        . = ALIGN (0x4)
-                0x0800c948                        _etext = .
+ .fini          0x0800c9cc        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crti.o
+                0x0800c9cc                _fini
+ .fini          0x0800c9d0        0x8 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtn.o
+                0x0800c9d8                        . = ALIGN (0x4)
+                0x0800c9d8                        _etext = .
 
-.vfp11_veneer   0x0800c948        0x0
- .vfp11_veneer  0x0800c948        0x0 linker stubs
+.vfp11_veneer   0x0800c9d8        0x0
+ .vfp11_veneer  0x0800c9d8        0x0 linker stubs
 
-.v4_bx          0x0800c948        0x0
- .v4_bx         0x0800c948        0x0 linker stubs
+.v4_bx          0x0800c9d8        0x0
+ .v4_bx         0x0800c9d8        0x0 linker stubs
 
-.iplt           0x0800c948        0x0
- .iplt          0x0800c948        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+.iplt           0x0800c9d8        0x0
+ .iplt          0x0800c9d8        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.rodata         0x0800c948     0x7858
-                0x0800c948                        . = ALIGN (0x4)
+.rodata         0x0800c9d8     0x7858
+                0x0800c9d8                        . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x0800c948       0x50 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strtod.o)
- .rodata        0x0800c998      0x100 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-gdtoa-gethex.o)
-                0x0800c998                __hexdig
- .rodata        0x0800ca98      0x101 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-ctype_.o)
-                0x0800ca98                _ctype_
- *fill*         0x0800cb99        0x7 
- .rodata        0x0800cba0      0x128 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-mprec.o)
-                0x0800cbb0                __mprec_tens
-                0x0800cc78                __mprec_tinytens
-                0x0800cca0                __mprec_bigtens
- .rodata        0x0800ccc8       0x10 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-e_sqrt.o)
+ .rodata        0x0800c9d8       0x50 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strtod.o)
+ .rodata        0x0800ca28      0x100 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-gdtoa-gethex.o)
+                0x0800ca28                __hexdig
+ .rodata        0x0800cb28      0x101 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-ctype_.o)
+                0x0800cb28                _ctype_
+ *fill*         0x0800cc29        0x7 
+ .rodata        0x0800cc30      0x128 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-mprec.o)
+                0x0800cc40                __mprec_tens
+                0x0800cd08                __mprec_tinytens
+                0x0800cd30                __mprec_bigtens
+ .rodata        0x0800cd58       0x10 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a(libm_a-e_sqrt.o)
  *(.rodata*)
  .rodata.keymap
-                0x0800ccd8       0x10 CMakeFiles/motorcontroller.dir/Core/Src/keypad.c.obj
+                0x0800cd68       0x10 CMakeFiles/motorcontroller.dir/Core/Src/keypad.c.obj
  .rodata.runScreen
-                0x0800cce8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800cce8                runScreen
+                0x0800cd78      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800cd78                runScreen
  .rodata.mainMenu1
-                0x0800d0e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800d0e8                mainMenu1
+                0x0800d178      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800d178                mainMenu1
  .rodata.mainMenu2
-                0x0800d4e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800d4e8                mainMenu2
+                0x0800d578      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800d578                mainMenu2
  .rodata.mainMenu3
-                0x0800d8e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800d8e8                mainMenu3
+                0x0800d978      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800d978                mainMenu3
  .rodata.mainMenu4
-                0x0800dce8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800dce8                mainMenu4
+                0x0800dd78      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800dd78                mainMenu4
  .rodata.mainMenu5
-                0x0800e0e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800e0e8                mainMenu5
+                0x0800e178      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800e178                mainMenu5
  .rodata.inputs1
-                0x0800e4e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800e4e8                inputs1
+                0x0800e578      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800e578                inputs1
  .rodata.inputs2
-                0x0800e8e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800e8e8                inputs2
+                0x0800e978      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800e978                inputs2
  .rodata.inputs3
-                0x0800ece8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800ece8                inputs3
+                0x0800ed78      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800ed78                inputs3
  .rodata.inputs4
-                0x0800f0e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800f0e8                inputs4
+                0x0800f178      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800f178                inputs4
  .rodata.inputs5
-                0x0800f4e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800f4e8                inputs5
+                0x0800f578      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800f578                inputs5
  .rodata.inputs6
-                0x0800f8e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800f8e8                inputs6
+                0x0800f978      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800f978                inputs6
  .rodata.outputs1
-                0x0800fce8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x0800fce8                outputs1
+                0x0800fd78      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x0800fd78                outputs1
  .rodata.outputs2
-                0x080100e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080100e8                outputs2
+                0x08010178      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08010178                outputs2
  .rodata.outputs3
-                0x080104e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080104e8                outputs3
+                0x08010578      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08010578                outputs3
  .rodata.outputs4
-                0x080108e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080108e8                outputs4
+                0x08010978      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08010978                outputs4
  .rodata.disabledCheckBmp
-                0x08010ce8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x08010ce8                disabledCheckBmp
+                0x08010d78      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08010d78                disabledCheckBmp
  .rodata.enabledBmp
-                0x080110e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080110e8                enabledBmp
+                0x08011178      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08011178                enabledBmp
  .rodata.enabledCheckBmp
-                0x080114e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080114e8                enabledCheckBmp
+                0x08011578      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08011578                enabledCheckBmp
  .rodata.disabledBmp
-                0x080118e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080118e8                disabledBmp
+                0x08011978      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08011978                disabledBmp
  .rodata.metricCheckBmp
-                0x08011ce8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x08011ce8                metricCheckBmp
+                0x08011d78      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08011d78                metricCheckBmp
  .rodata.imperialBmp
-                0x080120e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080120e8                imperialBmp
+                0x08012178      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08012178                imperialBmp
  .rodata.imperialCheckBmp
-                0x080124e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080124e8                imperialCheckBmp
+                0x08012578      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08012578                imperialCheckBmp
  .rodata.metricBmp
-                0x080128e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080128e8                metricBmp
+                0x08012978      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08012978                metricBmp
  .rodata.motorConfig1
-                0x08012ce8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x08012ce8                motorConfig1
+                0x08012d78      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08012d78                motorConfig1
  .rodata.motorConfig2
-                0x080130e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080130e8                motorConfig2
+                0x08013178      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08013178                motorConfig2
  .rodata.motorConfig3
-                0x080134e8      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080134e8                motorConfig3
+                0x08013578      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08013578                motorConfig3
  .rodata.invalid
-                0x080138e8       0x3e CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x080138e8                invalid
- *fill*         0x08013926        0x2 
+                0x08013978       0x3e CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08013978                invalid
+ *fill*         0x080139b6        0x2 
  .rodata.rightArrow
-                0x08013928        0xc CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x08013928                rightArrow
+                0x080139b8        0xc CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x080139b8                rightArrow
  .rodata.leftArrow
-                0x08013934        0xc CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x08013934                leftArrow
+                0x080139c4        0xc CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x080139c4                leftArrow
  .rodata.inputScreen
-                0x08013940      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x08013940                inputScreen
- .rodata.mm     0x08013d40        0xe CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x08013d40                mm
- *fill*         0x08013d4e        0x2 
- .rodata.in     0x08013d50        0xc CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
-                0x08013d50                in
- .rodata.CGA8   0x08013d5c      0x300 CMakeFiles/motorcontroller.dir/Core/Src/fonts.c.obj
-                0x08013d5c                CGA8
+                0x080139d0      0x400 CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x080139d0                inputScreen
+ .rodata.mm     0x08013dd0        0xe CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08013dd0                mm
+ *fill*         0x08013dde        0x2 
+ .rodata.in     0x08013de0        0xc CMakeFiles/motorcontroller.dir/Core/Src/bitmaps.c.obj
+                0x08013de0                in
+ .rodata.CGA8   0x08013dec      0x300 CMakeFiles/motorcontroller.dir/Core/Src/fonts.c.obj
+                0x08013dec                CGA8
  .rodata.AHBPrescTable
-                0x0801405c       0x10 CMakeFiles/motorcontroller.dir/Core/Src/system_stm32f4xx.c.obj
-                0x0801405c                AHBPrescTable
+                0x080140ec       0x10 CMakeFiles/motorcontroller.dir/Core/Src/system_stm32f4xx.c.obj
+                0x080140ec                AHBPrescTable
  .rodata.APBPrescTable
-                0x0801406c        0x8 CMakeFiles/motorcontroller.dir/Core/Src/system_stm32f4xx.c.obj
-                0x0801406c                APBPrescTable
+                0x080140fc        0x8 CMakeFiles/motorcontroller.dir/Core/Src/system_stm32f4xx.c.obj
+                0x080140fc                APBPrescTable
  .rodata.str1.4
-                0x08014074      0x129 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strtod.o)
+                0x08014104      0x129 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strtod.o)
                                  0x15 (size before relaxing)
  .rodata.str1.4
-                0x0801419d       0x4c /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-gdtoa-gethex.o)
+                0x0801422d       0x4c /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-gdtoa-gethex.o)
  .rodata.str1.4
-                0x0801419d       0x12 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-locale.o)
+                0x0801422d       0x12 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-locale.o)
  .rodata.str1.4
-                0x0801419d       0x43 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-assert.o)
+                0x0801422d       0x43 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-assert.o)
  .rodata.str1.4
-                0x0801419d       0x59 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-mprec.o)
+                0x0801422d       0x59 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-mprec.o)
  .rodata.str1.4
-                0x0801419d       0x13 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-nano-vfprintf.o)
+                0x0801422d       0x13 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-nano-vfprintf.o)
  .rodata.str1.4
-                0x0801419d       0x25 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-nano-vfprintf_i.o)
-                0x080141f8                        . = ALIGN (0x4)
- *fill*         0x0801419d        0x3 
+                0x0801422d       0x25 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08014288                        . = ALIGN (0x4)
+ *fill*         0x0801422d        0x3 
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x080141a0        0x8
-                0x080141a0                        __exidx_start = .
+.ARM            0x08014230        0x8
+                0x08014230                        __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x080141a0        0x8 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
- .ARM.exidx     0x080141a8        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strlen.o)
+ .ARM.exidx     0x08014230        0x8 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x08014238        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strlen.o)
                                   0x8 (size before relaxing)
- .ARM.exidx     0x080141a8        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-memcpy.o)
+ .ARM.exidx     0x08014238        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-memcpy.o)
                                   0x8 (size before relaxing)
- .ARM.exidx     0x080141a8        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-memchr.o)
+ .ARM.exidx     0x08014238        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-memchr.o)
                                   0x8 (size before relaxing)
-                0x080141a8                        __exidx_end = .
+                0x08014238                        __exidx_end = .
 
-.rel.dyn        0x080141a8        0x0
- .rel.iplt      0x080141a8        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+.rel.dyn        0x08014238        0x0
+ .rel.iplt      0x08014238        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.preinit_array  0x080141a8        0x0
-                0x080141a8                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x08014238        0x0
+                0x08014238                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x080141a8                        PROVIDE (__preinit_array_end = .)
+                0x08014238                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x080141a8        0x4
-                0x080141a8                        PROVIDE (__init_array_start = .)
+.init_array     0x08014238        0x4
+                0x08014238                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x080141a8        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x080141ac                        PROVIDE (__init_array_end = .)
+ .init_array    0x08014238        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x0801423c                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x080141ac        0x4
-                0x080141ac                        PROVIDE (__fini_array_start = .)
+.fini_array     0x0801423c        0x4
+                0x0801423c                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x080141ac        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x080141b0                        PROVIDE (__fini_array_end = .)
-                0x080141b0                        _sidata = LOADADDR (.data)
+ .fini_array    0x0801423c        0x4 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x08014240                        PROVIDE (__fini_array_end = .)
+                0x08014240                        _sidata = LOADADDR (.data)
 
-.data           0x20000000      0x1d8 load address 0x080141b0
+.data           0x20000000      0x1d8 load address 0x08014240
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -5441,17 +5441,17 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtn.o
                 0x200001d8                        _edata = .
 
 .tm_clone_table
-                0x200001d8        0x0 load address 0x08014388
+                0x200001d8        0x0 load address 0x08014418
  .tm_clone_table
                 0x200001d8        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
  .tm_clone_table
                 0x200001d8        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtend.o
 
-.igot.plt       0x200001d8        0x0 load address 0x08014388
+.igot.plt       0x200001d8        0x0 load address 0x08014418
  .igot.plt      0x200001d8        0x0 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtbegin.o
                 0x200001d8                        . = ALIGN (0x4)
 
-.bss            0x200001d8      0xe48 load address 0x08014388
+.bss            0x200001d8      0xe48 load address 0x08014418
                 0x200001d8                        _sbss = .
                 0x200001d8                        __bss_start__ = _sbss
  *(.bss)
@@ -5564,7 +5564,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/crtn.o
                 0x20001020                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20001020      0x600 load address 0x08014388
+                0x20001020      0x600 load address 0x08014418
                 0x20001020                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 0x20001020                        PROVIDE (_end = .)
@@ -6313,7 +6313,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a
  .debug_aranges
                 0x00001b00       0x20 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_fixunsdfdi.o)
 
-.debug_line     0x00000000    0x1f158
+.debug_line     0x00000000    0x1f1e9
  .debug_line    0x00000000      0x11e /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-init.o)
  .debug_line    0x0000011e      0x1b6 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-memset.o)
  .debug_line    0x000002d4      0x4fc /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-findfp.o)
@@ -6338,72 +6338,72 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a
  .debug_line    0x00003949      0x419 CMakeFiles/motorcontroller.dir/Core/Src/menu.c.obj
  .debug_line    0x00003d62      0x5cf CMakeFiles/motorcontroller.dir/Core/Src/override.c.obj
  .debug_line    0x00004331      0x8d2 CMakeFiles/motorcontroller.dir/Core/Src/ssd1309.c.obj
- .debug_line    0x00004c03      0xf9f CMakeFiles/motorcontroller.dir/Core/Src/navigation.c.obj
- .debug_line    0x00005ba2      0xc97 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
- .debug_line    0x00006839      0xbe1 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
- .debug_line    0x0000741a      0x435 CMakeFiles/motorcontroller.dir/Core/Src/parameters.c.obj
- .debug_line    0x0000784f      0x6f4 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
- .debug_line    0x00007f43      0x6da CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
- .debug_line    0x0000861d     0x394f CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
- .debug_line    0x0000bf6c      0xcb1 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
- .debug_line    0x0000cc1d      0x9be CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj
- .debug_line    0x0000d5db      0xb72 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
- .debug_line    0x0000e14d      0x8a2 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
- .debug_line    0x0000e9ef     0x33e1 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
- .debug_line    0x00011dd0     0x179d CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj
- .debug_line    0x0001356d     0x23ea CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj
- .debug_line    0x00015957      0x626 CMakeFiles/motorcontroller.dir/Core/Src/system_stm32f4xx.c.obj
- .debug_line    0x00015f7d      0x1ed CMakeFiles/motorcontroller.dir/Core/Src/sysmem.c.obj
- .debug_line    0x0001616a      0x51e CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
- .debug_line    0x00016688       0x7a CMakeFiles/motorcontroller.dir/startup_stm32f411xe.s.obj
- .debug_line    0x00016702      0x16f /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
- .debug_line    0x00016871      0x184 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
- .debug_line    0x000169f5       0xa6 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_cmpdf2.o)
- .debug_line    0x00016a9b       0x76 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_truncdfsf2.o)
- .debug_line    0x00016b11      0x103 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubsf3.o)
- .debug_line    0x00016c14       0x6c /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_ldivmod.o)
- .debug_line    0x00016c80       0x4e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_uldivmod.o)
- .debug_line    0x00016cce       0xaf /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_fixsfdi.o)
- .debug_line    0x00016d7d       0xb7 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_fixunssfdi.o)
- .debug_line    0x00016e34      0x574 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
- .debug_line    0x000173a8       0x4a /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_dvmd_tls.o)
- .debug_line    0x000173f2       0x5e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixunsdfsi.o)
- .debug_line    0x00017450     0x1599 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strtod.o)
- .debug_line    0x000189e9      0xaef /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-gdtoa-gethex.o)
- .debug_line    0x000194d8       0x86 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strlen.o)
- .debug_line    0x0001955e      0x10c /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-errno.o)
- .debug_line    0x0001966a      0x29f /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-locale.o)
- .debug_line    0x00019909      0x1fe /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-wctomb_r.o)
- .debug_line    0x00019b07       0xb9 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-memcpy.o)
- .debug_line    0x00019bc0      0x1f6 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strncmp.o)
- .debug_line    0x00019db6       0x97 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-ctype_.o)
- .debug_line    0x00019e4d      0x3b0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-gdtoa-hexnan.o)
- .debug_line    0x0001a1fd       0xb0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libm_a-s_nan.o)
- .debug_line    0x0001a2ad       0xaf /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libm_a-sf_nan.o)
- .debug_line    0x0001a35c      0x1ad /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-assert.o)
- .debug_line    0x0001a509     0x1434 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-mprec.o)
- .debug_line    0x0001b93d      0x214 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-mbtowc_r.o)
- .debug_line    0x0001bb51      0x115 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-abort.o)
- .debug_line    0x0001bc66      0x1a2 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-callocr.o)
- .debug_line    0x0001be08      0x16b /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-malloc.o)
- .debug_line    0x0001bf73      0x1aa /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-fprintf.o)
- .debug_line    0x0001c11d      0x6c5 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-nano-vfprintf.o)
- .debug_line    0x0001c7e2      0x256 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-wbuf.o)
- .debug_line    0x0001ca38      0x5ec /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-fvwrite.o)
- .debug_line    0x0001d024      0x66f /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-signal.o)
- .debug_line    0x0001d693      0x1f1 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-memmove.o)
- .debug_line    0x0001d884       0x84 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-memchr.o)
- .debug_line    0x0001d908      0x2b0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-wsetup.o)
- .debug_line    0x0001dbb8      0x1f8 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-reallocr.o)
- .debug_line    0x0001ddb0      0x75d /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-nano-vfprintf_i.o)
- .debug_line    0x0001e50d      0x3a7 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-makebuf.o)
- .debug_line    0x0001e8b4      0x194 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-isattyr.o)
- .debug_line    0x0001ea48      0x176 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-msizer.o)
- .debug_line    0x0001ebbe      0x1c5 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-signalr.o)
- .debug_line    0x0001ed83      0x21c /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-fstatr.o)
- .debug_line    0x0001ef9f       0x57 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_unorddf2.o)
- .debug_line    0x0001eff6       0xb5 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_fixdfdi.o)
- .debug_line    0x0001f0ab       0xad /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_fixunsdfdi.o)
+ .debug_line    0x00004c03     0x1030 CMakeFiles/motorcontroller.dir/Core/Src/navigation.c.obj
+ .debug_line    0x00005c33      0xc97 CMakeFiles/motorcontroller.dir/Core/Src/motor.c.obj
+ .debug_line    0x000068ca      0xbe1 CMakeFiles/motorcontroller.dir/Core/Src/movementprofile.c.obj
+ .debug_line    0x000074ab      0x435 CMakeFiles/motorcontroller.dir/Core/Src/parameters.c.obj
+ .debug_line    0x000078e0      0x6f4 CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_it.c.obj
+ .debug_line    0x00007fd4      0x6da CMakeFiles/motorcontroller.dir/Core/Src/stm32f4xx_hal_msp.c.obj
+ .debug_line    0x000086ae     0x394f CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj
+ .debug_line    0x0000bffd      0xcb1 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj
+ .debug_line    0x0000ccae      0x9be CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj
+ .debug_line    0x0000d66c      0xb72 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj
+ .debug_line    0x0000e1de      0x8a2 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj
+ .debug_line    0x0000ea80     0x33e1 CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj
+ .debug_line    0x00011e61     0x179d CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj
+ .debug_line    0x000135fe     0x23ea CMakeFiles/motorcontroller.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj
+ .debug_line    0x000159e8      0x626 CMakeFiles/motorcontroller.dir/Core/Src/system_stm32f4xx.c.obj
+ .debug_line    0x0001600e      0x1ed CMakeFiles/motorcontroller.dir/Core/Src/sysmem.c.obj
+ .debug_line    0x000161fb      0x51e CMakeFiles/motorcontroller.dir/Core/Src/syscalls.c.obj
+ .debug_line    0x00016719       0x7a CMakeFiles/motorcontroller.dir/startup_stm32f411xe.s.obj
+ .debug_line    0x00016793      0x16f /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubdf3.o)
+ .debug_line    0x00016902      0x184 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_muldivdf3.o)
+ .debug_line    0x00016a86       0xa6 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_cmpdf2.o)
+ .debug_line    0x00016b2c       0x76 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_truncdfsf2.o)
+ .debug_line    0x00016ba2      0x103 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_addsubsf3.o)
+ .debug_line    0x00016ca5       0x6c /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_ldivmod.o)
+ .debug_line    0x00016d11       0x4e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_uldivmod.o)
+ .debug_line    0x00016d5f       0xaf /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_fixsfdi.o)
+ .debug_line    0x00016e0e       0xb7 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_fixunssfdi.o)
+ .debug_line    0x00016ec5      0x574 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
+ .debug_line    0x00017439       0x4a /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x00017483       0x5e /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_line    0x000174e1     0x1599 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strtod.o)
+ .debug_line    0x00018a7a      0xaef /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-gdtoa-gethex.o)
+ .debug_line    0x00019569       0x86 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strlen.o)
+ .debug_line    0x000195ef      0x10c /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-errno.o)
+ .debug_line    0x000196fb      0x29f /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-locale.o)
+ .debug_line    0x0001999a      0x1fe /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-wctomb_r.o)
+ .debug_line    0x00019b98       0xb9 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-memcpy.o)
+ .debug_line    0x00019c51      0x1f6 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-strncmp.o)
+ .debug_line    0x00019e47       0x97 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-ctype_.o)
+ .debug_line    0x00019ede      0x3b0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-gdtoa-hexnan.o)
+ .debug_line    0x0001a28e       0xb0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libm_a-s_nan.o)
+ .debug_line    0x0001a33e       0xaf /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libm_a-sf_nan.o)
+ .debug_line    0x0001a3ed      0x1ad /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-assert.o)
+ .debug_line    0x0001a59a     0x1434 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-mprec.o)
+ .debug_line    0x0001b9ce      0x214 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-mbtowc_r.o)
+ .debug_line    0x0001bbe2      0x115 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-abort.o)
+ .debug_line    0x0001bcf7      0x1a2 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-callocr.o)
+ .debug_line    0x0001be99      0x16b /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-malloc.o)
+ .debug_line    0x0001c004      0x1aa /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-fprintf.o)
+ .debug_line    0x0001c1ae      0x6c5 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-nano-vfprintf.o)
+ .debug_line    0x0001c873      0x256 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-wbuf.o)
+ .debug_line    0x0001cac9      0x5ec /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-fvwrite.o)
+ .debug_line    0x0001d0b5      0x66f /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-signal.o)
+ .debug_line    0x0001d724      0x1f1 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-memmove.o)
+ .debug_line    0x0001d915       0x84 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-memchr.o)
+ .debug_line    0x0001d999      0x2b0 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-wsetup.o)
+ .debug_line    0x0001dc49      0x1f8 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-reallocr.o)
+ .debug_line    0x0001de41      0x75d /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-nano-vfprintf_i.o)
+ .debug_line    0x0001e59e      0x3a7 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-makebuf.o)
+ .debug_line    0x0001e945      0x194 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-isattyr.o)
+ .debug_line    0x0001ead9      0x176 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-msizer.o)
+ .debug_line    0x0001ec4f      0x1c5 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-signalr.o)
+ .debug_line    0x0001ee14      0x21c /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(libc_a-fstatr.o)
+ .debug_line    0x0001f030       0x57 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_arm_unorddf2.o)
+ .debug_line    0x0001f087       0xb5 /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_fixdfdi.o)
+ .debug_line    0x0001f13c       0xad /usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v7e-m+fp/hard/libgcc.a(_fixunsdfdi.o)
 
 .debug_str      0x00000000    0x95eb4
  .debug_str     0x00000000    0x95eb4 /usr/lib/gcc/arm-none-eabi/13.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(libc_a-init.o)

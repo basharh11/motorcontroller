@@ -65,14 +65,20 @@ void navigationLoop() {
     if(dequeue(&keyQueue, &raw)) {
         char c = keypadDecodeKey(raw);
         if(c == '#' && current->child) {
-            if (current->child == &disabledCheck) {
-                disabledCheck.parent  = current;
-                enabled.    parent    = current;
-                enabledCheck.parent   = current;
-                disabled.   parent    = current;
+            if((current->child == &disabledCheck || current->child == &enabledCheck) && (current != &disabledCheck && current != &enabled && current != &enabledCheck && current != &disabled)) {
+                disabledCheck.parent = current;
+                enabled.parent = current;
+                enabledCheck.parent = current;
+                disabled.parent = current;
+            } else if(current->child == &userInput){
+                current->child->parent = current;
             }
             current = current->child;
         } else if (c == '*' && current->parent) {
+            if(current == &enabledCheck || current == &disabled)
+                current->parent->child = &enabledCheck;
+            else if(current == &enabled || current == &disabledCheck)
+                current->parent->child = &disabledCheck;
             current = current->parent;
         } else if (c == 'A' && current->prev) {
             current = current->prev;
