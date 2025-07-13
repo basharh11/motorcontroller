@@ -129,7 +129,8 @@
 				32,
 				33,
 				34,
-				35
+				35,
+				36
 			]
 		},
 		{
@@ -180,7 +181,7 @@
 			"language" : "ASM",
 			"sourceIndexes" : 
 			[
-				36
+				37
 			]
 		}
 	],
@@ -248,14 +249,15 @@
 				32,
 				33,
 				34,
-				35
+				35,
+				36
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				36
+				37
 			]
 		}
 	],
@@ -331,6 +333,12 @@
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
 			"path" : "Core/Src/parameters.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "Core/Src/eeprom.c",
 			"sourceGroupIndex" : 0
 		},
 		{

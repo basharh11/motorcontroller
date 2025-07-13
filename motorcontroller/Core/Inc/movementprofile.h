@@ -26,8 +26,6 @@ typedef struct movementProfile {
     uint32_t homingTicks;
 } movementProfile;
 
-void mpInit(movementProfile *mp);
-
 int32_t getRemainingPulses(const movementProfile *mp);
 uint32_t getTotalPulses(const movementProfile *mp);
 float getAccelerationPPSS(const movementProfile *mp);

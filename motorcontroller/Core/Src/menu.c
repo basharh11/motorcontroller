@@ -82,22 +82,6 @@ const uint8_t* getBitmap(const menuNode *name) {
     return name->bitmap;
 }
 
-menuNode *getPrev(const menuNode *name) {
-    return name->prev;
-}
-
-menuNode *getNext(const menuNode *name) {
-    return name->next;
-}
-
-menuNode *getChild(const menuNode *name) {
-    return name->child;
-}
-
-menuNode *getParent(const menuNode *name) {
-    return name->parent;
-}
-
 void buildMenuTree() {
     run.bitmap = runScreen;
     run.prev = NULL;
@@ -286,13 +270,44 @@ void buildMenuTree() {
     userInput.parent = NULL;
 }
 
-void updateLinkage(menuNode *cur, menuNode *ch) {
-    if(ch == &userInput)
-        cur->child = ch;
-    
-    if(ch == &disabledCheck || ch == &enabled || ch == &enabledCheck || ch == &disabled) {
-        cur->child = ch;
-    }
+void updateChildLinkage(menuNode *current) {
+    if((current->child == &disabledCheck || current->child == &enabledCheck) && (current != &disabledCheck && current != &enabled && current != &enabledCheck && current != &disabled)) {
+        disabledCheck.parent = current;
+        enabled.parent = current;
+        enabledCheck.parent = current;
+        disabled.parent = current;
+    } else if(current->child == &userInput)
+        current->child->parent = current;
 }
+
+void updateParentLinkage(menuNode *current) {
+    if(current == &enabledCheck || current == &disabled)
+        current->parent->child = &enabledCheck;
+    else if(current == &enabled || current == &disabledCheck)
+        current->parent->child = &disabledCheck;
+}
+
+uint8_t getInputScreen(menuNode *c) {
+    if(c->parent == &menu23) 
+        return 0;
+    else if(c->parent == &menu25) 
+        return 1;
+    else if(c->parent == &menu26) 
+        return 2;
+    else if(c->parent == &menu311) 
+        return 3;
+    else if (c->parent == &menu312) 
+        return 4;
+    else if (c->parent == &menu313) 
+        return 5;
+    else if (c->parent == &menu321) 
+        return 6;
+    else if (c->parent == &menu322) 
+        return 7;
+    else if (c->parent == &menu323) 
+        return 8;
+    return 0;
+}
+
 
 

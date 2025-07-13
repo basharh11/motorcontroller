@@ -22,6 +22,7 @@
         "menu.h": "c",
         "new": "c",
         "cstdlib": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "queue.h": "c"
     }
 }

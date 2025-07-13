@@ -33,6 +33,7 @@ target_sources(stm32cubemx INTERFACE
     ../../Core/Src/motor.c
     ../../Core/Src/movementprofile.c
     ../../Core/Src/parameters.c
+    ../../Core/Src/eeprom.c
     ../../Core/Src/enums.c
     ../../Core/Src/stm32f4xx_it.c
     ../../Core/Src/stm32f4xx_hal_msp.c

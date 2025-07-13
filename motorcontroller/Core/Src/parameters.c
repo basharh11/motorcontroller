@@ -22,54 +22,23 @@ void updateParameters(parameters *p) {
     p->analog = (menu4.child == &disabledCheck) ? dis : en;
     p->units = (menu5.child == &menu51) ? metric : imperial;
     p->numberLength = p->units ? 8 : 9;
+    if(p->units != p->lastUnits)
+        clearAll(p);
+    p->lastUnits = p->units;
 }
 
-uint8_t getInputScreen(menuNode *c) {
-    if(c->parent == &menu23) 
-        return 0;
-    else if(c->parent == &menu25) 
-        return 1;
-    else if(c->parent == &menu26) 
-        return 2;
-    else if(c->parent == &menu311) 
-        return 3;
-    else if (c->parent == &menu312) 
-        return 4;
-    else if (c->parent == &menu313) 
-        return 5;
-    else if (c->parent == &menu321) 
-        return 6;
-    else if (c->parent == &menu322) 
-        return 7;
-    else if (c->parent == &menu323) 
-        return 8;
-    return 0;
+void clearAll(parameters *p) {
+    p->target[0] = '\0';
+    p->motor1Range[0] = '\0';
+    p->motor2Range[0] = '\0';
+    p->motor1PeakSpeed[0] = '\0';
+    p->motor1Acceleration[0] = '\0';
+    p->motor1Pulse[0] = '\0';
+    p->motor2PeakSpeed[0] = '\0';
+    p->motor2Acceleration[0] = '\0';
+    p->motor2Pulse[0] = '\0';
 }
 
-state getState(const menuNode *m, const parameters *p) {
-    menuNode *parent = getParent(m);
-    if(parent == &menu21) 
-        return p->home1;
-    else if(parent == &menu22) 
-        return p->home2;
-    else if(parent == &menu24) 
-        return p->emergencyStop;
-    else if(parent == &menu33) 
-        return p->relay1;
-    else if(parent == &menu34) 
-        return p->relay2;
-    else if(parent == &menu4) 
-        return p->analog;
-    return 0;
-}
-
-systemOfMeasurement getUnits(const parameters *p) {
-    return p->units;
-}
-
-uint8_t getNumberLength(const parameters *p) {
-    return p->numberLength;
-}
 
 
 

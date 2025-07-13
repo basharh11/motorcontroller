@@ -98,12 +98,15 @@ menuNode* getNext(const menuNode *name);
 menuNode* getChild(const menuNode *name);
 menuNode* getParent(const menuNode *name);
 
-void setPrev(menuNode name);
-void setNext(menuNode name);
-void setChild(menuNode name);
-void setParent(menuNode name);
+void setPrev(menuNode *current, menuNode *target);
+void setNext(menuNode *current, menuNode *target);
+void setChild(menuNode *current, menuNode *target);
+void setParent(menuNode *current, menuNode *target);
 
-void updateLinkage(menuNode *cur, menuNode *ch);
+void updateChildLinkage(menuNode *current);
+void updateParentLinkage(menuNode *current);
+
+uint8_t getInputScreen(menuNode *c);
 
 void buildMenuTree();
 

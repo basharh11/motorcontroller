@@ -5,7 +5,7 @@
 #define KEYPAD_DEBOUNCE 400 // delay in ms to prevent rapid double clicking within the mouse
 
 static uint8_t currentRow = 0;
-static queue *keyQueue = NULL; // pointer to user's queue
+static queue *keyQueue = NULL; // pointer to queue
 static uint32_t previous = 0; // timestamp for debounce
 
 // lookup table for decoding keys

@@ -1,14 +1,10 @@
 #include "navigation.h"
 
-systemOfMeasurement currentSysOfMeasurment;
-state currentState;
-direction currentDirection;
-
-parameters p;
-
 menuNode *current = &run;
 
 queue keyQueue;
+
+parameters p;
 
 motor m1;
 
@@ -45,6 +41,8 @@ void navigationLoop() {
         p.motor1Pos = 0;
     }
 
+    
+
     updateParameters(&p);
 
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
@@ -55,9 +53,11 @@ void navigationLoop() {
         dtoa(p.motor1Position, p.motor1Pos, 4);
         SSD1309_drawText(54, 6, 8, p.motor1Position);
     }
+
     if(current == &userInput) {
         SSD1309_drawText(6, 6, 8, p.strings[getInputScreen(current)]);
     }
+
     SSD1309_update();
 
     uint8_t raw;
@@ -65,20 +65,10 @@ void navigationLoop() {
     if(dequeue(&keyQueue, &raw)) {
         char c = keypadDecodeKey(raw);
         if(c == '#' && current->child) {
-            if((current->child == &disabledCheck || current->child == &enabledCheck) && (current != &disabledCheck && current != &enabled && current != &enabledCheck && current != &disabled)) {
-                disabledCheck.parent = current;
-                enabled.parent = current;
-                enabledCheck.parent = current;
-                disabled.parent = current;
-            } else if(current->child == &userInput){
-                current->child->parent = current;
-            }
+            updateChildLinkage(current);
             current = current->child;
         } else if (c == '*' && current->parent) {
-            if(current == &enabledCheck || current == &disabled)
-                current->parent->child = &enabledCheck;
-            else if(current == &enabled || current == &disabledCheck)
-                current->parent->child = &disabledCheck;
+            updateParentLinkage(current);
             current = current->parent;
         } else if (c == 'A' && current->prev) {
             current = current->prev;
@@ -92,7 +82,7 @@ void navigationLoop() {
             else if(current == &run)
                 p.target[0] = '\0';
         } else if(c == 'D' && current == &run && !getHomingStatus(&m1) && !getMoveStatus(&m1)) {
-            p.arrowDir = !p.arrowDir;
+            p.arrowDir = !(p.arrowDir);
         } else if(c == '#' && current == &menu1 && !getHomingStatus(&m1) && !getMoveStatus(&m1)) {
             home(&m1);
         } else if(p.target[0] == '\0' && current == &run && c >= '0' && c <= '9') {
@@ -156,7 +146,7 @@ void navigationLoop() {
                     SSD1309_update();
                 }  
             }
-            if(strtof(p.strings[idx], NULL) > 9000) {
+            if(strtof(p.strings[idx], NULL) > strtof(p.motor1Range, NULL)) {
                 p.strings[idx][0] = '\0';
                 SSD1309_drawBitmap(6, 6, 72, 7, invalid);
                 SSD1309_update();
@@ -210,15 +200,3 @@ void dtoa(char *buf, float val, int precision) {
     *buf = '\0';
 }
 
-void clearAll() {
-    p.target[0] = '\0';
-    p.slowZone[0] = '\0';
-    p.motor1Range[0] = '\0';
-    p.motor2Range[0] = '\0';
-    p.motor1PeakSpeed[0] = '\0';
-    p.motor1Acceleration[0] = '\0';
-    p.motor1Pulse[0] = '\0';
-    p.motor2PeakSpeed[0] = '\0';
-    p.motor2Acceleration[0] = '\0';
-    p.motor2Pulse[0] = '\0';
-}
