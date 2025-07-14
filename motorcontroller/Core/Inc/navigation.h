@@ -10,6 +10,7 @@
 #include "keypad.h"
 #include "menu.h"
 #include "motor.h"
+#include "eeprom.h"
 
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;

@@ -285,6 +285,10 @@ void updateParentLinkage(menuNode *current) {
         current->parent->child = &enabledCheck;
     else if(current == &enabled || current == &disabledCheck)
         current->parent->child = &disabledCheck;
+    else if(current == &menu51 || current == &menu52)
+        current->parent->child = &menu51;
+    else if(current == &menu53 || current == &menu54)
+        current->parent->child = &menu53;
 }
 
 uint8_t getInputScreen(menuNode *c) {

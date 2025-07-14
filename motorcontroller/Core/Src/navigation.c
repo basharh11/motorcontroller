@@ -30,6 +30,7 @@ void navigationInit() {
     keypadInit(&keyQueue); 
     HAL_TIM_Base_Start_IT(&htim2);
     motorInit(&m1, &mp1, &htim3, GPIOC, GPIO_PIN_9, GPIOB, GPIO_PIN_0);
+    
 }
 
 void navigationLoop() {
@@ -113,7 +114,7 @@ void navigationLoop() {
             }
             if(p.target[pos-1] == '.')
                 p.target[pos-1] = '\0';
-            if(strtof(p.target, NULL) > strtof(p.motor1Range, NULL) || (p.units == imperial && strtof(p.target, NULL) > 393.7007)) { 
+            if((strtof(p.target, NULL) + p.motor1Pos) > strtof(p.motor1Range, NULL)) { 
                 p.target[0] = '\0';
                 SSD1309_drawBitmap(54, 36, 72, 7, invalid);
                 SSD1309_update();
