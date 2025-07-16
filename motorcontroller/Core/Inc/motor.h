@@ -64,4 +64,6 @@ void home(motor *m);
 void motorOCCallback(motor *m);
 void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *motor);
 
+void switchEXTIHandler(uint16_t GPIO_Pin);
+
 #endif

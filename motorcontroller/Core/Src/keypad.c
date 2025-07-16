@@ -18,7 +18,7 @@ void keypadInit(queue *q) {
 void keypadTIMHandler(TIM_HandleTypeDef *htim) {
     // early return if this callback wasn’t invoked by TIM2
     // htim->Instance holds which timer generated this interrupt
-    if (htim->Instance != TIM2) 
+    if(htim->Instance != TIM2) 
         return;
 
     // set all rows high
