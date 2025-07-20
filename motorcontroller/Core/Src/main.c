@@ -60,8 +60,6 @@ TIM_HandleTypeDef htim4;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-volatile uint16_t adcValue;
-volatile bool adcValid;
 volatile bool powerDownRequested = false;
 /* USER CODE END PV */
 
@@ -120,19 +118,8 @@ int main(void)
   MX_TIM4_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim4);
-  char target[MAX_LENGTH];
-  SSD1309_init();
-  uint8_t readData;
-  read(0x00, &readData, sizeof(readData));
-  HAL_Delay(5);
-  float m1Pos = (float)readData;
-  dtoa(target, m1Pos, 3);
-  SSD1309_drawText(0, 0, 8, target);
-  SSD1309_drawText(0, 16, 8, "2");
-  SSD1309_update();
-
-  //navigationInit();
+    
+  navigationInit();
 
   /* USER CODE END 2 */
 
@@ -140,24 +127,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
     while(1)
     {
-    /* USER CODE END WHILE */
+      /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
-    //navigationLoop();
-    if (powerDownRequested) {
-        powerDownRequested = false;
-        uint8_t data = 90;
-        write(0x00, &data, sizeof(data));  
-        HAL_TIM_Base_Stop_IT(&htim4);
-    }  
-    char cc[MAX_LENGTH];
-    dtoa(cc, adcValue, 3);
-    SSD1309_drawText(0, 32, 8, cc);
-    SSD1309_update();
-  /* USER CODE END 3 */
+      /* USER CODE BEGIN 3 */
+      navigationLoop();
     }
+  /* USER CODE END 3 */
 }
-
 
 /**
   * @brief System Clock Configuration
@@ -246,7 +222,7 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = 1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -572,13 +548,13 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 3, 0);
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 3, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */

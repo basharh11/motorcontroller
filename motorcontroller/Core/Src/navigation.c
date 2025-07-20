@@ -13,6 +13,7 @@ movementProfile mp1;
 void navigationInit() {
     buildMenuTree();
     parametersInit(&p);
+    loadParameters(&p);
     
     SSD1309_init();
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
@@ -30,7 +31,7 @@ void navigationInit() {
     keypadInit(&keyQueue); 
     HAL_TIM_Base_Start_IT(&htim2);
     motorInit(&m1, &mp1, &htim3, GPIOC, GPIO_PIN_9, GPIOB, GPIO_PIN_0);
-    
+    HAL_TIM_Base_Start_IT(&htim4);
 }
 
 void navigationLoop() {
@@ -41,8 +42,6 @@ void navigationLoop() {
         resetStepCount(&m1);
         p.motor1Pos = 0;
     }
-
-    
 
     updateParameters(&p);
 
@@ -155,6 +154,8 @@ void navigationLoop() {
             } 
         }
     }
+
+    saveParameters(&p);
 }
 
 void dtoa(char *buf, float val, int precision) {

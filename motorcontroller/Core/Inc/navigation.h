@@ -3,7 +3,6 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <math.h>
 #include "ssd1309.h"
 #include "queue.h"
@@ -14,6 +13,7 @@
 
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
 
 void navigationInit();
 void navigationLoop();

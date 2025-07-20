@@ -13,16 +13,14 @@ extern ADC_HandleTypeDef hadc1;
 
 extern TIM_HandleTypeDef htim4;
 
-extern volatile uint16_t adcValue;
-extern volatile bool adcValid;
 extern volatile bool powerDownRequested;
 
 void write(uint16_t memoryAddress, uint8_t *wData, uint16_t size);
-void writeN(uint16_t memoryAddress, uint8_t *wData, uint16_t size);
 void read(uint16_t memoryAddress, uint8_t *rData, uint16_t size);
 
 void shutdownTIMHandler(TIM_HandleTypeDef *htim);
 
+void shutdownCall();
 void shutdownRoutine();
 
 #endif

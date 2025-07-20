@@ -23,11 +23,23 @@ void updateParameters(parameters *p) {
     p->units = (menu5.child == &menu51) ? metric : imperial;
     p->numberLength = p->units ? 8 : 9;
     if(p->units != p->lastUnits)
-        clearAll(p);
+        clearParameters(p);
     p->lastUnits = p->units;
 }
 
-void clearAll(parameters *p) {
+void saveParameters(parameters *p) {
+    if(powerDownRequested) {
+        powerDownRequested = false;
+        write(0x00, (uint8_t*)p, sizeof(*p));  
+        HAL_TIM_Base_Stop_IT(&htim4);
+    }  
+}
+
+void loadParameters(parameters *p) {
+    read(0x00, (uint8_t*)p, sizeof(*p));
+}
+
+void clearParameters(parameters *p) {
     p->target[0] = '\0';
     p->motor1Range[0] = '\0';
     p->motor2Range[0] = '\0';
@@ -38,6 +50,7 @@ void clearAll(parameters *p) {
     p->motor2Acceleration[0] = '\0';
     p->motor2Pulse[0] = '\0';
 }
+
 
 
 

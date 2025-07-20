@@ -4,11 +4,14 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <enums.h>
-#include <menu.h>
+#include "enums.h"
+#include "menu.h"
+#include "eeprom.h"
 
 #define MAX_LENGTH 10
 #define NUM_OF_PARAMETERS 11
+
+extern volatile bool powerDownRequested;
 
 typedef struct menuNode menuNode;
 
@@ -48,7 +51,8 @@ typedef struct parameters {
 void parametersInit(parameters *p);
 
 void updateParameters(parameters *p);
-
-void clearAll(parameters *p);
+void saveParameters(parameters *p);
+void loadParameters(parameters *p);
+void clearParameters(parameters *p);
 
 #endif 
