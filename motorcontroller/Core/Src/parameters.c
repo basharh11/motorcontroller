@@ -26,7 +26,7 @@ void saveParameters(parameters *p) {
     if(powerDownRequested) {
         powerDownRequested = false;
         writeBlock(0x00, (uint8_t*)p, sizeof(*p));  
-        HAL_TIM_Base_Stop_IT(&htim4);
+        HAL_Delay(50);
     }  
 }
 
