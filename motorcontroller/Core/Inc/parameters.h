@@ -30,8 +30,6 @@ typedef struct parameters {
     char motor1Position[MAX_LENGTH];
     char motor2Position[MAX_LENGTH];
 
-    char *strings[NUM_OF_PARAMETERS];
-
     float motor1Pos;
     float motor2Pos;   
 

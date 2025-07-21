@@ -1,13 +1,8 @@
 #include "parameters.h"
 
 void parametersInit(parameters *p) {
-    memset(p, 0, sizeof *p);
-
-    char *bufs[] = {p->slowZone, p->motor1Range, p->motor2Range, p->motor1PeakSpeed, p->motor1Acceleration, p->motor1Pulse, p->motor2PeakSpeed, p->motor2Acceleration, p->motor2Pulse};
-   
-    for (int i = 0; i < NUM_OF_PARAMETERS; ++i)
-        p->strings[i] = bufs[i];
-
+    memset(p, 0, sizeof(*p));
+    
     p->arrowDir = right;
 
     p->numberLength = 9;
@@ -30,7 +25,7 @@ void updateParameters(parameters *p) {
 void saveParameters(parameters *p) {
     if(powerDownRequested) {
         powerDownRequested = false;
-        write(0x00, (uint8_t*)p, sizeof(*p));  
+        writeBlock(0x00, (uint8_t*)p, sizeof(*p));  
         HAL_TIM_Base_Stop_IT(&htim4);
     }  
 }

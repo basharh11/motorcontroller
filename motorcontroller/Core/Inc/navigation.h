@@ -18,8 +18,6 @@ extern TIM_HandleTypeDef htim4;
 void navigationInit();
 void navigationLoop();
 void updateParameters();
-uint8_t selectInputScreen();
-bool isInputScreen();
 
 void dtoa(char *buf, float val, int precision);
 

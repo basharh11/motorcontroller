@@ -10,6 +10,8 @@ motor m1;
 
 movementProfile mp1;
 
+char *strings[] = {p.slowZone, p.motor1Range, p.motor2Range, p.motor1PeakSpeed, p.motor1Acceleration, p.motor1Pulse, p.motor2PeakSpeed, p.motor2Acceleration, p.motor2Pulse};
+
 void navigationInit() {
     buildMenuTree();
     parametersInit(&p);
@@ -55,7 +57,7 @@ void navigationLoop() {
     }
 
     if(current == &userInput) {
-        SSD1309_drawText(6, 6, 8, p.strings[getInputScreen(current)]);
+        SSD1309_drawText(6, 6, 8, strings[getInputScreen(current)]);
     }
 
     SSD1309_update();
@@ -78,7 +80,7 @@ void navigationLoop() {
             moveMotor(&m1);
         } else if(c == 'C' && (current == &userInput || current == &run)) {
             if(current == &userInput)
-                p.strings[getInputScreen(current)][0] = '\0';
+                strings[getInputScreen(current)][0] = '\0';
             else if(current == &run)
                 p.target[0] = '\0';
         } else if(c == 'D' && current == &run && !getHomingStatus(&m1) && !getMoveStatus(&m1)) {
@@ -119,35 +121,35 @@ void navigationLoop() {
                 SSD1309_update();
                 HAL_Delay(1500);
             } 
-        } else if(p.strings[getInputScreen(current)][0] == '\0' && current == &userInput && c >= '0' && c <= '9')  {
+        } else if(strings[getInputScreen(current)][0] == '\0' && current == &userInput && c >= '0' && c <= '9')  {
             uint8_t pos = 0;
             bool decimalFlag = false;
             uint8_t idx = getInputScreen(current);
             if(c >= '0' && c <= '9') {
-                p.strings[idx][pos++] = c;
-                p.strings[idx][pos] = '\0';
-                SSD1309_drawText(6, 6, 8, p.strings[idx]);
+                strings[idx][pos++] = c;
+                strings[idx][pos] = '\0';
+                SSD1309_drawText(6, 6, 8, strings[idx]);
                 SSD1309_update();
             }
             while(keypadDecodeKey(raw) != '#' && pos < p.numberLength) {
                 if(dequeue(&keyQueue, &raw)) {
-                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9' && ((pos < (p.units ? 3 : 4)) || p.strings[idx][p.numberLength - 5] == '.')) || (keypadDecodeKey(raw) == '*' && !decimalFlag && (pos > 0 && pos < (p.units ? 4 : 5)))) {
+                    if((keypadDecodeKey(raw) >= '0' && keypadDecodeKey(raw) <= '9' && ((pos < (p.units ? 3 : 4)) || strings[idx][p.numberLength - 5] == '.')) || (keypadDecodeKey(raw) == '*' && !decimalFlag && (pos > 0 && pos < (p.units ? 4 : 5)))) {
                         char character = keypadDecodeKey(raw);
                         if(keypadDecodeKey(raw) == '*') {
                             character = '.';
                             decimalFlag = true;
                         }
-                        p.strings[idx][pos++] = character;
-                        if(p.strings[idx][pos-1] == '.') 
+                        strings[idx][pos++] = character;
+                        if(strings[idx][pos-1] == '.') 
                             p.numberLength -= ((p.units ? 3 : 4) - (pos - 1));
-                        p.strings[idx][pos] = '\0';
+                        strings[idx][pos] = '\0';
                     }
-                    SSD1309_drawText(6, 6, 8, p.strings[idx]);
+                    SSD1309_drawText(6, 6, 8, strings[idx]);
                     SSD1309_update();
                 }  
             }
-            if(strtof(p.strings[idx], NULL) > strtof(p.motor1Range, NULL)) {
-                p.strings[idx][0] = '\0';
+            if(strtof(strings[idx], NULL) > strtof(p.motor1Range, NULL)) {
+                strings[idx][0] = '\0';
                 SSD1309_drawBitmap(6, 6, 72, 7, invalid);
                 SSD1309_update();
                 HAL_Delay(1500);
