@@ -22,11 +22,20 @@ void updateParameters(parameters *p) {
     p->lastUnits = p->units;
 }
 
+void updateAbilityLinkage(parameters *p) {
+    menu21.child = p->home1 ? &enabledCheck : &disabledCheck;
+    menu22.child = p->home2 ? &enabledCheck : &disabledCheck;
+    menu24.child = p->emergencyStop ? &enabledCheck : &disabledCheck;
+    menu33.child = p->relay1 ? &enabledCheck : &disabledCheck;
+    menu34.child = p->relay2 ? &enabledCheck : &disabledCheck;
+    menu4.child = p->analog ? &enabledCheck : &disabledCheck;
+    menu5.child = p->units ? &menu53 : &menu51;
+}
+
 void saveParameters(parameters *p) {
     if(powerDownRequested) {
         powerDownRequested = false;
         writeBlock(0x00, (uint8_t*)p, sizeof(*p));  
-        HAL_Delay(50);
     }  
 }
 

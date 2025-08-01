@@ -24,6 +24,7 @@
         "cstdlib": "c",
         "typeinfo": "c",
         "queue.h": "c",
-        "eeprom.h": "c"
+        "eeprom.h": "c",
+        "enums.h": "c"
     }
 }

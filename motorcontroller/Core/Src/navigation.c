@@ -8,6 +8,8 @@ parameters p;
 
 motor m1;
 
+motor m2;
+
 movementProfile mp1;
 
 char *strings[] = {p.slowZone, p.motor1Range, p.motor2Range, p.motor1PeakSpeed, p.motor1Acceleration, p.motor1Pulse, p.motor2PeakSpeed, p.motor2Acceleration, p.motor2Pulse};
@@ -16,13 +18,14 @@ void navigationInit() {
     buildMenuTree();
     parametersInit(&p);
     loadParameters(&p);
+    updateAbilityLinkage(&p);
     
     SSD1309_init();
     SSD1309_drawBitmap(0, 0, 128, 64, current->bitmap);
 
     if(current == &run) {
         SSD1309_drawText(54, 36, 8, p.target);
-        SSD1309_drawText(0, 0, 8, p.motor1Position);
+        SSD1309_drawText(54, 6, 8, p.motor1Position);
         SSD1309_drawBitmap(54, 51, 13, 7, p.arrowDir ? rightArrow : leftArrow);
         SSD1309_drawBitmap(p.units ? 113 : 106, p.units ? 50 : 52, p.units ? 12 : 19, p.units ? 8 : 6, p.units ? in : mm);
     }

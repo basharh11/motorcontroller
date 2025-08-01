@@ -2,8 +2,6 @@
 #define PARAMETERS_H
 
 #include <string.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include "enums.h"
 #include "menu.h"
 #include "eeprom.h"
@@ -49,6 +47,7 @@ typedef struct parameters {
 void parametersInit(parameters *p);
 
 void updateParameters(parameters *p);
+void updateAbilityLinkage(parameters *p);
 void saveParameters(parameters *p);
 void loadParameters(parameters *p);
 void clearParameters(parameters *p);

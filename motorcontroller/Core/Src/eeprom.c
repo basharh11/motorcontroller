@@ -1,7 +1,7 @@
 #include "eeprom.h"
 
 void write(uint16_t memoryAddress, uint8_t *wData, size_t size) {
-    HAL_I2C_Mem_Write(&EEPROM_I2C_PORT, EEPROM_I2C_ADDR, memoryAddress, I2C_MEMADD_SIZE_16BIT, wData, size, HAL_MAX_DELAY);
+    HAL_I2C_Mem_Write(&EEPROM_I2C_PORT, EEPROM_I2C_ADDR, memoryAddress, I2C_MEMADD_SIZE_16BIT, wData, size, 50);
     while(HAL_I2C_IsDeviceReady(&EEPROM_I2C_PORT, EEPROM_I2C_ADDR, 2, 5));
 }
 
@@ -29,7 +29,7 @@ void shutdownTIMHandler(TIM_HandleTypeDef *htim) {
 }
 
 void read(uint16_t memoryAddress, uint8_t *rData, uint16_t size) {
-    HAL_I2C_Mem_Read(&EEPROM_I2C_PORT, EEPROM_I2C_ADDR, memoryAddress, I2C_MEMADD_SIZE_16BIT, rData, size, HAL_MAX_DELAY);
+    HAL_I2C_Mem_Read(&EEPROM_I2C_PORT, EEPROM_I2C_ADDR, memoryAddress, I2C_MEMADD_SIZE_16BIT, rData, size, 50);
     while(HAL_I2C_IsDeviceReady(&EEPROM_I2C_PORT, EEPROM_I2C_ADDR, 2, 5));
 }
 
