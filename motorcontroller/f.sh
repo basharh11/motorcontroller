@@ -1,6 +1,6 @@
 set -e
 
-ELF_PATH="build/Debug/motorcontroller.elf"
+ELF_PATH="build/motorcontroller.elf"
 
 INTERFACE_CFG="interface/stlink.cfg"
 
